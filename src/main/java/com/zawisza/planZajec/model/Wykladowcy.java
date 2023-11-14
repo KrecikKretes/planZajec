@@ -1,6 +1,9 @@
 package com.zawisza.planZajec.model;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -10,30 +13,29 @@ import org.hibernate.annotations.GenericGenerator;
 @Getter
 @Setter
 @NoArgsConstructor
-public class GrupyGrup {
+
+public class Wykladowcy {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator="seq")
     @GenericGenerator(name = "seq", strategy="increment")
     private int id;
 
-    @Column(name="id_grupy")
-    private int idGrupy;
+    private String nazwisko;
 
-    @Column(name="grupa_grupy")
-    private String grupaGrupy;
+    private String skrot;
 
-    public GrupyGrup(int idGrupy, String grupaGrupy) {
-        this.idGrupy = idGrupy;
-        this.grupaGrupy = grupaGrupy;
+    public Wykladowcy(String nazwisko, String skrot) {
+        this.nazwisko = nazwisko;
+        this.skrot = skrot;
     }
 
     @Override
     public String toString() {
-        return "GrupyGrup{" +
+        return "Wykladowcy{" +
                 "id=" + id +
-                ", grupy=" + idGrupy +
-                ", grupaGrupy='" + grupaGrupy + '\'' +
+                ", nazwisko='" + nazwisko + '\'' +
+                ", skrot='" + skrot + '\'' +
                 '}';
     }
 }

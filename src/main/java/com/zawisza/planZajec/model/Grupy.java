@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.GenericGenerator;
 
 import java.util.Set;
 
@@ -15,14 +16,15 @@ import java.util.Set;
 public class Grupy {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int idGrupy;
+    @GeneratedValue(strategy = GenerationType.AUTO, generator="seq")
+    @GenericGenerator(name = "seq", strategy="increment")
+    private int id;
 
     private String grupa;
 
-    @OneToMany
-    @JoinColumn(name="idGrupy", nullable=false)
-    private Set<GrupyGrup> grupyGrupSet;
+    //@OneToMany
+    //@JoinTable
+    //private Set<GrupyGrup> grupyGrupSet;
 
     public Grupy(String grupa) {
         this.grupa = grupa;
@@ -32,7 +34,7 @@ public class Grupy {
     @Override
     public String toString() {
         return "Grupa{" +
-                "id=" + idGrupy +
+                "id=" + id +
                 ", grupa='" + grupa + '\'' +
                 '}';
     }

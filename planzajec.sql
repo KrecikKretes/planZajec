@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Lis 13, 2023 at 05:21 PM
+-- Generation Time: Lis 14, 2023 at 09:22 AM
 -- Wersja serwera: 10.4.28-MariaDB
 -- Wersja PHP: 8.2.4
 
@@ -125,6 +125,18 @@ INSERT INTO `grupy` (`id`, `grupa`) VALUES
 (86, '41S2'),
 (87, '41T4');
 
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla tabeli `grupygrup`
+--
+
+CREATE TABLE `grupygrup` (
+  `id` int(11) NOT NULL,
+  `idGrupy` int(11) NOT NULL,
+  `grupaGrupy` varchar(3) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
 --
 -- Indeksy dla zrzutów tabel
 --
@@ -136,6 +148,12 @@ ALTER TABLE `grupy`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indeksy dla tabeli `grupygrup`
+--
+ALTER TABLE `grupygrup`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -144,6 +162,12 @@ ALTER TABLE `grupy`
 --
 ALTER TABLE `grupy`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=269;
+
+--
+-- AUTO_INCREMENT for table `grupygrup`
+--
+ALTER TABLE `grupygrup`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
