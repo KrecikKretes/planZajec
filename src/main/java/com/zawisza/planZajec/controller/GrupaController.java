@@ -1,6 +1,5 @@
 package com.zawisza.planZajec.controller;
 
-import com.zawisza.planZajec.model.Wykladowcy;
 import com.zawisza.planZajec.repository.WykladowcyRepository;
 import com.zawisza.planZajec.service.GrupyGrupService;
 import com.zawisza.planZajec.model.Grupy;
@@ -8,20 +7,15 @@ import com.zawisza.planZajec.model.GrupyGrup;
 import com.zawisza.planZajec.repository.GrupyGrupRepository;
 
 import com.zawisza.planZajec.repository.GrupyRepository;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.*;
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@Controller
+@RestController
 public class GrupaController {
 
 
@@ -29,43 +23,26 @@ public class GrupaController {
     private final GrupyGrupRepository grupyGrupRepository;
     private final GrupyGrupService grupyGrupService;
 
-
-
-    private final List<Grupy> grupies = new ArrayList<>();
-
     public GrupaController(GrupyRepository grupyRepository, GrupyGrupRepository grupyGrupRepository,
-                           GrupyGrupService grupyGrupService, WykladowcyRepository wykladowcyRepository) {
+                           GrupyGrupService grupyGrupService) {
         this.grupyRepository = grupyRepository;
         this.grupyGrupRepository = grupyGrupRepository;
         this.grupyGrupService = grupyGrupService;
     }
 
-    @GetMapping("/error")
-    @ResponseBody
-    public String error(){
-        return "error";
-    }
 
-    @GetMapping(value= "/work")
-    @ResponseBody
-    public String work(){
-        return "Work";
-    }
-
-
-    @GetMapping("/grupy")
-    public @ResponseBody Iterable<Grupy> getAllGrupas(){
+    @GetMapping("/grupy/grupy")
+    public Iterable<Grupy> getAllGrupas(){
         return grupyRepository.findAll();
     }
 
 
-    @GetMapping("/{grupa_id}")
-    public @ResponseBody Optional<Grupy> getOneGrupa(@PathVariable("grupa_id") int grupaID){
+    @GetMapping("/grupy/{grupa_id}")
+    public Optional<Grupy> getOneGrupa(@PathVariable("grupa_id") int grupaID){
         return grupyRepository.findById(grupaID);
     }
 
-    @RequestMapping(value="/updateGrupy")
-    @ResponseBody
+    @RequestMapping(value="/grupy/updateGrupy")
     public String saveGrupy(){
         URL url;
         String[] week = {"Pon : ", "Wt : ", "Sr : ", "Czw : ", "Pt : "};
@@ -208,8 +185,6 @@ public class GrupaController {
         }
         return "Complete";
     }
-
-
 
     private String getString(int id, String text) {
         String grup;

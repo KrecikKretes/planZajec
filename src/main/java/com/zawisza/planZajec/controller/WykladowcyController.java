@@ -2,17 +2,20 @@ package com.zawisza.planZajec.controller;
 
 import com.zawisza.planZajec.model.Wykladowcy;
 import com.zawisza.planZajec.repository.WykladowcyRepository;
-import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.io.*;
+import java.net.ConnectException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
-@Controller
+@RestController
 public class WykladowcyController {
 
 
@@ -22,13 +25,9 @@ public class WykladowcyController {
         this.wykladowcyRepository = wykladowcyRepository;
     }
 
-    @ResponseBody
     @RequestMapping(value="/wykladowcy/updateWykladowcy")
     public String saveWykladowcy(){
         URL url;
-        String grupName;
-
-        int id;
 
         List<Wykladowcy> wykladowcyList = new ArrayList<>();
 
@@ -38,8 +37,6 @@ public class WykladowcyController {
                 url = new URL("https://podzial.mech.pk.edu.pl/stacjonarne/html/plany/n" + i + ".html");
                 URLConnection con = url.openConnection();
                 InputStream isOdd = con.getInputStream();
-
-                id = i;
 
                 try(BufferedReader br = new BufferedReader(new InputStreamReader(isOdd))) {
                     String line;
@@ -64,6 +61,7 @@ public class WykladowcyController {
                             Wykladowcy wykladowcy = new Wykladowcy(nazwisko,skrot);
                             if(!wykladowcyList.contains(wykladowcy)){
                                 wykladowcyRepository.save(wykladowcy);
+                                wykladowcyList.add(wykladowcy);
                             }
 
                             continue procces;
@@ -72,11 +70,23 @@ public class WykladowcyController {
                 }
 
             } catch (FileNotFoundException e){
-                continue procces;
+                System.out.println("Brak strony");
+            } catch (ConnectException e){
+                return "Brak połączenia";
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
         }
         return "Complete";
+    }
+
+    @GetMapping("/wykladowcy/{wykladowcy_id}")
+    public Optional<Wykladowcy> getOneWykladowcy(@PathVariable("wykladowcy_id") int wykladowcy_id){
+        return wykladowcyRepository.findById(wykladowcy_id);
+    }
+
+    @GetMapping("/wykladowcy/wykladowcy")
+    public Iterable<Wykladowcy> getAllWykladowcy(){
+        return wykladowcyRepository.findAll();
     }
 }

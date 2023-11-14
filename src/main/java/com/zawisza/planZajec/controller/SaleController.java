@@ -1,109 +1,102 @@
 package com.zawisza.planZajec.controller;
 
-import com.zawisza.planZajec.model.Grupy;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import com.zawisza.planZajec.model.Sale;
+import com.zawisza.planZajec.repository.SaleRepository;
+import org.springframework.web.bind.annotation.*;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
+import java.net.ConnectException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
-@Controller
+@RestController
 public class SaleController {
 
-    @RequestMapping(value="/updateSale")
-    @ResponseBody
+    private final SaleRepository saleRepository;
+
+    public SaleController(SaleRepository saleRepository) {
+        this.saleRepository = saleRepository;
+    }
+
+    @RequestMapping(value="/sale/updateSale")
     public String saveSale(){
         URL url;
-        String[] week = {"Pon : ", "Wt : ", "Sr : ", "Czw : ", "Pt : "};
-        String grupName;
+        String sala;
 
-        int id;
+        List<Sale> saleList = new ArrayList<>();
 
+        saleRepository.deleteAll();
 
+        procces:
         for(int i = 1; i < 300; i++){
             try {
                 url = new URL("https://podzial.mech.pk.edu.pl/stacjonarne/html/plany/s" + i + ".html");
                 URLConnection con = url.openConnection();
-                InputStream isOdd = con.getInputStream();
+                InputStream inputStream = con.getInputStream();
 
-
-                id = i;
-
-                try(BufferedReader br = new BufferedReader(new InputStreamReader(isOdd))) {
+                try(BufferedReader br = new BufferedReader(new InputStreamReader(inputStream))) {
                     String line;
 
-                    // read each line and write to System.out
                     while ((line = br.readLine()) != null) {
-                        //System.out.println(line);
                         if(line.contains("<span class=\"tytulnapis\">")){
                             line = line.replaceAll("<.*?>", "");
+                            line = line.replaceAll("</span.*?table>", "");
+
                             System.out.println(line);
-                            grupName = line;
-
-                            Grupy grupy = new Grupy(grupName);
-                            grupyRepository.save(grupy);
-
-                            System.out.println("----------------");
-                            System.out.println("Nieparzysty tydzień");
-                            continue;
-                        }
-
-                        if(line.contains("<td class=\"g\">")) {
-
-                            //Wypisanie godziny
-                            line = line.replaceAll("<.*?>", "");
-                            System.out.println(line);
-
-
-                            //Wypisanie dla kazdego dnia
-                            for (int j = 0; j < 5; j++) {
-                                line = br.readLine();
-                                if (line.contains("&nbsp;")) {
-                                    //System.out.println();
-                                    continue;
+                            if(line.contains("-")){
+                                if(line.contains("--")){
+                                    continue procces;
+                                }else{
+                                    sala = line.substring(0, line.indexOf("-"));
                                 }
-
-                                line = line.replaceAll("<.*?>", "");
-                                line = line.replaceAll("-n", "-n ");
-                                line = line.replaceAll("-p", "-p ");
-
-                                while (line.contains("-n")) {
-                                    //System.out.println(line);
-                                    String text;
-                                    String grup = "";
-                                    if (line.indexOf("-n") > 0) {
-                                        //System.out.println("Posiada -n");
-                                        text = line.substring(0, line.indexOf("-n") + 2);
-                                        line = line.substring(line.indexOf("-n") + 2);
-                                        //} else {
-                                        //if(line.indexOf("-p") > 0){
-                                        //    System.out.println("Posiada -p");
-                                        //    text = line.substring(0, line.indexOf("-p") + 2);
-                                        //    line = line.substring(line.indexOf("-p") + 2, line.length());
-                                        //}
-                                        grup = getString(id, text);
-
-                                    }
-
-                                    System.out.println(week[j] + "  " + grup);
+                            }else{
+                                if(line.contains("*")){
+                                    continue procces;
+                                }else{
+                                    sala = line;
                                 }
                             }
 
-                            System.out.println();
-                        }
+                            if(sala.charAt(0) < 65 && sala.charAt(0) > 90){
+                                continue procces;
+                            }
 
+                            System.out.println(sala);
+
+                            Sale sale = new Sale(sala);
+                            if(!saleList.contains(sale)){
+                                saleRepository.save(sale);
+                                saleList.add(sale);
+                            }
+
+                            continue procces;
+                        }
                     }
                 }
 
+            } catch (FileNotFoundException e) {
+                System.out.println("Brak strony");
+            } catch (ConnectException e){
+                return "Brak połączenia";
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
         }
         return "Complete";
     }
+
+
+    @GetMapping("/sale/{sale_id}")
+    public Optional<Sale> getOneSale(@PathVariable("sale_id") int sale_id){
+        return saleRepository.findById(sale_id);
+    }
+
+    @GetMapping("/sale/sale")
+    public Iterable<Sale> getAllSale(){
+        return saleRepository.findAll();
+    }
+
 }

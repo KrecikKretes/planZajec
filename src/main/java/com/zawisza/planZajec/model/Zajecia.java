@@ -13,26 +13,24 @@ import org.hibernate.annotations.GenericGenerator;
 @Getter
 @Setter
 @NoArgsConstructor
-
-public class Grupy {
+public class Zajecia {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator="seq")
     @GenericGenerator(name = "seq", strategy="increment")
     private int id;
 
-    private String grupa;
+    private String nazwa;
 
-    public Grupy(String grupa) {
-        this.grupa = grupa;
+    public Zajecia(String nazwa) {
+        this.nazwa = nazwa;
     }
-
 
     @Override
     public String toString() {
-        return "Grupa{" +
+        return "Zajecia{" +
                 "id=" + id +
-                ", grupa='" + grupa + '\'' +
+                ", nazwa='" + nazwa + '\'' +
                 '}';
     }
 }
