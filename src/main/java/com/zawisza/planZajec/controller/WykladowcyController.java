@@ -31,6 +31,7 @@ public class WykladowcyController {
 
         List<Wykladowcy> wykladowcyList = new ArrayList<>();
 
+        wykladowcyRepository.deleteAll();
 
         procces: for(int i = 1; i < 1000; i++){
             try {

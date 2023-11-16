@@ -26,12 +26,12 @@ public class SaleController {
         URL url;
         String sala;
 
-        List<Sale> saleList = new ArrayList<>();
+        List<String> saleList = new ArrayList<>();
 
         saleRepository.deleteAll();
 
         procces:
-        for(int i = 1; i < 300; i++){
+        for(int i = 1; i < 400; i++){
             try {
                 url = new URL("https://podzial.mech.pk.edu.pl/stacjonarne/html/plany/s" + i + ".html");
                 URLConnection con = url.openConnection();
@@ -45,7 +45,7 @@ public class SaleController {
                             line = line.replaceAll("<.*?>", "");
                             line = line.replaceAll("</span.*?table>", "");
 
-                            System.out.println(line);
+                            //System.out.println(line);
                             if(line.contains("-")){
                                 if(line.contains("--")){
                                     continue procces;
@@ -56,7 +56,11 @@ public class SaleController {
                                 if(line.contains("*")){
                                     continue procces;
                                 }else{
-                                    sala = line;
+                                    if(line.contains(" ")){
+                                        sala = line.substring(0, line.indexOf(" "));
+                                    }else{
+                                        sala = line;
+                                    }
                                 }
                             }
 
@@ -66,10 +70,11 @@ public class SaleController {
 
                             System.out.println(sala);
 
-                            Sale sale = new Sale(sala);
-                            if(!saleList.contains(sale)){
+
+                            if(!saleList.contains(sala)){
+                                Sale sale = new Sale(sala);
                                 saleRepository.save(sale);
-                                saleList.add(sale);
+                                saleList.add(sala);
                             }
 
                             continue procces;
