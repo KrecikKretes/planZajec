@@ -24,10 +24,12 @@ public class Wykladowcy {
     private String nazwisko;
 
     private String skrot;
+    private int id_strony;
 
-    public Wykladowcy(String nazwisko, String skrot) {
+    public Wykladowcy(String nazwisko, String skrot, int id_strony) {
         this.nazwisko = nazwisko;
         this.skrot = skrot;
+        this.id_strony = id_strony;
     }
 
     @Override
@@ -36,6 +38,7 @@ public class Wykladowcy {
                 "id=" + id +
                 ", nazwisko='" + nazwisko + '\'' +
                 ", skrot='" + skrot + '\'' +
+                ", id_strony=" + id_strony +
                 '}';
     }
 }

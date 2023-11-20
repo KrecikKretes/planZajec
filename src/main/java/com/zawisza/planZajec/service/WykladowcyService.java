@@ -13,7 +13,23 @@ public class WykladowcyService {
 
     private final WykladowcyRepository wykladowcyRepository;
 
-    public List<Wykladowcy> getWykladowcy(String skrot) {
-        return wykladowcyRepository.findAllWykloadowcyBySkrot(skrot);
+    public List<Wykladowcy> getWykladowcies(String skrot) {
+        return wykladowcyRepository.findAllWykladowcyBySkrot(skrot);
+    }
+
+    public Wykladowcy getWykladowcy(String skrot) {
+        return wykladowcyRepository.findWykladowcyBySkrot(skrot);
+    }
+
+    public Wykladowcy getWykladowcyBySkrotAndIdStronyMoreThan0(String skrot){
+        return wykladowcyRepository.findWykladowcyBySkrotAndId_stronyMoreThan0(skrot);
+    }
+
+    public Wykladowcy getWykladowcyBySkrotAndIdStrony(String skrot, int id_strony){
+        return wykladowcyRepository.findWykladowcyBySkrotAndId_strony(skrot, id_strony);
+    }
+
+    public Wykladowcy getWykladowcyByNazwiskoAndSkrot(String nazwisko, String skrot){
+        return wykladowcyRepository.findWykladowcyByNazwiskoAndSkrot(nazwisko, skrot);
     }
 }

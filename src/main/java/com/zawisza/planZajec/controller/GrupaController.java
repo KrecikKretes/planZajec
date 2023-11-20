@@ -50,8 +50,10 @@ public class GrupaController {
 
         int id;
 
+        grupyGrupRepository.deleteAll();
+        grupyRepository.deleteAll();
 
-        for(int i = 1; i < 87; i++){
+        for(int i = 1; i < 88; i++){
             try {
                 url = new URL("https://podzial.mech.pk.edu.pl/stacjonarne/html/plany/o" + i + ".html");
                 URLConnection con = url.openConnection();
@@ -190,14 +192,42 @@ public class GrupaController {
         String grup;
         text = text.trim();
         String substring = text.substring(text.indexOf(" ") + 1, text.indexOf(" ") + 2);
-        if(text.startsWith("J ang") || substring.equals("W") || substring.equals("Ć")){
+        if(text.startsWith("J ang") || text.startsWith("Mat DK") || text.startsWith("Ster pc") ||
+                text.startsWith("Ap Med") ||
+                substring.equals("W") || substring.equals("Ć") || substring.equals("S")){
+            System.out.println(text);
+            System.out.println(substring);
             if(text.startsWith("J ang")){
                 grup = "ang";
-            }else{
-                if(text.startsWith("W")){
-                    grup = "W";
-                }else{
+            } else{
+                if(text.startsWith("Mat DK")) {
                     grup = "Ć";
+                } else {
+                    if(text.startsWith("Ster pc")){
+                        grup = text.substring(text.indexOf("pc ") + 3, text.indexOf("pc ") + 6);
+                    }else{
+                        if(text.startsWith("Ap Med")){
+                            grup = text.substring(text.indexOf("Med ") + 4, text.indexOf("Med ") + 7);
+                        }else{
+                            if(text.startsWith("PM3D CAD")){
+                                grup = text.substring(text.indexOf("CAD ") + 4, text.indexOf("CAD ") + 7);
+                            }else {
+                                if(text.startsWith("Ind 4.0")){
+                                    grup = text.substring(text.indexOf("4.0 ") + 4, text.indexOf("4.0 ") + 7);
+                                }else{
+                                    if(substring.startsWith("W")){
+                                        grup = "W";
+                                    }else{
+                                        if(substring.startsWith("S")){
+                                            grup = "S";
+                                        }else{
+                                            grup = "Ć";
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }else{

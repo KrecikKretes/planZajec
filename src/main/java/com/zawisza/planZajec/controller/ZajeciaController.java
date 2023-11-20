@@ -96,20 +96,85 @@ public class ZajeciaController {
                                             }
                                         }
                                     }else{
-                                        if (line.indexOf("-n") > 0) {
-                                            System.out.println("Posiada -n");
-                                            text = line.substring(0, line.indexOf(" "));
-                                            line = line.substring(line.indexOf("-n") + 3);
-                                        } else {
-                                            if(line.indexOf("-p") > 0){
-                                                System.out.println("Posiada -p");
-                                                text = line.substring(0, line.indexOf(" "));
-                                                line = line.substring(line.indexOf("-p") + 3);
+                                        if(line.startsWith("Mat DK")){
+                                            text = "Mat DK";
+                                            if (line.indexOf("-n") > 0) {
+                                                System.out.println("Posiada -n");
+                                                line = line.substring(line.indexOf("-n") + 3);
+                                            } else {
+                                                if(line.indexOf("-p") > 0){
+                                                    System.out.println("Posiada -p");
+                                                    line = line.substring(line.indexOf("-p") + 3);
+                                                }
+                                            }
+                                        }else{
+                                            if(line.startsWith("Ster pc")){
+                                                text = "Ster pc";
+                                                if (line.indexOf("-n") > 0) {
+                                                    System.out.println("Posiada -n");
+                                                    line = line.substring(line.indexOf("-n") + 3);
+                                                } else {
+                                                    if(line.indexOf("-p") > 0){
+                                                        System.out.println("Posiada -p");
+                                                        line = line.substring(line.indexOf("-p") + 3);
+                                                    }
+                                                }
+                                            }else {
+                                                if(line.startsWith("Ap Med")) {
+                                                    text = "Ap Med";
+                                                    if (line.indexOf("-n") > 0) {
+                                                        System.out.println("Posiada -n");
+                                                        line = line.substring(line.indexOf("-n") + 3);
+                                                    } else {
+                                                        if (line.indexOf("-p") > 0) {
+                                                            System.out.println("Posiada -p");
+                                                            line = line.substring(line.indexOf("-p") + 3);
+                                                        }
+                                                    }
+                                                }else{
+                                                    if(line.startsWith("PM3D CAD")){
+                                                        text = "PM3D CAD";
+                                                        if (line.indexOf("-n") > 0) {
+                                                            System.out.println("Posiada -n");
+                                                            line = line.substring(line.indexOf("-n") + 3);
+                                                        } else {
+                                                            if (line.indexOf("-p") > 0) {
+                                                                System.out.println("Posiada -p");
+                                                                line = line.substring(line.indexOf("-p") + 3);
+                                                            }
+                                                        }
+                                                    }else{
+                                                        if(line.startsWith("Ind 4.0")){
+                                                            text = "Ind 4.0";
+                                                            if (line.indexOf("-n") > 0) {
+                                                                System.out.println("Posiada -n");
+                                                                line = line.substring(line.indexOf("-n") + 3);
+                                                            } else {
+                                                                if (line.indexOf("-p") > 0) {
+                                                                    System.out.println("Posiada -p");
+                                                                    line = line.substring(line.indexOf("-p") + 3);
+                                                                }
+                                                            }
+                                                        }else{
+                                                            if (line.indexOf("-n") > 0) {
+                                                                System.out.println("Posiada -n");
+                                                                text = line.substring(0, line.indexOf(" "));
+                                                                line = line.substring(line.indexOf("-n") + 3);
+                                                            } else {
+                                                                if (line.indexOf("-p") > 0) {
+                                                                    System.out.println("Posiada -p");
+                                                                    text = line.substring(0, line.indexOf(" "));
+                                                                    line = line.substring(line.indexOf("-p") + 3);
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
                                             }
                                         }
                                     }
 
-                                    if(!zajeciaList.contains(text)){
+                                    if(zajeciaRepository.findZajeciaByNazwa(text) == null){
                                         Zajecia zajecia = new Zajecia(text);
                                         zajeciaRepository.save(zajecia);
                                         zajeciaList.add(text);

@@ -29,11 +29,12 @@ public class WykladowcyController {
     public String saveWykladowcy(){
         URL url;
 
-        List<Wykladowcy> wykladowcyList = new ArrayList<>();
+        List<String> wykladowcyNameList = new ArrayList<>();
+        List<String> wykladowcySkrotList = new ArrayList<>();
 
         wykladowcyRepository.deleteAll();
 
-        procces: for(int i = 1; i < 1000; i++){
+        procces: for(int i = 1; i < 900; i++){
             try {
                 url = new URL("https://podzial.mech.pk.edu.pl/stacjonarne/html/plany/n" + i + ".html");
                 URLConnection con = url.openConnection();
@@ -52,17 +53,22 @@ public class WykladowcyController {
                             System.out.println(i);
                             System.out.println(line);
                             String nazwisko;
+                            String skrot;
                             if(line.contains("-n")){
                                 nazwisko = line.substring(0, line.indexOf("-n"));
+                                skrot = line.substring(line.indexOf("-n") + 4, line.indexOf("-n") + 6);
                             }else{
                                 nazwisko = line.substring(0, line.indexOf("-p"));
+                                skrot = line.substring(line.indexOf("-p") + 4, line.indexOf("-p") + 6);
                             }
-                            String skrot = line.substring(line.indexOf("(") + 1, line.indexOf(")"));
 
-                            Wykladowcy wykladowcy = new Wykladowcy(nazwisko,skrot);
-                            if(!wykladowcyList.contains(wykladowcy)){
+
+                            Wykladowcy wykladowcy = new Wykladowcy(nazwisko,skrot, i);
+                            if(!(wykladowcyNameList.contains(nazwisko) &&
+                                    wykladowcySkrotList.contains(skrot)) ){
                                 wykladowcyRepository.save(wykladowcy);
-                                wykladowcyList.add(wykladowcy);
+                                wykladowcyNameList.add(nazwisko);
+                                wykladowcySkrotList.add(skrot);
                             }
 
                             continue procces;
