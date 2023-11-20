@@ -12,22 +12,21 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Getter
-@Setter
 @NoArgsConstructor
 public class Plan {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO, generator="seq")
+    @GeneratedValue(strategy = GenerationType.IDENTITY, generator="seq")
     @GenericGenerator(name = "seq", strategy="increment")
     private int id;
 
-    private int id_grupy;
-    private int id_grupy_grup;
-    private int id_sale;
-    private int id_wykladowcy;
-    private int id_zajecia;
+    @Setter
+    private int id_grupy, id_grupy_grup, id_sale, id_wykladowcy, id_zajecia;
+    @Setter
     private char tydzien;
+    @Setter
     private String godz;
+    @Setter
     private String dzien;
 
     public Plan(int id_grupy, int id_grupy_grup, int id_sale, int id_wykladowcy, int id_zajecia, char tydzien, String godz, String dzien) {

@@ -1,15 +1,19 @@
 package com.zawisza.planZajec.controller;
 
-import com.zawisza.planZajec.repository.WykladowcyRepository;
-import com.zawisza.planZajec.service.GrupyGrupService;
 import com.zawisza.planZajec.model.Grupy;
 import com.zawisza.planZajec.model.GrupyGrup;
 import com.zawisza.planZajec.repository.GrupyGrupRepository;
-
 import com.zawisza.planZajec.repository.GrupyRepository;
-import org.springframework.web.bind.annotation.*;
+import com.zawisza.planZajec.service.GrupyGrupService;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.List;

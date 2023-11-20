@@ -1,19 +1,27 @@
 package com.zawisza.planZajec.controller;
 
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-@RestController
+@Controller
 public class BasicController {
 
     @GetMapping("/error")
+    @ResponseBody
     public String error(){
         return "error";
     }
 
-    @GetMapping(value= "/work")
+    @GetMapping("/work")
+    @ResponseBody
     public String work(){
         return "Work";
+    }
+
+    @GetMapping("/")
+    public String search(){
+        return "index";
     }
 
 }

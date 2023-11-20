@@ -1,8 +1,6 @@
 package com.zawisza.planZajec.controller;
 
 
-import com.zawisza.planZajec.model.Grupy;
-import com.zawisza.planZajec.model.Sale;
 import com.zawisza.planZajec.model.Zajecia;
 import com.zawisza.planZajec.repository.ZajeciaRepository;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -41,7 +39,6 @@ public class ZajeciaController {
     public String saveZajecia(){
         URL url;
         String[] week = {"Pon : ", "Wt : ", "Sr : ", "Czw : ", "Pt : "};
-        int id;
 
         List<String> zajeciaList = new ArrayList<>();
 
@@ -52,9 +49,6 @@ public class ZajeciaController {
                 url = new URL("https://podzial.mech.pk.edu.pl/stacjonarne/html/plany/o" + i + ".html");
                 URLConnection con = url.openConnection();
                 InputStream inputStream = con.getInputStream();
-
-
-                id = i;
 
                 try(BufferedReader br = new BufferedReader(new InputStreamReader(inputStream))) {
                     String line;

@@ -38,7 +38,7 @@ public class PlanController extends Constant {
     @RequestMapping(value="/plan/updatePlan")
     public String savePlan(){
         URL url;
-        String[] week = {"Pon : ", "Wt : ", "Sr : ", "Czw : ", "Pt : "};
+        String[] week = {"Pon", "Wt", "Sr", "Czw", "Pt"};
         int id = 0;
 
         int id_grupy_grup;
