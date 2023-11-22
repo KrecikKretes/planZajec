@@ -32,4 +32,20 @@ public class WykladowcyService {
     public Wykladowcy getWykladowcyByNazwiskoAndSkrot(String nazwisko, String skrot){
         return wykladowcyRepository.findWykladowcyByNazwiskoAndSkrot(nazwisko, skrot);
     }
+
+    public int getCount(){
+        return wykladowcyRepository.countAll();
+    }
+
+    public List<String> getUniqueName(){
+        return wykladowcyRepository.getUniqueName();
+    }
+
+    public List<String> getUniqueSkrot(){
+        return wykladowcyRepository.getUniqueSkrot();
+    }
+
+    public List<Integer> getIdByNazwisko(List<String> nazwisko){
+        return wykladowcyRepository.getIdByNazwisko(nazwisko);
+    }
 }

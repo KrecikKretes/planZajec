@@ -1,4 +1,11 @@
 *{
-    margin:0 auto;
     text-align: center;
+    margin: 20px auto 0;
+}
+select{
+    margin:0 auto;
+    width: 20em;
+}
+option{
+    margin:0 auto;
 }

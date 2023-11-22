@@ -1,14 +1,13 @@
 package com.zawisza.planZajec.model;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
+
+import java.util.List;
 
 @Entity
 @Getter
@@ -28,6 +27,10 @@ public class Plan {
     private String godz;
     @Setter
     private String dzien;
+
+    @Setter
+    @OneToMany(mappedBy = "id")
+    List<Grupy> grupyList;
 
     public Plan(int id_grupy, int id_grupy_grup, int id_sale, int id_wykladowcy, int id_zajecia, char tydzien, String godz, String dzien) {
         this.id_grupy = id_grupy;

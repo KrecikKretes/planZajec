@@ -20,6 +20,9 @@ public class GrupyGrup {
     @Column(name="id_grupy")
     private int idGrupy;
 
+    @ManyToOne
+    Grupy grupy;
+
     @Column(name="grupa_grupy")
     private String grupaGrupy;
 

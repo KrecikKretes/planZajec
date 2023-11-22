@@ -8,6 +8,8 @@ import com.zawisza.planZajec.repository.WykladowcyRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @AllArgsConstructor
 public class SaleService {
@@ -16,6 +18,14 @@ public class SaleService {
 
     public Sale getSaleBySala(String sala){
         return saleRepository.findSaleBySala(sala);
+    }
+
+    public int getCount(){
+        return saleRepository.countAll();
+    }
+
+    public List<Sale> getSale(){
+        return saleRepository.getSales();
     }
 
 }
