@@ -14,7 +14,7 @@ public class PlanService {
 
     private final PlanRepository planRepository;
 
-    public List<Plan> getPlanById_wykladowcyAndTydzien(List<Integer> id_wykladowcy, char tydzien){
-        return planRepository.getPlanById_wykladowcyAndTydzien(id_wykladowcy, tydzien);
-    }
+    //public List<Plan> getPlanById_wykladowcyAndTydzien(List<Integer> id_wykladowcy, char tydzien){
+    //    return planRepository.getPlanById_wykladowcyAndTydzien(id_wykladowcy, tydzien);
+    //}
 }

@@ -15,10 +15,16 @@ public class Constant {
     private String salaName = "";
     private String wykladowcyName = "";
     private String grupaGrupyName = "";
-    private char tydzien = 0;
+    private String tydzien = "";
+
+    protected String linia = "";
 
     public void substring(){
         line = line.substring(line.indexOf(" "));
+        line = line.trim();
+    }
+
+    public void trim(){
         line = line.trim();
     }
 
@@ -27,6 +33,6 @@ public class Constant {
         this.salaName = "";
         this.wykladowcyName = "";
         this.grupaGrupyName = "";
-        this.tydzien = 0;
+        this.tydzien = "";
     }
 }

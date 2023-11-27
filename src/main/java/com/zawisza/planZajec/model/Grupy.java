@@ -12,23 +12,26 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
-
 public class Grupy {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO, generator="seq")
+    @GeneratedValue(strategy = GenerationType.IDENTITY, generator="seq")
     @GenericGenerator(name = "seq", strategy="increment")
     private int id;
 
     private String grupa;
 
-    @OneToMany(mappedBy = "id_grupy")
-    List<GrupyGrup> grupyGrupList;
+    @OneToMany(
+            mappedBy = "grupy",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true,
+            fetch = FetchType.LAZY
+    )
+    private List<GrupyGrup> grupyGrupList;
 
     public Grupy(String grupa) {
         this.grupa = grupa;
     }
-
 
     @Override
     public String toString() {

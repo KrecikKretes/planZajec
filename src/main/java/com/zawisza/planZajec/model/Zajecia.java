@@ -1,13 +1,12 @@
 package com.zawisza.planZajec.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
+
+import java.util.List;
 
 @Entity
 @Getter
@@ -16,11 +15,19 @@ import org.hibernate.annotations.GenericGenerator;
 public class Zajecia {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO, generator="seq")
+    @GeneratedValue(strategy = GenerationType.IDENTITY, generator="seq")
     @GenericGenerator(name = "seq", strategy="increment")
     private int id;
 
     private String nazwa;
+
+    @OneToMany(
+            mappedBy = "zajecia",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true,
+            fetch = FetchType.LAZY
+    )
+    private List<Plan> planList;
 
     public Zajecia(String nazwa) {
         this.nazwa = nazwa;

@@ -7,11 +7,10 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 
-import java.util.List;
-
 @Entity
 @Getter
 @NoArgsConstructor
+
 public class Plan {
 
     @Id
@@ -19,42 +18,52 @@ public class Plan {
     @GenericGenerator(name = "seq", strategy="increment")
     private int id;
 
+    @ManyToOne
+    @JoinColumn(name="id_zajecia")
+    private Zajecia zajecia;
+
+    @ManyToOne
+    @JoinColumn(name="id_grupy_grup")
+    private GrupyGrup grupyGrup;
+
+    @ManyToOne
+    @JoinColumn(name="id_wykladowcy")
+    private Wykladowcy wykladowcy;
+
+    @ManyToOne
+    @JoinColumn(name="id_sale")
+    private Sale sale;
+
     @Setter
-    private int id_grupy, id_grupy_grup, id_sale, id_wykladowcy, id_zajecia;
-    @Setter
-    private char tydzien;
-    @Setter
-    private String godz;
+    private String tydzien;
     @Setter
     private String dzien;
-
     @Setter
-    @OneToMany(mappedBy = "id")
-    List<Grupy> grupyList;
+    private String godz;
 
-    public Plan(int id_grupy, int id_grupy_grup, int id_sale, int id_wykladowcy, int id_zajecia, char tydzien, String godz, String dzien) {
-        this.id_grupy = id_grupy;
-        this.id_grupy_grup = id_grupy_grup;
-        this.id_sale = id_sale;
-        this.id_wykladowcy = id_wykladowcy;
-        this.id_zajecia = id_zajecia;
+
+    public Plan(String tydzien, String godz, String dzien, GrupyGrup grupyGrup,
+                Sale sale, Wykladowcy wykladowcy, Zajecia zajecia) {
         this.tydzien = tydzien;
         this.godz = godz;
         this.dzien = dzien;
+        this.grupyGrup = grupyGrup;
+        this.sale = sale;
+        this.wykladowcy = wykladowcy;
+        this.zajecia = zajecia;
     }
 
     @Override
     public String toString() {
         return "Plan{" +
                 "id=" + id +
-                ", id_grupy=" + id_grupy +
-                ", id_grupy_grup=" + id_grupy_grup +
-                ", id_sale=" + id_sale +
-                ", id_wykladowcy=" + id_wykladowcy +
-                ", id_zajecia=" + id_zajecia +
+                ", zajecia=" + zajecia +
+                ", grupyGrup=" + grupyGrup +
+                ", wykladowcy=" + wykladowcy +
+                ", sale=" + sale +
                 ", tydzien=" + tydzien +
-                ", godz='" + godz + '\'' +
                 ", dzien='" + dzien + '\'' +
+                ", godz='" + godz + '\'' +
                 '}';
     }
 }

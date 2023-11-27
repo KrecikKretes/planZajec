@@ -14,6 +14,9 @@ public interface WykladowcyRepository extends CrudRepository<Wykladowcy, Integer
     @Query("Select p From Wykladowcy p where p.skrot LIKE :skrot")
     List<Wykladowcy> findAllWykladowcyBySkrot(@Param("skrot") String skrot);
 
+    @Query("Select p From Wykladowcy p where p.id_strony = :id_strony")
+    Wykladowcy findWykladowcyById_strony(@Param("id_strony") int id_strony);
+
     @Query("Select p From Wykladowcy p where p.skrot LIKE :skrot")
     Wykladowcy findWykladowcyBySkrot(@Param("skrot") String skrot);
 

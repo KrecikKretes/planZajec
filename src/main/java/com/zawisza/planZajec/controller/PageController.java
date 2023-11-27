@@ -44,12 +44,12 @@ public class PageController {
         wykladowcySkrotList = wykladowcyService.getUniqueSkrot();
         model.addAttribute("wykladowcySkrot", wykladowcySkrotList);
 
-        int grupySize = grupyService.getCount();
-        model.addAttribute("grupySize", grupySize);
+        //int grupySize = grupyService.getCount();
+        //model.addAttribute("grupySize", grupySize);
 
         List<Grupy> grupyList;
-        grupyList = grupyService.getGrupy();
-        model.addAttribute("grupy", grupyList);
+        //grupyList = grupyService.getGrupy();
+        //model.addAttribute("grupy", grupyList);
 
         int saleSize = saleService.getCount();
         model.addAttribute("saleSize", saleSize);

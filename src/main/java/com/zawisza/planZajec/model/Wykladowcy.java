@@ -1,13 +1,12 @@
 package com.zawisza.planZajec.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
+
+import java.util.List;
 
 @Entity
 @Getter
@@ -25,6 +24,14 @@ public class Wykladowcy {
 
     private String skrot;
     private int id_strony;
+
+    @OneToMany(
+            mappedBy = "wykladowcy",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true,
+            fetch = FetchType.LAZY
+    )
+    private List<Plan> planList;
 
     public Wykladowcy(String nazwisko, String skrot, int id_strony) {
         this.nazwisko = nazwisko;

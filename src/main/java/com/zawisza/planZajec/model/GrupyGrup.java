@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 
+import java.util.List;
+
 @Entity
 @Getter
 @Setter
@@ -17,25 +19,31 @@ public class GrupyGrup {
     @GenericGenerator(name = "seq", strategy="increment")
     private int id;
 
-    @Column(name="id_grupy")
-    private int idGrupy;
-
-    @ManyToOne
-    Grupy grupy;
-
     @Column(name="grupa_grupy")
     private String grupaGrupy;
 
-    public GrupyGrup(int idGrupy, String grupaGrupy) {
-        this.idGrupy = idGrupy;
+    @ManyToOne
+    @JoinColumn(name="grupy_id")
+    private Grupy grupy;
+
+    @OneToMany(
+            mappedBy = "grupyGrup",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true,
+            fetch = FetchType.LAZY
+    )
+    private List<Plan> planList;
+
+    public GrupyGrup(String grupaGrupy, Grupy grupy) {
         this.grupaGrupy = grupaGrupy;
+        this.grupy = grupy;
     }
 
     @Override
     public String toString() {
         return "GrupyGrup{" +
                 "id=" + id +
-                ", grupy=" + idGrupy +
+                ", grupy=" + grupy +
                 ", grupaGrupy='" + grupaGrupy + '\'' +
                 '}';
     }
