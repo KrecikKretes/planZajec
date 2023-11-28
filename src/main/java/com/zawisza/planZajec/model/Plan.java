@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
@@ -30,7 +31,9 @@ public class Plan {
     @JoinColumn(name="id_wykladowcy")
     private Wykladowcy wykladowcy;
 
-    @ManyToOne
+    @ManyToOne(
+            cascade = CascadeType.ALL
+    )
     @JoinColumn(name="id_sale")
     private Sale sale;
 

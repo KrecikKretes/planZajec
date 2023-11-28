@@ -31,6 +31,11 @@ public class PageController {
         return "index";
     }
 
+    @GetMapping("/page/update")
+    public String update(){
+        return "/page/update";
+    }
+
     @GetMapping("/page/search")
     public String search(Model model){
         int wykladowcySize = wykladowcyService.getCount();

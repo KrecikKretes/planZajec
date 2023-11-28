@@ -17,7 +17,7 @@ public class Constant {
     private String grupaGrupyName = "";
     private String tydzien = "";
 
-    protected String linia = "";
+    protected String resztaLinii = "";
 
     public void substring(){
         line = line.substring(line.indexOf(" "));

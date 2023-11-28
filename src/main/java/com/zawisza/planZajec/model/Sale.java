@@ -22,6 +22,8 @@ public class Sale {
 
     private String sala;
 
+    private int id_strony;
+
     @OneToMany(
             mappedBy = "sale",
             cascade = CascadeType.ALL,
@@ -30,16 +32,17 @@ public class Sale {
     )
     private List<Plan> planList;
 
-    public Sale(String sala) {
+    public Sale(String sala, int id_strony) {
         this.sala = sala;
+        this.id_strony = id_strony;
     }
-
 
     @Override
     public String toString() {
-        return "Grupa{" +
+        return "Sale{" +
                 "id=" + id +
                 ", sala='" + sala + '\'' +
+                ", planList=" + planList +
                 '}';
     }
 }

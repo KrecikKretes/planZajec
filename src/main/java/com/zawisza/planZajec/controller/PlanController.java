@@ -24,6 +24,8 @@ public class PlanController extends Constant {
     private final PlanRepository planRepository;
     private final WykladowcyRepository wykladowcyRepository;
     private final SaleRepository saleRepository;
+    private final ZajeciaRepository zajeciaRepository;
+    private final GrupyRepository grupyRepository;
 
     private final ZajeciaService zajeciaService;
     private final GrupyGrupService grupyGrupService;
@@ -51,10 +53,11 @@ public class PlanController extends Constant {
 
         List<String> wykladowcyList = new ArrayList<>();
         List<String> salaList = new ArrayList<>();
+        List<String> zajeciaList = new ArrayList<>();
 
         planRepository.deleteAll();
 
-        for(int i = 1; i < 2; i++){
+        for(int i = 1; i < 88; i++){
             try {
                 url = new URL("https://podzial.mech.pk.edu.pl/stacjonarne/html/plany/o" + i + ".html");
                 URLConnection con = url.openConnection();
@@ -77,8 +80,12 @@ public class PlanController extends Constant {
                             System.out.println(getLine());
                             grupName = getLine();
 
+                            if(grupyService.getGrupyByNazwa(grupName) == null){
+                                grupy = new Grupy(grupName);
+                            }else{
+                                grupy = grupyService.getGrupyByNazwa(grupName);
 
-                            grupy = grupyService.getGrupyByNazwa(grupName);
+                            }
 
                             System.out.println("----------------");
                             continue;
@@ -108,9 +115,11 @@ public class PlanController extends Constant {
                                     continue;
                                 }
 
-                                linia = getLine();
+                                resztaLinii = getLine();
 
-                                while (linia.contains("-n") || linia.contains("-p")) {
+                                while (resztaLinii.contains("-n") || resztaLinii.contains("-p")) {
+
+                                    reset();
 
                                     System.out.println();
                                     System.out.println();
@@ -119,11 +128,11 @@ public class PlanController extends Constant {
                                     System.out.println("***************");
 
                                     //Usuwanie niepotrzebnych znaków
-                                    System.out.println("Linia PRZED : " + linia);
+                                    System.out.println("Linia PRZED : " + resztaLinii);
                                     System.out.println("GetLine PRZED : " + getLine());
 
-                                    if(linia.contains("-n") && linia.contains("-p")){
-                                        if(linia.indexOf("-n") > linia.indexOf("-p")){
+                                    if(resztaLinii.contains("-n") && resztaLinii.contains("-p")){
+                                        if(resztaLinii.indexOf("-n") < resztaLinii.indexOf("-p")){
                                             System.out.println("Zawiera pierwsze -n i -p");
                                             setTydzien("n");
                                             getString();
@@ -133,7 +142,7 @@ public class PlanController extends Constant {
                                             getString2();
                                         }
                                     }else{
-                                        if(linia.contains("-n")){
+                                        if(resztaLinii.contains("-n")){
                                             System.out.println("Zawiera -n");
                                             setTydzien("n");
                                             getString2();
@@ -144,12 +153,13 @@ public class PlanController extends Constant {
                                         }
                                     }
 
-                                    System.out.println("Linia PO : " + linia);
+                                    System.out.println("Tydzien : " + getTydzien());
+
+                                    System.out.println("Linia PO : " + resztaLinii);
                                     System.out.println("GetLine PO : " + getLine());
 
-                                    reset();
 
-                                    //Znalezienie wykladowcy
+                                    //Znalezienie id wykladowcy
                                     String id_wykladowcy_href;
                                     int id_wykladowcy_href_int;
                                     if(getLine().contains("a href=\"n") &&
@@ -177,51 +187,31 @@ public class PlanController extends Constant {
 
 
                                     //Usunięcie niepotrzebnych znaków
-                                    //replace();
-                                    //line = line.replaceAll("<.*?>", "");
                                     System.out.println("Test2 : " + getLine());
-
                                     setLine(getLine().replaceAll("<.*?>", ""));
-
                                     System.out.println("Test : " + getLine());
-                                    String test = getString3(getLine());
 
-                                    //setLine(getLine().trim());
-                                    System.out.println(getLine());
+                                    getString3();
 
                                     System.out.println("___________________");
 
-                                    /*
-                                    if(getLine().contains("-n") && getLine().indexOf("-n") < getLine().indexOf("-p") &&
-                                            getLine().contains("-p") ){
-                                        setTydzien("n");
-                                    }else{
-                                        if(getLine().contains("-n") && getLine().contains("-p")){
-                                            setTydzien("p");
-                                        }else{
-                                            if(getLine().contains("-n") && !getLine().contains("-p")) {
-                                                setTydzien("n");
-                                            }else{
-                                                setTydzien("p");
-                                            }
+                                    trim();
+
+                                    zajecia = zajeciaService.getZajeciaByNazwa(getZajeciaName());
+                                    if(zajecia == null){
+                                        if(!zajeciaList.contains(getZajeciaName())){
+                                            zajeciaList.add(getZajeciaName());
+                                            zajecia = new Zajecia(getZajeciaName());
+                                            zajeciaRepository.save(zajecia);
                                         }
                                     }
 
-                                     */
-
-                                    trim();
-
-
-
-                                    //substring();
-
-                                    setGrupaGrupyName(findGrup());
-                                    zajecia = zajeciaService.getZajeciaByNazwa(getZajeciaName());
+                                    assert grupy != null;
+                                    grupyGrup = grupyGrupService.getGrupyGrupByIdGrupyAndNazwaGrup(grupy.getId(), getGrupaGrupyName());
 
                                     System.out.println("Grupy ID : " + grupy.getId());
 
-                                    grupyGrup = grupyGrupService.getGrupyGrupByIdGrupyAndNazwaGrup(grupy.getId(), getGrupaGrupyName());
-
+                                    assert zajecia != null;
                                     System.out.println("Zajecia : " + zajecia.getNazwa());
 
                                     System.out.println("Wyszukane grupa grupy : " + getGrupaGrupyName());
@@ -247,47 +237,37 @@ public class PlanController extends Constant {
                                         }
                                     }
 
+                                    assert wykladowcy != null;
                                     System.out.println("Wykladowca : " + wykladowcy.getNazwisko());
 
                                     substring();
 
+                                    trim();
 
-
-                                    String salaText;
-                                    if(getLine().length() < 7){
-                                        salaText = getLine();
-                                    }else{
-                                        salaText = getLine().substring(0,6);
-                                    }
-
-                                    System.out.println("Test 2 : " + salaText);
+                                    System.out.println("Sala przed : " + getLine());
                                     if(getLine().substring(0, getLine().indexOf("-n") + 2).endsWith("-n") ||
                                             getLine().substring(0, getLine().indexOf("-p") + 2).endsWith("-p")){
-                                        setSalaName(getLine().substring(0, getLine().indexOf("-")));
+                                        setSalaName(getLine().substring(0, getLine().length() - 2));
                                     }else{
-                                        setSalaName(getLine().substring(0, getLine().indexOf(" ")));
-                                    }
-
-
-                                    if(salaText.contains("-n") || salaText.contains("-p")){
-                                        salaText = salaText.replace("-n", "");
-                                        salaText = salaText.replace("-p", "");
-                                    }else{
-                                        if(salaText.contains(" ")){
-                                            salaText = salaText.substring(0, salaText.indexOf(" "));
+                                        if(getLine().contains(" ")){
+                                            setSalaName(getLine().substring(0, getLine().indexOf(" ")));
+                                        }else{
+                                            setSalaName(getLine());
                                         }
                                     }
-                                    System.out.println("SalaText : " + salaText);
-                                    setSalaName(salaText);
+
+                                    System.out.println("Sala po : " + getSalaName());
 
                                     if(saleService.getSaleBySala(getSalaName()) == null &&
                                             !salaList.contains(getSalaName())){
                                         salaList.add(getSalaName());
-                                        saleRepository.save(new Sale(getSalaName()));
-                                        sale = new Sale(getSalaName());
+                                        sale = new Sale(getSalaName(), -1);
+                                        saleRepository.save(sale);
                                     }else{
-                                        sale = saleRepository.findSaleBySala(salaText);
+                                        sale = saleRepository.findSaleBySala(getSalaName());
                                     }
+
+                                    System.out.println("TEST : " + sale);
 
                                     if(getLine().contains(" ")){
                                         substring();
@@ -302,21 +282,6 @@ public class PlanController extends Constant {
                                     System.out.println("Plan : " + plan);
 
                                     planRepository.save(plan);
-
-                                     //public Plan(char tydzien, String godz, String dzien, GrupyGrup grupyGrup,
-                                     //       Sale sale, Wykladowcy wykladowcy, Zajecia zajecia) {
-
-                                    //Plan plan = new Plan(id_sale, id_wykladowcy, id_zajecia, getTydzien(), godzina, week[j], new GrupyGrup());
-                                    //id_grupy, id_grupy_grup, id_sale, id_wykladowcy, id_zajecia, tydzien, godz, dzien
-                                    //System.out.println(week[j] + "  " + text);
-
-                                    //System.out.println(plan);
-
-                                    //if(!planList.contains(plan)){
-                                    //    planRepository.save(plan);
-                                    //    planList.add(plan);
-                                    //}
-
                                 }
                             }
 
@@ -358,257 +323,80 @@ public class PlanController extends Constant {
 
     private void getString2() {
         System.out.println("GetString 2");
-        if(linia.contains("<br>")){
+        if(resztaLinii.contains("<br>")){
             System.out.println("Zawiera <br>");
-            setLine(linia.substring(0,linia.indexOf("<br>")));
-            System.out.println("Lin : " + linia);
+            setLine(resztaLinii.substring(0, resztaLinii.indexOf("<br>")));
+            System.out.println("Lin : " + resztaLinii);
             System.out.println("Getl : " + getLine());
-            linia = linia.substring(linia.indexOf("<br>") +4 );
+            resztaLinii = resztaLinii.substring(resztaLinii.indexOf("<br>") +4 );
         }else{
             System.out.println("Nie zawiera <br>");
-            setLine(linia.substring(0,linia.indexOf("-n") +2 ));
-            linia = linia.substring(linia.indexOf("-n") + 2);
+            setLine(resztaLinii.substring(0, resztaLinii.indexOf("-n") +2 ));
+            resztaLinii = resztaLinii.substring(resztaLinii.indexOf("-n") + 2);
         }
     }
 
 
     private void getString() {
         System.out.println("GetString 1");
-        if(linia.contains("<br>")){
+        if(resztaLinii.contains("<br>")){
             System.out.println("Zawiera <br>");
-            setLine(linia.substring(0,linia.indexOf("<br>")));
-            linia = linia.substring(linia.indexOf("<br>") + 4);
+            setLine(resztaLinii.substring(0, resztaLinii.indexOf("<br>")));
+            resztaLinii = resztaLinii.substring(resztaLinii.indexOf("<br>") + 4);
         }else{
             System.out.println("Nie zawiera <br>");
-            setLine(linia.substring(0,linia.indexOf("-p") +2));
-            linia = linia.substring(linia.indexOf("-p") +2);
+            setLine(resztaLinii.substring(0, resztaLinii.indexOf("-p") +2));
+            resztaLinii = resztaLinii.substring(resztaLinii.indexOf("-p") +2);
         }
     }
 
-
-
-    private String getString3(String text) {
-        String zajeciaName = "";
+    private void getString3() {
+        StringBuilder zajeciaName = new StringBuilder();
         String grup = "";
-        text = text.trim();
+        trim();
         String substring;
 
-        while(!text.isEmpty()){
-            System.out.println(text);
-            substring = text.substring(0, text.indexOf(" "));
+        while(!getLine().isEmpty()){
+            System.out.println("Przed : " + getLine());
+            substring = getLine().substring(0, getLine().indexOf(" "));
+            setLine(getLine().substring(getLine().indexOf(" ")));
             if(substring.contains("-(") || substring.contains("-1ps") || substring.contains("-2ps")){
+                System.out.println("TAK");
                 if(substring.contains("-(")){
-                    grup = substring.substring(0,text.indexOf("-("));
+                    grup = substring.substring(0,substring.indexOf("-("));
+                    if(grup.equals("angielski")){
+                        zajeciaName = new StringBuilder("J angielski");
+                    }
                 }else{
                     if(substring.contains("-1ps")){
-                        grup = substring.substring(0,text.indexOf("-1ps"));
+                        grup = substring.substring(0,substring.indexOf("-1ps"));
                     }else{
-                        grup = substring.substring(0,text.indexOf("-2ps"));
+                        grup = substring.substring(0,substring.indexOf("-2ps"));
                     }
                 }
                 break;
             }else{
+                System.out.println("NIE");
                 if(substring.contains(" ")){
                     break;
                 }else{
                     if(zajeciaName.isEmpty()){
-                        zajeciaName = zajeciaName + substring;
+                        zajeciaName.append(substring);
                     }else{
-                        zajeciaName = zajeciaName + " " + substring;
+                        zajeciaName.append(" ").append(substring);
                     }
 
-                    text = text.substring(text.indexOf(" ") + 1);
-                    System.out.println("Text : " + text);
+                    setLine(getLine().substring(getLine().indexOf(" ") + 1));
+                    System.out.println("Text : " + getLine());
                 }
             }
         }
         System.out.println("ZajeciaTest : " + zajeciaName);
         System.out.println("GrupTest : " + grup);
-        /*
-        try{
-            switch (text.substring(0, 6)) {
-                case "J angi" -> grup = "ang";
-                case "Mat DK" -> grup = "Ć";
-                case "Ster p" -> grup = text.substring(text.indexOf("pc ") + 3, text.indexOf("pc ") + 6);
-                case "Ap Med" -> grup = text.substring(text.indexOf("Med ") + 4, text.indexOf("Med ") + 7);
-                case "PM3D C" -> grup = text.substring(text.indexOf("CAD ") + 4, text.indexOf("CAD ") + 7);
-                case "Ind 4." -> grup = text.substring(text.indexOf("4.0 ") + 4, text.indexOf("4.0 ") + 7);
-                case "TerTec" -> grup = text.substring(text.indexOf("II ") + 3, text.indexOf("II ") + 4);
-                case "TKszWy" -> grup = text.substring(text.indexOf(" ") + 1, text.indexOf(" ") + 2);
-                default -> grup = switch (substring.charAt(0)) {
-                    case 'W' -> "W";
-                    case 'S' -> "S";
-                    case 'Ć' -> "Ć";
-                    default -> text.substring(text.indexOf(" ") + 1, text.indexOf(" ") + 4);
-                };
-            }
-        } finally {
-            System.out.println(text);
-            System.out.println(substring);
-        }
 
-         */
-        return grup;
-    }
-
-
-    private String findGrup(){
-        try {
-            String substring = getLine().substring(getLine().indexOf(" ") + 1, getLine().indexOf(" ") + 2);
-
-            switch (getLine().substring(0, 6)) {
-                case "J angi" -> {
-                    setGrupaGrupyName("angielski");
-                    setZajeciaName("J angielski");
-                    if (getLine().indexOf("-n") > 0) {
-                        System.out.println("Ang Posiada -n");
-                        setTydzien("n");
-                    } else {
-                        if (getLine().indexOf("-p") > 0) {
-                            System.out.println("Ang Posiada -p");
-                            setTydzien("p");
-                        }
-                    }
-                    setLine(getLine().substring(11));
-                }
-
-                case "Mat DK" -> {
-                    setGrupaGrupyName("Ć");
-                    if (getLine().indexOf("-n") > 0) {
-                        System.out.println("Mat DK Posiada -n");
-                        setTydzien("n");
-                    } else {
-                        if (getLine().indexOf("-p") > 0) {
-                            System.out.println("Mat DK Posiada -p");
-                            setTydzien("n");
-                        }
-                    }
-                    setLine(getLine().substring(7));
-                }
-
-                case "Ster p" -> {
-                    setGrupaGrupyName(getLine().substring(getLine().indexOf("pc ") + 3,
-                            getLine().indexOf("pc ") + 6));
-                    if (getLine().indexOf("-n") > 0) {
-                        System.out.println("Ster pc Posiada -n");
-                        setTydzien("n");
-                    } else {
-                        if (getLine().indexOf("-p") > 0) {
-                            System.out.println("Ster pc Posiada -p");
-                            setTydzien("p");
-                        }
-                    }
-                    setLine(getLine().substring(getLine().indexOf("pc ") + 3));
-                }
-
-                case "Ap Med" -> {
-                    setGrupaGrupyName(getLine().substring(getLine().indexOf("Med ") + 4,
-                            getLine().indexOf("Med ") + 7));
-
-                    if (getLine().indexOf("-n") > 0) {
-                        System.out.println("Ap Med Posiada -n");
-                        setTydzien("n");
-                    } else {
-                        if (getLine().indexOf("-p") > 0) {
-                            System.out.println("Ap Med Posiada -p");
-                            setTydzien("p");
-                        }
-                    }
-                    setLine(getLine().substring(getLine().indexOf("Med ") + 4));
-                }
-
-                case "PM3D C" -> {
-                    setGrupaGrupyName(getLine().substring(getLine().indexOf("CAD ") + 4,
-                            getLine().indexOf("CAD ") + 7));
-
-                    if (getLine().indexOf("-n") > 0) {
-                        System.out.println("PM3D CAD Posiada -n");
-                        setTydzien("n");
-                    } else {
-                        if (getLine().indexOf("-p") > 0) {
-                            System.out.println("PM3D CAD Posiada -p");
-                            setTydzien("p");
-                        }
-                    }
-                    setLine(getLine().substring(getLine().indexOf("CAD ") + 4));
-                }
-
-                case "Ind 4." -> {
-                    setGrupaGrupyName(getLine().substring(getLine().indexOf("4.0 ") + 4,
-                            getLine().indexOf("4.0 ") + 7));
-
-                    if (getLine().indexOf("-n") > 0) {
-                        System.out.println("Ind 4.0 Posiada -n");
-                        setTydzien("n");
-                    } else {
-                        if (getLine().indexOf("-p") > 0) {
-                            System.out.println("Ind 4.0 Posiada -p");
-                            setTydzien("p");
-                        }
-                    }
-                    setLine(getLine().substring(getLine().indexOf("4.0 ") + 4));
-                }
-
-                default -> {
-                    setZajeciaName(getLine().substring(0,getLine().indexOf(" ")));
-                    switch (substring.charAt(0)) {
-                        case 'W' -> {
-                            setGrupaGrupyName("W");
-                            setLine(getLine().substring(getLine().indexOf(" ") + 1));
-                        }
-                        case 'S' -> {
-                            setGrupaGrupyName("S");
-                            setLine(getLine().substring(getLine().indexOf(" ") + 1));
-                        }
-                        case 'Ć' -> {
-                            setGrupaGrupyName("Ć");
-                            setLine(getLine().substring(getLine().indexOf(" ") + 1));
-                        }
-                        default -> {
-                            System.out.println("ASDSADASD  " + getLine());
-                            setLine(getLine().substring(getLine().indexOf(" ") + 1));
-                            setGrupaGrupyName(getLine().substring(0, getLine().indexOf(" ")));
-                            System.out.println("ASDSADASD  " + getLine());
-
-                        }
-                    }
-                }
-            }
-
-            return getGrupaGrupyName();
-
-        } finally {
-            if(!getGrupaGrupyName().equals("angielski")) {
-                if(getLine().startsWith("W 1ps")){
-                    setGrupaGrupyName(getLine().substring(0, 1));
-                    substring();
-                }else{
-                    setGrupaGrupyName(getLine().substring(0, getLine().indexOf(" ")));
-                }
-                substring();
-            }
-        }
-    }
-
-
-
-    private void replace(){
-        setLine(getLine().replaceAll("<td class=\"l\">",""));
-        setLine(getLine().replaceAll("<span .*?>",""));
-        setLine(getLine().replaceFirst("<a href=\"s.*? class=\"s\">",""));
-        setLine(getLine().replaceFirst("<a href=\"n.*? class=\"n\">",""));
-        setLine(getLine().replaceAll("</a>", " "));
-        setLine(getLine().replaceAll("</.*?>", ""));
-        setLine(getLine().replaceFirst("<br>", ""));
-        setLine(getLine().replaceFirst("-", " "));
-        setLine(getLine().replaceAll("-n", "-n "));
-        setLine(getLine().replaceAll("-p", "-p "));
-        setLine(getLine().replaceAll("\\(\\w\\)", ""));
-        //setLine(getLine().replaceAll("\\(N.", ""));
-        //setLine(getLine().replaceAll("\\(P.", ""));
-        //setLine(getLine().replaceAll("\\(n.", ""));
-        //setLine(getLine().replaceAll("\\(p.", ""));
-        setLine(getLine().replaceAll(" {2}", " "));
+        System.out.println("GetLine po getString3 : " + getLine());
+        setGrupaGrupyName(grup);
+        setZajeciaName(zajeciaName.toString());
     }
 
     private void podsumowanie(GrupyGrup grupyGrup, Zajecia zajecia, Wykladowcy wykladowcy, Sale sale){
@@ -616,33 +404,19 @@ public class PlanController extends Constant {
         System.out.println("Podsumowanie");
         System.out.println("+++++++++++++++++");
 
-        System.out.println("Grupa grupy nazwa : " + grupyGrup.getGrupaGrupy());
-        System.out.println("Grupa grupy id : " + grupyGrup.getId());
         System.out.println("Grupa grupy : " + grupyGrup);
 
         System.out.println("------");
 
-        System.out.println("Zajecia : " + zajecia.getNazwa());
-        System.out.println("ID zajecia : " + zajecia.getId());
+        System.out.println("Zajecia : " + zajecia);
 
         System.out.println("------");
 
-        System.out.println("Skrót : " + wykladowcy.getSkrot());
-        System.out.println("ID a href : " + wykladowcy.getId_strony());
-        System.out.println("Nazwisko : " + wykladowcy.getNazwisko());
-        //if(wykladowcyService.getWykladowcyBySkrotAndIdStrony(getWykladowcyName(), id_wykladowcy_href_int) == null &&
-        //        !wykladowcyList.contains(getWykladowcyName())){
-        //    wykladowcyList.add(getWykladowcyName());
-        //    wykladowcyRepository.save(new Wykladowcy("Nieznane", getWykladowcyName(), -1));
-        //    id_wykladowcy = wykladowcyService.getWykladowcyByNazwiskoAndSkrot("Nieznane",getWykladowcyName()).getId();
-        //}else{
-        //    id_wykladowcy = wykladowcyService.getWykladowcyBySkrotAndIdStrony(getWykladowcyName(), id_wykladowcy_href_int).getId();
-        //}
-        //System.out.println("Id wykladowcy : " + id_wykladowcy);
+        System.out.println("Wykladowcy : " + wykladowcy);
 
         System.out.println("------");
 
-        System.out.println("Sala : " + sale.getSala());
+        System.out.println("Sala : " + sale);
 
         System.out.println("------");
 

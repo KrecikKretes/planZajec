@@ -24,7 +24,7 @@ public class SaleController {
     @RequestMapping(value="/sale/updateSale")
     public String saveSale(){
         URL url;
-        String sala;
+        String sala = null;
 
         List<String> saleList = new ArrayList<>();
 
@@ -45,12 +45,18 @@ public class SaleController {
                             line = line.replaceAll("<.*?>", "");
                             line = line.replaceAll("</span.*?table>", "");
 
-                            //System.out.println(line);
-                            if(line.contains("-")){
+                            System.out.println(line);
+                            if(line.contains("-n") || line.contains("-p")){
                                 if(line.contains("--")){
                                     continue procces;
                                 }else{
-                                    sala = line.substring(0, line.indexOf("-"));
+                                    if(line.contains("-n")){
+                                        sala = line.substring(0, line.indexOf("-n"));
+                                    }else{
+                                        if(line.contains("-p")){
+                                            sala = line.substring(0, line.indexOf("-p"));
+                                        }
+                                    }
                                 }
                             }else{
                                 if(line.contains("*")){
@@ -70,9 +76,8 @@ public class SaleController {
 
                             System.out.println(sala);
 
-
                             if(!saleList.contains(sala)){
-                                Sale sale = new Sale(sala);
+                                Sale sale = new Sale(sala,i);
                                 saleRepository.save(sale);
                                 saleList.add(sala);
                             }
