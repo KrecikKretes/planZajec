@@ -13,8 +13,12 @@ public class GrupyGrupService {
 
     private final GrupyGrupRepository grupyGrupRepository;
 
-    public List<GrupyGrup> getGrupyGrup(int id) {
-        return grupyGrupRepository.findAllGrupyGrupByIdGrupy(id);
+    public int getCount(){
+        return grupyGrupRepository.countAll();
+    }
+
+    public List<String> getGrupyGrupy() {
+        return grupyGrupRepository.findAllGrupyGrup();
     }
 
     public GrupyGrup getGrupyGrupByIdGrupyAndNazwaGrup(int id_grupy, String nazwa_grupy){

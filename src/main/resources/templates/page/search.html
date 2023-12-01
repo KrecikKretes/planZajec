@@ -29,20 +29,6 @@
                     </select>
                 </td>
             </tr>
-
-            <tr>
-                <td>
-                    <label for="grupy">Grupy</label>
-                </td>
-                <td>
-                    <select id="grupy" name="grupy" size="${grupySize}" multiple multiselect-search="true" multiselect-select-all="true">
-                        <option th:each="grupa : ${grupy}"
-                                th:value="${grupa.getGrupa()}"
-                                th:text="${grupa.getGrupa()}">
-                        </option>
-                    </select>
-                </td>
-            </tr>
             <tr>
                 <td>
                     <label for="wykladowcyskrot">Skrót</label>
@@ -52,6 +38,45 @@
                         <option th:each="wykladowca : ${wykladowcySkrot}"
                                 th:value="${wykladowca}"
                                 th:text="${wykladowca}">
+                        </option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="grupy">Grupy</label>
+                </td>
+                <td>
+                    <select id="grupy" name="grupy" size="${grupySize}" multiple multiselect-search="true" multiselect-select-all="true">
+                        <option th:each="grupaGrup : ${grupyGrup}"
+                                th:value="${grupaGrup}"
+                                th:text="${grupaGrup}">
+                        </option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="grupyGrup">Grupy</label>
+                </td>
+                <td>
+                    <select id="grupyGrup" name="grupyGrup" size="${grupyGrupySize}" multiple multiselect-search="true" multiselect-select-all="true">
+                        <option th:each="grupa : ${grupy}"
+                                th:value="${grupa.getGrupa()}"
+                                th:text="${grupa.getGrupa()}">
+                        </option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="zajecia">Zajecia</label>
+                </td>
+                <td>
+                    <select id="zajecia" name="zajecia" size="${zajeciaSize}" multiple multiselect-search="true" multiselect-select-all="true">
+                        <option th:each="zajecie : ${zajecia}"
+                                th:value="${zajecie.getNazwa()}"
+                                th:text="${zajecie.getNazwa()}">
                         </option>
                     </select>
                 </td>

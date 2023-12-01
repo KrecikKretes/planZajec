@@ -3,8 +3,74 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link th:href="@{/css/style.css}" rel="stylesheet" />
 </head>
 <body>
-    Work
+<table>
+    <thead>
+        <td class="result_td">
+            <p>ID</p>
+        </td>
+        <td class="result_td">
+            <p>Dzień</p>
+        </td>
+        <td class="result_td">
+            <p>Godzina</p>
+        </td>
+        <td class="result_td">
+            <p>Tydzień</p>
+        </td>
+        <td class="result_td">
+            <p>Zajęcia</p>
+        </td>
+        <td class="result_td">
+            <p>Kierunek</p>
+        </td>
+        <td class="result_td">
+            <p>Grupa</p>
+        </td>
+        <td class="result_td">
+            <p>Sala</p>
+        </td>
+        <td class="result_td">
+            <p>Wykładowca - nazwisko</p>
+        </td>
+        <td class="result_td">
+            <p>Wykładowca - skrót</p>
+        </td>
+    </thead>
+    <tr th:each="plan : ${planList}">
+        <td class="result_td">
+            <p th:text="${plan.getId()}"></p>
+        </td>
+        <td class="result_td">
+            <p th:text="${plan.getDzien()}"></p>
+        </td>
+        <td class="result_td">
+            <p th:text="${plan.getGodz()}"></p>
+        </td>
+        <td class="result_td">
+            <p th:text="${plan.getTydzien()}"></p>
+        </td>
+        <td class="result_td">
+            <p th:text="${plan.getZajecia().getNazwa()}"></p>
+        </td>
+        <td class="result_td">
+            <p th:text="${plan.getGrupyGrup().getGrupy().getGrupa()}"></p>
+        </td>
+        <td class="result_td">
+            <p th:text="${plan.getGrupyGrup().getGrupaGrupy()}"></p>
+        </td>
+        <td class="result_td">
+            <p th:text="${plan.getSale().getSala()}"></p>
+        </td>
+        <td class="result_td">
+            <p th:text="${plan.getWykladowcy().getNazwisko()}"></p>
+        </td>
+        <td class="result_td">
+            <p th:text="${plan.getWykladowcy().getSkrot()}"></p>
+        </td>
+    </tr>
+</table>
 </body>
 </html>

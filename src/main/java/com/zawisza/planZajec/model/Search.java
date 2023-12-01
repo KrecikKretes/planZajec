@@ -13,7 +13,9 @@ public class Search {
     private List<String> wykladowcySkrot;
     private List<String> sale;
     private List<String> grupy;
-    private char tydzien;
-    private String dzien;
-    private String godzina;
+    private List<String> zajecia;
+    private List<String> grupyGrup;
+    private List<String> tydzien;
+    private List<String> dzien;
+    private List<String> godzina;
 }

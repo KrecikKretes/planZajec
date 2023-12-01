@@ -1,6 +1,6 @@
 *{
     text-align: center;
-    margin: 20px auto 0;
+    margin: 20px auto 50px;
 }
 select{
     margin:0 auto;
@@ -31,4 +31,8 @@ img{
 }
 iframe{
     display: none;
+}
+
+.result_td{
+    width: 80px;
 }

@@ -120,6 +120,7 @@ public class PlanController extends Constant {
                                 while (resztaLinii.contains("-n") || resztaLinii.contains("-p")) {
 
                                     reset();
+                                    wykladowcy = null;
 
                                     System.out.println();
                                     System.out.println();
