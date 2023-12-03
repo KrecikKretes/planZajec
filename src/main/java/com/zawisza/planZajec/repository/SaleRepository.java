@@ -5,6 +5,7 @@ import com.zawisza.planZajec.model.Wykladowcy;
 import com.zawisza.planZajec.model.Zajecia;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Repository;
 import org.springframework.data.repository.CrudRepository;
 
@@ -22,4 +23,6 @@ public interface SaleRepository extends CrudRepository<Sale, Integer>{
     @Query("Select p from Sale p")
     List<Sale> getSales();
 
+    @Query("Select p From Sale p WHERE p.id = :id")
+    Sale getSaleById(@Param("id") int id);
 }

@@ -28,4 +28,7 @@ public class SaleService {
         return saleRepository.getSales();
     }
 
+    public Sale getSaleById(int id){
+        return saleRepository.getSaleById(id);
+    }
 }

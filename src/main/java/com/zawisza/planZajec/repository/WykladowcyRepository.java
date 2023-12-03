@@ -11,23 +11,17 @@ import java.util.List;
 @Repository
 public interface WykladowcyRepository extends CrudRepository<Wykladowcy, Integer> {
 
-    @Query("Select p From Wykladowcy p where p.skrot LIKE :skrot")
-    List<Wykladowcy> findAllWykladowcyBySkrot(@Param("skrot") String skrot);
 
     @Query("Select p From Wykladowcy p where p.id_strony = :id_strony")
     Wykladowcy findWykladowcyById_strony(@Param("id_strony") int id_strony);
 
-    @Query("Select p From Wykladowcy p where p.skrot LIKE :skrot")
-    Wykladowcy findWykladowcyBySkrot(@Param("skrot") String skrot);
+    @Query("Select p From Wykladowcy p where p.id = :id")
+    Wykladowcy findWykladowcyById(@Param("id") int id);
+
 
     @Query("Select p From Wykladowcy p where p.skrot LIKE :skrot and p.id_strony = :id_strony")
     Wykladowcy findWykladowcyBySkrotAndId_strony(@Param("skrot") String skrot, @Param("id_strony") int id_strony);
 
-    @Query("Select p From Wykladowcy p where p.skrot LIKE :skrot and p.id_strony > 0")
-    Wykladowcy findWykladowcyBySkrotAndId_stronyMoreThan0(@Param("skrot") String skrot);
-
-    @Query("Select p From Wykladowcy p where p.skrot LIKE :skrot and p.nazwisko LIKE :nazwisko")
-    Wykladowcy findWykladowcyByNazwiskoAndSkrot(@Param("nazwisko") String nazwisko,@Param("skrot") String skrot);
 
     @Query("select count(*) from Wykladowcy ")
     int countAll();
@@ -40,8 +34,5 @@ public interface WykladowcyRepository extends CrudRepository<Wykladowcy, Integer
 
     @Query("Select DISTINCT p.skrot from Wykladowcy p")
     List<String> getUniqueSkrot();
-
-    @Query( "select p.id from Wykladowcy p where p.nazwisko in :nazwisko" )
-    List<Integer> getIdByNazwisko(@Param("nazwisko") List<String> nazwisko);
 
 }

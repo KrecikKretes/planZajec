@@ -1,6 +1,7 @@
 package com.zawisza.planZajec.controller;
 
 import com.zawisza.planZajec.model.*;
+import com.zawisza.planZajec.repository.*;
 import com.zawisza.planZajec.service.*;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -10,6 +11,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.sql.*;
+import org.h2.tools.Csv;
+import org.h2.tools.SimpleResultSet;
+
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -23,14 +29,198 @@ public class PageController {
     private final PlanService planService;
     private final ZajeciaService zajeciaService;
 
+    private final GrupyRepository grupyRepository;
+    private final SaleRepository saleRepository;
+    private final WykladowcyRepository wykladowcyRepository;
+    private final ZajeciaRepository zajeciaRepository;
+    private final PlanRepository planRepository;
+
     @GetMapping("/")
-    public String index(){
+    public String index() throws SQLException {
+
+
+        ResultSet rs = new Csv().read("data/grupy.csv", null, null);
+        ResultSet rs1 = new Csv().read("data/grupyGrup.csv", null, null);
+        ResultSetMetaData meta = rs.getMetaData();
+        ResultSetMetaData meta1 = rs1.getMetaData();
+        while (rs.next()) {
+            Grupy grupy = new Grupy(rs.getString(2));
+            List<GrupyGrup> grupyGrupList = new ArrayList<>();
+
+            while (rs1.next()) {
+                if(rs1.getInt(3) == grupy.getId()){
+                    GrupyGrup grupyGrup = new GrupyGrup(rs1.getString(2), grupy);
+                    grupyGrupList.add(grupyGrup);
+                }
+                if(rs1.getInt(3) > grupy.getId()){
+                    break;
+                }
+
+            }
+
+            grupy.setGrupyGrupList(grupyGrupList);
+            grupyRepository.save(grupy);
+        }
+        rs.close();
+        rs1.close();
+
+        System.out.println("Grupy complete");
+
+        rs = new Csv().read("data/sale.csv", null, null);
+        meta = rs.getMetaData();
+        while (rs.next()) {
+            Sale sale = new Sale(rs.getString(2), rs.getInt(3));
+
+            saleRepository.save(sale);
+        }
+        rs.close();
+
+        System.out.println("Sale complete");
+
+        rs = new Csv().read("data/wykladowcy.csv", null, null);
+        meta = rs.getMetaData();
+        while (rs.next()) {
+            Wykladowcy wykladowcy = new Wykladowcy(rs.getString(2), rs.getString(3), rs.getInt(4));
+            wykladowcyRepository.save(wykladowcy);
+        }
+        rs.close();
+
+        System.out.println("Wykladowcy complete");
+
+        rs = new Csv().read("data/zajecia.csv", null, null);
+        meta = rs.getMetaData();
+        while (rs.next()) {
+            Zajecia zajecia = new Zajecia(rs.getString(2));
+            zajeciaRepository.save(zajecia);
+        }
+        rs.close();
+
+        System.out.println("Zajecia complete");
+
+        rs = new Csv().read("data/plan.csv", null, null);
+        meta = rs.getMetaData();
+        while (rs.next()) {
+            String tydzien = rs.getString(2);
+            String godzina = rs.getString(3);
+            String week = rs.getString(4);
+            int idGG = rs.getInt(5);
+            int idSale = rs.getInt(6);
+            int idWykladowcy = rs.getInt(7);
+            int idZajecia = rs.getInt(8);
+
+            GrupyGrup grupyGrup = grupyGrupService.findGrupyGrupById(idGG);
+            Sale sale = saleService.getSaleById(idSale);
+            Wykladowcy wykladowcy = wykladowcyService.findWykladowcyById(idWykladowcy);
+            Zajecia zajecia = zajeciaService.findZajeciaById(idZajecia);
+
+            Plan plan = new Plan(tydzien,godzina, week, grupyGrup, sale, wykladowcy, zajecia);
+            planRepository.save(plan);
+        }
+        rs.close();
+
+        System.out.println("Plan complete");
+
         return "index";
     }
 
     @GetMapping("/page/update")
-    public String update(){
+    public String update() throws SQLException {
         return "/page/update";
+    }
+
+    @GetMapping("/page/complete")
+    public String complete() throws SQLException {
+
+        SimpleResultSet rs = new SimpleResultSet();
+        rs.addColumn("id", Types.INTEGER, 255, 0);
+        rs.addColumn("grupa", Types.VARCHAR, 255, 0);
+
+        List<Grupy> grupyList = grupyService.getGrupy();
+
+        for(Grupy grupy: grupyList){
+            rs.addRow(grupy.getId(), grupy.getGrupa());
+        }
+        new Csv().write("data/grupy.csv", rs, null);
+
+        rs = new SimpleResultSet();
+        rs.addColumn("id", Types.INTEGER, 255, 0);
+        rs.addColumn("grupa_grupy", Types.VARCHAR, 255, 0);
+        rs.addColumn("grupy_id", Types.INTEGER, 255, 0);
+
+        List<GrupyGrup> grupyGrups = grupyGrupService.getAll();
+
+        for(GrupyGrup grupyGrup: grupyGrups){
+            rs.addRow(grupyGrup.getId(), grupyGrup.getGrupaGrupy(), grupyGrup.getGrupy().getId());
+        }
+        new Csv().write("data/grupyGrup.csv", rs, null);
+
+
+        rs = new SimpleResultSet();
+        rs.addColumn("id", Types.INTEGER, 255, 0);
+        rs.addColumn("sala", Types.VARCHAR, 255, 0);
+        rs.addColumn("id_strony", Types.INTEGER, 255, 0);
+
+        List<Sale> saleList = saleService.getSale();
+
+        for(Sale sale: saleList){
+            rs.addRow(sale.getId(), sale.getSala(), sale.getId_strony());
+        }
+        new Csv().write("data/sale.csv", rs, null);
+
+        rs = new SimpleResultSet();
+        rs.addColumn("id", Types.INTEGER, 255, 0);
+        rs.addColumn("nazwisko", Types.VARCHAR, 255, 0);
+        rs.addColumn("skrot", Types.VARCHAR, 255, 0);
+        rs.addColumn("id_strony", Types.INTEGER, 255, 0);
+
+        List<Wykladowcy> wykladowcyList = wykladowcyService.getWykladowcy();
+
+        for(Wykladowcy wykladowcy: wykladowcyList){
+            rs.addRow(wykladowcy.getId(), wykladowcy.getNazwisko(), wykladowcy.getSkrot() , wykladowcy.getId_strony());
+        }
+        new Csv().write("data/wykladowcy.csv", rs, null);
+
+        rs = new SimpleResultSet();
+        rs.addColumn("id", Types.INTEGER, 255, 0);
+        rs.addColumn("nazwa", Types.VARCHAR, 255, 0);
+
+        List<Zajecia> zajeciaList = zajeciaService.getZajecia();
+
+        for(Zajecia zajecia: zajeciaList){
+            rs.addRow(zajecia.getId(), zajecia.getNazwa());
+        }
+        new Csv().write("data/zajecia.csv", rs, null);
+
+
+
+        rs = new SimpleResultSet();
+        rs.addColumn("id", Types.INTEGER, 255, 0);
+        rs.addColumn("dzien", Types.VARCHAR, 255, 0);
+        rs.addColumn("godz", Types.VARCHAR, 255, 0);
+        rs.addColumn("tydzien", Types.VARCHAR, 255, 0);
+        rs.addColumn("id_grupy_grup", Types.INTEGER, 255, 0);
+        rs.addColumn("id_sale", Types.INTEGER, 255, 0);
+        rs.addColumn("id_wykladowcy", Types.INTEGER, 255, 0);
+        rs.addColumn("id_zajecia", Types.INTEGER, 255, 0);
+
+        List<Plan> planList = planService.getPlan();
+
+        for(Plan plan: planList){
+            rs.addRow(plan.getId(), plan.getDzien(),
+                    plan.getGodz(), plan.getTydzien(),
+                    plan.getGrupyGrup().getId(),
+                    plan.getSale().getId(),
+                    plan.getWykladowcy().getId(),
+                    plan.getZajecia().getId()
+                    );
+        }
+        new Csv().write("data/plan.csv", rs, null);
+
+
+
+
+
+        return "/page/complete";
     }
 
     @GetMapping("/page/search")

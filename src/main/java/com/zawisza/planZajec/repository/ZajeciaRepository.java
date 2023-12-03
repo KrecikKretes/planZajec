@@ -18,4 +18,7 @@ public interface ZajeciaRepository extends CrudRepository<Zajecia, Integer> {
     @Query("Select p From Zajecia p where p.nazwa LIKE :nazwa")
     Zajecia findZajeciaByNazwa(@Param("nazwa") String nazwa);
 
+    @Query("Select p From Zajecia p where p.id LIKE :id")
+    Zajecia findZajeciaById(@Param("id") int id);
+
 }

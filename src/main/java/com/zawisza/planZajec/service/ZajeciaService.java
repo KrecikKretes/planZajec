@@ -26,4 +26,8 @@ public class ZajeciaService {
     public Zajecia getZajeciaByNazwa(String nazwa) {
         return zajeciaRepository.findZajeciaByNazwa(nazwa);
     }
+
+    public Zajecia findZajeciaById(int id){
+        return zajeciaRepository.findZajeciaById(id);
+    }
 }

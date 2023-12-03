@@ -21,6 +21,14 @@ public class GrupyGrupService {
         return grupyGrupRepository.findAllGrupyGrup();
     }
 
+    public List<GrupyGrup> getAll(){
+        return grupyGrupRepository.findAll();
+    }
+
+    public GrupyGrup findGrupyGrupById(int id){
+        return grupyGrupRepository.findGrupyGrupById(id);
+    }
+
     public GrupyGrup getGrupyGrupByIdGrupyAndNazwaGrup(int id_grupy, String nazwa_grupy){
         return grupyGrupRepository.findGrupyGrupByIdGrupyAndGrupaGrupy(id_grupy, nazwa_grupy);
     }

@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface PlanRepository  extends CrudRepository<Plan, Integer> {
 
-    @Query("Select DISTINCT p from Plan p")
+    @Query("Select p from Plan p")
     List<Plan> getPlan();
 
     @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
