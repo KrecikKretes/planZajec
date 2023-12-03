@@ -12,14 +12,14 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
     @Query("Select DISTINCT p from Plan p")
     List<Plan> getPlan();
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " ORDER BY p.tydzien ASC, CASE WHEN p.dzien LIKE 'Pon' THEN 1" +
             " WHEN p.dzien LIKE 'Wt' THEN 2" +
             " WHEN p.dzien LIKE 'Sr' THEN 3" +
             " WHEN p.dzien LIKE 'Czw' THEN 4" +
             " ELSE 5 END," +
             " p.godz ASC")
-    List<Plan> getPlanByWykladowcyNazwisko(@Param("wykladowcyNazwa") List<String> wykladowcyNazwa);
+    List<Plan> getPlanByWykladowcyNazwisko(@Param("wykladowcyName") List<String> wykladowcyName);
 
     @Query("Select p from Plan p WHERE p.wykladowcy.skrot IN :wykladowcySkrot" +
             " ORDER BY p.tydzien ASC, CASE WHEN p.dzien LIKE 'Pon' THEN 1" +
@@ -97,7 +97,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
 
     //2 warunki
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.dzien IN :dzien" +
             " ORDER BY p.tydzien ASC, CASE WHEN p.dzien LIKE 'Pon' THEN 1" +
             " WHEN p.dzien LIKE 'Wt' THEN 2" +
@@ -105,10 +105,10 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             " WHEN p.dzien LIKE 'Czw' THEN 4" +
             " ELSE 5 END," +
             " p.godz ASC")
-    List<Plan> getPlanByWykladowcyNazwiskoAndDzien(@Param("wykladowcyNazwa") List<String> wykladowcyNazwa,
+    List<Plan> getPlanByWykladowcyNazwiskoAndDzien(@Param("wykladowcyName") List<String> wykladowcyName,
                                                    @Param("dzien") List<String> dzien);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.godz IN :godz" +
             " ORDER BY p.tydzien ASC, CASE WHEN p.dzien LIKE 'Pon' THEN 1" +
             " WHEN p.dzien LIKE 'Wt' THEN 2" +
@@ -116,10 +116,10 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             " WHEN p.dzien LIKE 'Czw' THEN 4" +
             " ELSE 5 END," +
             " p.godz ASC")
-    List<Plan> getPlanByWykladowcyNazwiskoAndGodz(@Param("wykladowcyNazwa") List<String> wykladowcyName,
+    List<Plan> getPlanByWykladowcyNazwiskoAndGodz(@Param("wykladowcyName") List<String> wykladowcyName,
                                                   @Param("godz") List<String> godz);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.tydzien IN :tydzien" +
             " ORDER BY p.tydzien ASC, CASE WHEN p.dzien LIKE 'Pon' THEN 1" +
             " WHEN p.dzien LIKE 'Wt' THEN 2" +
@@ -127,10 +127,10 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             " WHEN p.dzien LIKE 'Czw' THEN 4" +
             " ELSE 5 END," +
             " p.godz ASC")
-    List<Plan> getPlansByWykladowcyNazwiskoAndTydzien(@Param("wykladowcyNazwa")List<String> wykladowcyName,
+    List<Plan> getPlansByWykladowcyNazwiskoAndTydzien(@Param("wykladowcyName")List<String> wykladowcyName,
                                                       @Param("tydzien")List<String> tydzien);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.zajecia.nazwa IN :zajeciaNazwa" +
             " ORDER BY p.tydzien ASC, CASE WHEN p.dzien LIKE 'Pon' THEN 1" +
             " WHEN p.dzien LIKE 'Wt' THEN 2" +
@@ -138,10 +138,10 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             " WHEN p.dzien LIKE 'Czw' THEN 4" +
             " ELSE 5 END," +
             " p.godz ASC")
-    List<Plan> getPlanByWykladowcyNazwiskoAndZajeciaNazwa(@Param("wykladowcyNazwa")List<String> wykladowcyName,
+    List<Plan> getPlanByWykladowcyNazwiskoAndZajeciaNazwa(@Param("wykladowcyName")List<String> wykladowcyName,
                                                           @Param("zajeciaNazwa")List<String> zajeciaNazwa);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.grupyGrup.grupaGrupy IN :grupaGrupy" +
             " ORDER BY p.tydzien ASC, CASE WHEN p.dzien LIKE 'Pon' THEN 1" +
             " WHEN p.dzien LIKE 'Wt' THEN 2" +
@@ -152,7 +152,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
     List<Plan> getPlanByWykladowcyNazwiskoAndGrupaGrupy(List<String> wykladowcyName,
                                                         List<String> grupaGrupy);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.grupyGrup.grupy.grupa IN :grupy" +
             " ORDER BY p.tydzien ASC, CASE WHEN p.dzien LIKE 'Pon' THEN 1" +
             " WHEN p.dzien LIKE 'Wt' THEN 2" +
@@ -163,7 +163,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
     List<Plan> getPlanByWykladowcyNazwiskoAndGrupy(
             List<String> wykladowcyName, List<String> grupy);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.sale.sala IN :sale" +
             " ORDER BY p.tydzien ASC, CASE WHEN p.dzien LIKE 'Pon' THEN 1" +
             " WHEN p.dzien LIKE 'Wt' THEN 2" +
@@ -173,7 +173,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             " p.godz ASC")
     List<Plan> getPlanByWykladowcyNazwiskoAndSale(List<String> wykladowcyName, List<String> sale);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.wykladowcy.skrot IN :wykladowcySkrot" +
             " ORDER BY p.tydzien ASC, CASE WHEN p.dzien LIKE 'Pon' THEN 1" +
             " WHEN p.dzien LIKE 'Wt' THEN 2" +
@@ -467,7 +467,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
 
     //3 warunki
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.godz IN :godz" +
             " AND p.dzien IN :dzien" +
             " ORDER BY p.tydzien ASC, CASE WHEN p.dzien LIKE 'Pon' THEN 1" +
@@ -476,11 +476,11 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             " WHEN p.dzien LIKE 'Czw' THEN 4" +
             " ELSE 5 END," +
             " p.godz ASC")
-    List<Plan> getPlanByWykladowcyNazwiskoAndGodzAndDzien(@Param("wykladowcyNazwa")List<String> wykladowcyName,
+    List<Plan> getPlanByWykladowcyNazwiskoAndGodzAndDzien(@Param("wykladowcyName")List<String> wykladowcyName,
                                                           @Param("godz")List<String> godz,
                                                           @Param("dzien")List<String> dzien);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.tydzien IN :tydzien" +
             " AND p.dzien IN :dzien" +
             " ORDER BY p.tydzien ASC, CASE WHEN p.dzien LIKE 'Pon' THEN 1" +
@@ -489,12 +489,12 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             " WHEN p.dzien LIKE 'Czw' THEN 4" +
             " ELSE 5 END," +
             " p.godz ASC")
-    List<Plan> getPlanByWykladowcyNazwiskoAndTydzienAndDzien(@Param("wykladowcyNazwa")List<String> wykladowcyName,
+    List<Plan> getPlanByWykladowcyNazwiskoAndTydzienAndDzien(@Param("wykladowcyName")List<String> wykladowcyName,
                                                              @Param("dzien")List<String> dzien,
                                                              @Param("tydzien")List<String> tydzien);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
-            " AND p.dzien IN :dzien" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
+            " AND p.tydzien IN :tydzien" +
             " AND p.godz IN :godz" +
             " ORDER BY p.tydzien ASC, CASE WHEN p.dzien LIKE 'Pon' THEN 1" +
             " WHEN p.dzien LIKE 'Wt' THEN 2" +
@@ -502,11 +502,11 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             " WHEN p.dzien LIKE 'Czw' THEN 4" +
             " ELSE 5 END," +
             " p.godz ASC")
-    List<Plan> getPlanByWykladowcyNazwiskoAndTydzienAndGodz(@Param("wykladowcyNazwa")List<String> wykladowcyName,
+    List<Plan> getPlanByWykladowcyNazwiskoAndTydzienAndGodz(@Param("wykladowcyName")List<String> wykladowcyName,
                                                             @Param("godz")List<String> godz,
                                                             @Param("tydzien")List<String> tydzien);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.dzien IN :dzien" +
             " AND p.zajecia.nazwa IN :zajeciaNazwa" +
             " ORDER BY p.tydzien ASC, CASE WHEN p.dzien LIKE 'Pon' THEN 1" +
@@ -515,11 +515,11 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             " WHEN p.dzien LIKE 'Czw' THEN 4" +
             " ELSE 5 END," +
             " p.godz ASC")
-    List<Plan> getPlanByWykladowcyNazwiskoAndZajeciaNazwaAndDzien(@Param("wykladowcyNazwa")List<String> wykladowcyName,
+    List<Plan> getPlanByWykladowcyNazwiskoAndZajeciaNazwaAndDzien(@Param("wykladowcyName")List<String> wykladowcyName,
                                                                   @Param("dzien")List<String> dzien,
                                                                   @Param("zajeciaNazwa")List<String> zajeciaNazwa);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.zajecia.nazwa IN :zajeciaNazwa" +
             " AND p.godz IN :godz" +
             " ORDER BY p.tydzien ASC, CASE WHEN p.dzien LIKE 'Pon' THEN 1" +
@@ -528,11 +528,11 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             " WHEN p.dzien LIKE 'Czw' THEN 4" +
             " ELSE 5 END," +
             " p.godz ASC")
-    List<Plan> getPlanByWykladowcyNazwiskoAndZajeciaNazwaAndGodz(@Param("wykladowcyNazwa")List<String> wykladowcyName,
+    List<Plan> getPlanByWykladowcyNazwiskoAndZajeciaNazwaAndGodz(@Param("wykladowcyName")List<String> wykladowcyName,
                                                                  @Param("godz")List<String> godz,
                                                                  @Param("zajeciaNazwa")List<String> zajeciaNazwa);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.zajecia.nazwa IN :zajeciaNazwa" +
             " AND p.tydzien IN :tydzien" +
             " ORDER BY p.tydzien ASC, CASE WHEN p.dzien LIKE 'Pon' THEN 1" +
@@ -541,11 +541,11 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             " WHEN p.dzien LIKE 'Czw' THEN 4" +
             " ELSE 5 END," +
             " p.godz ASC")
-    List<Plan> getPlanByWykladowcyNazwiskoAndZajeciaNazwaAndTydzien(List<String> wykladowcyName,
+    List<Plan> getPlanByWykladowcyNazwiskoAndZajeciaNazwaAndTydzien(@Param("wykladowcyName")List<String> wykladowcyName,
                                                                     List<String> tydzien,
                                                                     List<String> zajeciaNazwa);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.grupyGrup.grupaGrupy IN :grupaGrupy" +
             " AND p.dzien IN :dzien" +
             " ORDER BY p.tydzien ASC, CASE WHEN p.dzien LIKE 'Pon' THEN 1" +
@@ -555,9 +555,9 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             " ELSE 5 END," +
             " p.godz ASC")
     List<Plan> getPlanByWykladowcyNazwiskoAndGrupaGrupyAndDzien(
-            List<String> wykladowcyName, List<String> dzien, List<String> grupaGrupy);
+            @Param("wykladowcyName")List<String> wykladowcyName, List<String> dzien, List<String> grupaGrupy);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.grupyGrup.grupaGrupy IN :grupaGrupy" +
             " AND p.godz IN :godz" +
             " ORDER BY p.tydzien ASC, CASE WHEN p.dzien LIKE 'Pon' THEN 1" +
@@ -569,7 +569,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
     List<Plan> getPlanByWykladowcyNazwiskoAndGrupaGrupyAndGodz(
             List<String> wykladowcyName, List<String> godz, List<String> grupaGrupy);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.zajecia.nazwa IN :zajeciaNazwa" +
             " AND p.grupyGrup.grupaGrupy IN :grupaGrupy" +
             " ORDER BY p.tydzien ASC, CASE WHEN p.dzien LIKE 'Pon' THEN 1" +
@@ -582,7 +582,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> wykladowcyName, List<String> zajeciaNazwa,
             List<String> grupaGrupy);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.dzien IN :dzien" +
             " AND p.grupyGrup.grupy.grupa IN :grupy" +
             " ORDER BY p.tydzien ASC, CASE WHEN p.dzien LIKE 'Pon' THEN 1" +
@@ -595,7 +595,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> wykladowcyName, List<String> dzien,
             List<String> grupy);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.godz IN :godz" +
             " AND p.grupyGrup.grupy.grupa IN :grupy" +
             " ORDER BY p.tydzien ASC, CASE WHEN p.dzien LIKE 'Pon' THEN 1" +
@@ -608,7 +608,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> wykladowcyName, List<String> godz,
             List<String> grupy);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.tydzien IN :tydzien" +
             " AND p.grupyGrup.grupy.grupa IN :grupy" +
             " ORDER BY p.tydzien ASC, CASE WHEN p.dzien LIKE 'Pon' THEN 1" +
@@ -621,7 +621,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> wykladowcyName, List<String> tydzien,
             List<String> grupy);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.zajecia.nazwa IN :zajeciaNazwa" +
             " AND p.grupyGrup.grupy.grupa IN :grupy" +
             " ORDER BY p.tydzien ASC, CASE WHEN p.dzien LIKE 'Pon' THEN 1" +
@@ -633,7 +633,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
     List<Plan> getPlanByWykladowcyNazwiskoAndGrupyAndZajeciaNazwa(
             List<String> wykladowcyName, List<String> zajeciaNazwa, List<String> grupy);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.grupyGrup.grupaGrupy IN :grupaGrupy" +
             " AND p.grupyGrup.grupy.grupa IN :grupy" +
             " ORDER BY p.tydzien ASC, CASE WHEN p.dzien LIKE 'Pon' THEN 1" +
@@ -645,7 +645,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
     List<Plan> getPlanByWykladowcyNazwiskoAndGrupyAndGrupaGrupy(
             List<String> wykladowcyName, List<String> grupaGrupy, List<String> grupy);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.tydzien IN :tydzien" +
             " AND p.grupyGrup.grupy.grupa IN :grupy" +
             " ORDER BY p.tydzien ASC, CASE WHEN p.dzien LIKE 'Pon' THEN 1" +
@@ -657,7 +657,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
     List<Plan> getPlanByWykladowcyNazwiskoAndGrupyAndGrupaGrupyAndTydzien(
             List<String> wykladowcyName, List<String> tydzien, List<String> grupy);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.dzien IN :dzien" +
             " AND p.sale.sala IN :sale" +
             " ORDER BY p.tydzien ASC, CASE WHEN p.dzien LIKE 'Pon' THEN 1" +
@@ -669,7 +669,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
     List<Plan> getPlanByWykladowcyNazwiskoAndSaleAndDzien(
             List<String> wykladowcyName, List<String> dzien, List<String> sale);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.godz IN :godz" +
             " AND p.sale.sala IN :sale" +
             " ORDER BY p.tydzien ASC, CASE WHEN p.dzien LIKE 'Pon' THEN 1" +
@@ -681,7 +681,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
     List<Plan> getPlanByWykladowcyNazwiskoAndSaleAndGodz(
             List<String> wykladowcyName, List<String> godz, List<String> sale);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.tydzien IN :tydzien" +
             " AND p.sale.sala IN :sale" +
             " ORDER BY p.tydzien ASC, CASE WHEN p.dzien LIKE 'Pon' THEN 1" +
@@ -693,7 +693,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
     List<Plan> getPlanByWykladowcyNazwiskoAndSaleAndTydzien(
             List<String> wykladowcyName, List<String> tydzien, List<String> sale);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.zajecia.nazwa IN :zajeciaNazwa" +
             " AND p.sale.sala IN :sale" +
             " ORDER BY p.tydzien ASC, CASE WHEN p.dzien LIKE 'Pon' THEN 1" +
@@ -705,7 +705,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
     List<Plan> getPlanByWykladowcyNazwiskoAndSaleAndZajeciaNazwa(
             List<String> wykladowcyName, List<String> zajeciaNazwa, List<String> sale);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.grupyGrup.grupaGrupy IN :grupaGrupy" +
             " AND p.sale.sala IN :sale" +
             " ORDER BY p.tydzien ASC, CASE WHEN p.dzien LIKE 'Pon' THEN 1" +
@@ -717,7 +717,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
     List<Plan> getPlanByWykladowcyNazwiskoAndSaleAndGrupaGrupy(
             List<String> wykladowcyName, List<String> grupaGrupy, List<String> sale);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.grupyGrup.grupy.grupa IN :grupy" +
             " AND p.sale.sala IN :sale" +
             " ORDER BY p.tydzien ASC, CASE WHEN p.dzien LIKE 'Pon' THEN 1" +
@@ -730,7 +730,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> wykladowcyName, List<String> grupy, List<String> sale);
 
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.wykladowcy.skrot IN :wykladowcySkrot" +
             " AND p.dzien IN :dzien" +
             " ORDER BY p.tydzien ASC, CASE WHEN p.dzien LIKE 'Pon' THEN 1" +
@@ -741,7 +741,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             " p.godz ASC")
     List<Plan> getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndDzien(List<String> wykladowcyName, List<String> dzien, List<String> wykladowcySkrot);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.wykladowcy.skrot IN :wykladowcySkrot" +
             " AND p.godz IN :godz" +
             " ORDER BY p.tydzien ASC, CASE WHEN p.dzien LIKE 'Pon' THEN 1" +
@@ -752,7 +752,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             " p.godz ASC")
     List<Plan> getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndGodz(List<String> wykladowcyName, List<String> godz, List<String> wykladowcySkrot);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.wykladowcy.skrot IN :wykladowcySkrot" +
             " AND p.zajecia.nazwa IN :zajeciaNazwa" +
             " ORDER BY p.tydzien ASC, CASE WHEN p.dzien LIKE 'Pon' THEN 1" +
@@ -763,7 +763,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             " p.godz ASC")
     List<Plan> getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndZajeciaNazwa(List<String> wykladowcyName, List<String> zajeciaNazwa, List<String> wykladowcySkrot);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.grupyGrup.grupaGrupy IN :grupaGrupy" +
             " AND p.wykladowcy.skrot IN :wykladowcySkrot" +
             " ORDER BY p.tydzien ASC, CASE WHEN p.dzien LIKE 'Pon' THEN 1" +
@@ -774,7 +774,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             " p.godz ASC")
     List<Plan> getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndGrupaGrupy(List<String> wykladowcyName, List<String> grupaGrupy, List<String> wykladowcySkrot);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.grupyGrup.grupy.grupa IN :grupy" +
             " AND p.wykladowcy.skrot IN :wykladowcySkrot" +
             " ORDER BY p.tydzien ASC, CASE WHEN p.dzien LIKE 'Pon' THEN 1" +
@@ -785,7 +785,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             " p.godz ASC")
     List<Plan> getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndGrupy(List<String> wykladowcyName, List<String> grupy, List<String> wykladowcySkrot);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.wykladowcy.skrot IN :wykladowcySkrot" +
             " AND p.sale.sala IN :sale" +
             " ORDER BY p.tydzien ASC, CASE WHEN p.dzien LIKE 'Pon' THEN 1" +
@@ -796,7 +796,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             " p.godz ASC")
     List<Plan> getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndSale(List<String> wykladowcyName, List<String> sale, List<String> wykladowcySkrot);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.wykladowcy.skrot IN :wykladowcySkrot" +
             " AND p.tydzien IN :tydzien" +
             " ORDER BY p.tydzien ASC, CASE WHEN p.dzien LIKE 'Pon' THEN 1" +
@@ -1413,13 +1413,23 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             " p.godz ASC")
     List<Plan> getPlanByWykladowcySkrotAndSaleAndGrupy(List<String> wykladowcySkrot, List<String> grupy, List<String> sale);
 
-
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
+            " AND p.grupyGrup.grupaGrupy IN :grupaGrupy" +
+            " AND p.tydzien IN :tydzien" +
+            " ORDER BY p.tydzien ASC, CASE WHEN p.dzien LIKE 'Pon' THEN 1" +
+            " WHEN p.dzien LIKE 'Wt' THEN 2" +
+            " WHEN p.dzien LIKE 'Sr' THEN 3" +
+            " WHEN p.dzien LIKE 'Czw' THEN 4" +
+            " ELSE 5 END," +
+            " p.godz ASC")
+    List<Plan> getPlanByWykladowcyNazwiskoAndGrupaGrupyAndTydzien(
+            List<String> wykladowcyName, List<String> grupaGrupy, List<String> tydzien);
 
 
 
     //4 warunki
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.tydzien IN :tydzien" +
             " AND p.dzien IN :dzien" +
             " AND p.godz IN :godz" +
@@ -1430,12 +1440,12 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             " ELSE 5 END," +
             " p.godz ASC")
     List<Plan> getPlanByWykladowcyNazwiskoAndTydzienAndGodzAndDzien(
-            @Param("wykladowcyNazwa")List<String> wykladowcyName,
+            @Param("wykladowcyName")List<String> wykladowcyName,
             @Param("godz")List<String> godz,
             @Param("dzien")List<String> dzien,
             @Param("tydzien")List<String> tydzien);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.zajecia.nazwa IN :zajeciaNazwa" +
             " AND p.dzien IN :dzien" +
             " AND p.godz IN :godz" +
@@ -1446,12 +1456,12 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             " ELSE 5 END," +
             " p.godz ASC")
     List<Plan> getPlanByWykladowcyNazwiskoAndZajeciaNazwaAndGodzAndDzien(
-            @Param("wykladowcyNazwa")List<String> wykladowcyName,
+            @Param("wykladowcyName")List<String> wykladowcyName,
             @Param("godz")List<String> godz,
             @Param("dzien")List<String> dzien,
             @Param("zajeciaNazwa")List<String> zajeciaNazwa);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.zajecia.nazwa IN :zajeciaNazwa" +
             " AND p.dzien IN :dzien" +
             " AND p.tydzien IN :tydzien" +
@@ -1465,7 +1475,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> wykladowcyName, List<String> dzien,
             List<String> tydzien, List<String> zajeciaNazwa);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.zajecia.nazwa IN :zajeciaNazwa" +
             " AND p.godz IN :godz" +
             " AND p.tydzien IN :tydzien" +
@@ -1479,7 +1489,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> wykladowcyName, List<String> godz,
             List<String> tydzien, List<String> zajeciaNazwa);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.grupyGrup.grupaGrupy IN :grupaGrupy" +
             " AND p.godz IN :godz" +
             " AND p.dzien IN :dzien" +
@@ -1493,7 +1503,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> wykladowcyName, List<String> godz,
             List<String> dzien, List<String> grupaGrupy);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.grupyGrup.grupaGrupy IN :grupaGrupy" +
             " AND p.tydzien IN :tydzien" +
             " AND p.dzien IN :dzien" +
@@ -1507,7 +1517,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> wykladowcyName, List<String> dzien,
             List<String> tydzien, List<String> grupaGrupy);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.grupyGrup.grupaGrupy IN :grupaGrupy" +
             " AND p.zajecia.nazwa IN :zajeciaNazwa" +
             " AND p.dzien IN :dzien" +
@@ -1521,7 +1531,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> wykladowcyName, List<String> dzien,
             List<String> zajeciaNazwa, List<String> grupaGrupy);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.grupyGrup.grupaGrupy IN :grupaGrupy" +
             " AND p.zajecia.nazwa IN :zajeciaNazwa" +
             " AND p.godz IN :godz" +
@@ -1535,7 +1545,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> wykladowcyName, List<String> godz,
             List<String> zajeciaNazwa, List<String> grupaGrupy);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.grupyGrup.grupaGrupy IN :grupaGrupy" +
             " AND p.zajecia.nazwa IN :zajeciaNazwa" +
             " AND p.tydzien IN :tydzien" +
@@ -1549,7 +1559,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> wykladowcyName, List<String> tydzien,
             List<String> zajeciaNazwa, List<String> grupaGrupy);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.grupyGrup.grupy.grupa IN :grupy" +
             " AND p.dzien IN :dzien" +
             " AND p.godz IN :godz" +
@@ -1563,7 +1573,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> wykladowcyName, List<String> godz,
             List<String> dzien, List<String> grupy);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.grupyGrup.grupy.grupa IN :grupy" +
             " AND p.dzien IN :dzien" +
             " AND p.tydzien IN :tydzien" +
@@ -1577,7 +1587,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> wykladowcyName, List<String> tydzien,
             List<String> dzien, List<String> grupy);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.grupyGrup.grupy.grupa IN :grupy" +
             " AND p.godz IN :godz" +
             " AND p.tydzien IN :tydzien" +
@@ -1591,7 +1601,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> wykladowcyName, List<String> tydzien,
             List<String> godz, List<String> grupy);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.grupyGrup.grupy.grupa IN :grupy" +
             " AND p.dzien IN :dzien" +
             " AND p.zajecia.nazwa IN :zajeciaNazwa" +
@@ -1605,7 +1615,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> wykladowcyName, List<String> dzien,
             List<String> zajeciaNazwa, List<String> grupy);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.grupyGrup.grupy.grupa IN :grupy" +
             " AND p.godz IN :godz" +
             " AND p.zajecia.nazwa IN :zajeciaNazwa" +
@@ -1619,7 +1629,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> wykladowcyName, List<String> godz,
             List<String> zajeciaNazwa, List<String> grupy);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.grupyGrup.grupy.grupa IN :grupy" +
             " AND p.tydzien IN :tydzien" +
             " AND p.zajecia.nazwa IN :zajeciaNazwa" +
@@ -1633,7 +1643,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> wykladowcyName, List<String> tydzien,
             List<String> zajeciaNazwa, List<String> grupy);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.grupyGrup.grupy.grupa IN :grupy" +
             " AND p.dzien IN :dzien" +
             " AND p.grupyGrup.grupaGrupy IN :grupaGrupy" +
@@ -1647,7 +1657,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> wykladowcyName, List<String> dzien,
             List<String> grupaGrupy, List<String> grupy);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.grupyGrup.grupy.grupa IN :grupy" +
             " AND p.godz IN :godz" +
             " AND p.grupyGrup.grupaGrupy IN :grupaGrupy" +
@@ -1661,7 +1671,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> wykladowcyName, List<String> godz,
             List<String> grupaGrupy, List<String> grupy);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.grupyGrup.grupy.grupa IN :grupy" +
             " AND p.godz IN :godz" +
             " AND p.tydzien IN :tydzien" +
@@ -1675,7 +1685,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> wykladowcyName, List<String> godz,
             List<String> tydzien, List<String> grupy);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.grupyGrup.grupy.grupa IN :grupy" +
             " AND p.grupyGrup.grupaGrupy IN :grupaGrupy" +
             " AND p.zajecia.nazwa IN :zajeciaNazwa" +
@@ -1689,7 +1699,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> wykladowcyName, List<String> zajeciaNazwa,
             List<String> grupaGrupy, List<String> grupy);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.godz IN :godz" +
             " AND p.dzien IN :dzien" +
             " AND p.sale.sala IN :sale" +
@@ -1703,7 +1713,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> wykladowcyName, List<String> godz,
             List<String> dzien, List<String> sale);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.tydzien IN :tydzien" +
             " AND p.dzien IN :dzien" +
             " AND p.sale.sala IN :sale" +
@@ -1717,7 +1727,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> wykladowcyName, List<String> tydzien,
             List<String> dzien, List<String> sale);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.tydzien IN :tydzien" +
             " AND p.godz IN :godz" +
             " AND p.sale.sala IN :sale" +
@@ -1731,8 +1741,8 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> wykladowcyName, List<String> tydzien,
             List<String> godz, List<String> sale);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
-            " AND p.dzien IN :tydzien" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
+            " AND p.dzien IN :dzien" +
             " AND p.zajecia.nazwa IN :zajeciaNazwa" +
             " AND p.sale.sala IN :sale" +
             " ORDER BY p.tydzien ASC, CASE WHEN p.dzien LIKE 'Pon' THEN 1" +
@@ -1745,7 +1755,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> wykladowcyName, List<String> dzien,
             List<String> zajeciaNazwa, List<String> sale);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.godz IN :godz" +
             " AND p.zajecia.nazwa IN :zajeciaNazwa" +
             " AND p.sale.sala IN :sale" +
@@ -1759,7 +1769,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> wykladowcyName, List<String> godz,
             List<String> zajeciaNazwa, List<String> sale);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.tydzien IN :tydzien" +
             " AND p.zajecia.nazwa IN :zajeciaNazwa" +
             " AND p.sale.sala IN :sale" +
@@ -1773,7 +1783,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> wykladowcyName, List<String> tydzien,
             List<String> zajeciaNazwa, List<String> sale);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.dzien IN :dzien" +
             " AND p.grupyGrup.grupaGrupy IN :grupaGrupy" +
             " AND p.sale.sala IN :sale" +
@@ -1787,7 +1797,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> wykladowcyName, List<String> dzien,
             List<String> grupaGrupy, List<String> sale);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.godz IN :godz" +
             " AND p.grupyGrup.grupaGrupy IN :grupaGrupy" +
             " AND p.sale.sala IN :sale" +
@@ -1801,7 +1811,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> wykladowcyName, List<String> godz,
             List<String> grupaGrupy, List<String> sale);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.tydzien IN :tydzien" +
             " AND p.grupyGrup.grupaGrupy IN :grupaGrupy" +
             " AND p.sale.sala IN :sale" +
@@ -1815,7 +1825,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> wykladowcyName, List<String> tydzien,
             List<String> grupaGrupy, List<String> sale);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.zajecia.nazwa IN :zajeciaNazwa" +
             " AND p.grupyGrup.grupaGrupy IN :grupaGrupy" +
             " AND p.sale.sala IN :sale" +
@@ -1829,7 +1839,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> wykladowcyName, List<String> zajeciaNazwa,
             List<String> grupaGrupy, List<String> sale);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.dzien IN :dzien" +
             " AND p.grupyGrup.grupy.grupa IN :grupy" +
             " AND p.sale.sala IN :sale" +
@@ -1843,7 +1853,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> wykladowcyName, List<String> dzien,
             List<String> grupy, List<String> sale);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.godz IN :godz" +
             " AND p.grupyGrup.grupy.grupa IN :grupy" +
             " AND p.sale.sala IN :sale" +
@@ -1857,7 +1867,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> wykladowcyName, List<String> godz,
             List<String> grupy, List<String> sale);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.tydzien IN :tydzien" +
             " AND p.grupyGrup.grupy.grupa IN :grupy" +
             " AND p.sale.sala IN :sale" +
@@ -1871,7 +1881,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> wykladowcyName, List<String> tydzien,
             List<String> grupy, List<String> sale);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.zajecia.nazwa IN :zajeciaNazwa" +
             " AND p.grupyGrup.grupy.grupa IN :grupy" +
             " AND p.sale.sala IN :sale" +
@@ -1885,7 +1895,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> wykladowcyName, List<String> zajeciaNazwa,
             List<String> grupy, List<String> sale);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.grupyGrup.grupaGrupy IN :grupaGrupy" +
             " AND p.grupyGrup.grupy.grupa IN :grupy" +
             " AND p.sale.sala IN :sale" +
@@ -1899,21 +1909,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> wykladowcyName, List<String> grupaGrupy,
             List<String> grupy, List<String> sale);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
-            " AND p.tydzien IN :tydzien" +
-            " AND p.grupyGrup.grupy.grupa IN :grupy" +
-            " AND p.sale.sala IN :sale" +
-            " ORDER BY p.tydzien ASC, CASE WHEN p.dzien LIKE 'Pon' THEN 1" +
-            " WHEN p.dzien LIKE 'Wt' THEN 2" +
-            " WHEN p.dzien LIKE 'Sr' THEN 3" +
-            " WHEN p.dzien LIKE 'Czw' THEN 4" +
-            " ELSE 5 END," +
-            " p.godz ASC")
-    List<Plan> getPlanByWykladowcyNazwiskoAndSaleAndGrupyAndGrupaGrupyAndTydzien(
-            List<String> wykladowcyName, List<String> tydzien,
-            List<String> grupy, List<String> sale);
-
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.wykladowcy.skrot IN :wykladowcySkrot" +
             " AND p.grupyGrup.grupaGrupy IN :grupaGrupy" +
             " AND p.tydzien IN :tydzien" +
@@ -1927,7 +1923,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> wykladowcyName, List<String> tydzien,
             List<String> grupaGrupy, List<String> wykladowcySkrot);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.wykladowcy.skrot IN :wykladowcySkrot" +
             " AND p.dzien IN :dzien" +
             " AND p.godz IN :godz" +
@@ -1941,7 +1937,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> wykladowcyName, List<String> godz,
             List<String> dzien, List<String> wykladowcySkrot);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.wykladowcy.skrot IN :wykladowcySkrot" +
             " AND p.dzien IN :dzien" +
             " AND p.tydzien IN :tydzien" +
@@ -1955,7 +1951,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> wykladowcyName, List<String> tydzien,
             List<String> dzien, List<String> wykladowcySkrot);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.wykladowcy.skrot IN :wykladowcySkrot" +
             " AND p.godz IN :godz" +
             " AND p.tydzien IN :tydzien" +
@@ -1969,7 +1965,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> wykladowcyName, List<String> godz,
             List<String> tydzien, List<String> wykladowcySkrot);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.wykladowcy.skrot IN :wykladowcySkrot" +
             " AND p.zajecia.nazwa IN :zajeciaNazwa" +
             " AND p.dzien IN :dzien" +
@@ -1983,7 +1979,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> wykladowcyName, List<String> zajeciaNazwa,
             List<String> dzien, List<String> wykladowcySkrot);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.wykladowcy.skrot IN :wykladowcySkrot" +
             " AND p.zajecia.nazwa IN :zajeciaNazwa" +
             " AND p.godz IN :godz" +
@@ -1997,7 +1993,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> wykladowcyName, List<String> godz,
             List<String> zajeciaNazwa, List<String> wykladowcySkrot);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.wykladowcy.skrot IN :wykladowcySkrot" +
             " AND p.zajecia.nazwa IN :zajeciaNazwa" +
             " AND p.tydzien IN :tydzien" +
@@ -2011,10 +2007,10 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> wykladowcyName, List<String> tydzien,
             List<String> zajeciaNazwa, List<String> wykladowcySkrot);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.wykladowcy.skrot IN :wykladowcySkrot" +
             " AND p.grupyGrup.grupaGrupy IN :grupaGrupy" +
-            " AND p.dzien IN :tydzien" +
+            " AND p.dzien IN :dzien" +
             " ORDER BY p.tydzien ASC, CASE WHEN p.dzien LIKE 'Pon' THEN 1" +
             " WHEN p.dzien LIKE 'Wt' THEN 2" +
             " WHEN p.dzien LIKE 'Sr' THEN 3" +
@@ -2025,7 +2021,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> wykladowcyName, List<String> grupaGrupy,
             List<String> dzien, List<String> wykladowcySkrot);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.wykladowcy.skrot IN :wykladowcySkrot" +
             " AND p.grupyGrup.grupaGrupy IN :grupaGrupy" +
             " AND p.godz IN :godz" +
@@ -2039,7 +2035,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> wykladowcyName, List<String> godz,
             List<String> grupaGrupy, List<String> wykladowcySkrot);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.wykladowcy.skrot IN :wykladowcySkrot" +
             " AND p.grupyGrup.grupaGrupy IN :grupaGrupy" +
             " AND p.zajecia.nazwa IN :zajeciaNazwa" +
@@ -2053,7 +2049,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> wykladowcyName, List<String> zajeciaNazwa,
             List<String> grupaGrupy, List<String> wykladowcySkrot);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.wykladowcy.skrot IN :wykladowcySkrot" +
             " AND p.grupyGrup.grupy.grupa IN :grupy" +
             " AND p.dzien IN :dzien" +
@@ -2067,7 +2063,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> wykladowcyName, List<String> grupy,
             List<String> dzien, List<String> wykladowcySkrot);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.wykladowcy.skrot IN :wykladowcySkrot" +
             " AND p.grupyGrup.grupy.grupa IN :grupy" +
             " AND p.godz IN :godz" +
@@ -2081,7 +2077,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> wykladowcyName, List<String> godz,
             List<String> grupy, List<String> wykladowcySkrot);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.wykladowcy.skrot IN :wykladowcySkrot" +
             " AND p.grupyGrup.grupy.grupa IN :grupy" +
             " AND p.tydzien IN :tydzien" +
@@ -2095,7 +2091,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> wykladowcyName, List<String> tydzien,
             List<String> grupy, List<String> wykladowcySkrot);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.wykladowcy.skrot IN :wykladowcySkrot" +
             " AND p.grupyGrup.grupy.grupa IN :grupy" +
             " AND p.zajecia.nazwa IN :zajeciaNazwa" +
@@ -2109,7 +2105,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> wykladowcyName, List<String> zajeciaNazwa,
             List<String> grupy, List<String> wykladowcySkrot);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.wykladowcy.skrot IN :wykladowcySkrot" +
             " AND p.grupyGrup.grupaGrupy IN :grupaGrupy" +
             " AND p.grupyGrup.grupy.grupa IN :grupy" +
@@ -2123,7 +2119,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> wykladowcyName, List<String> grupaGrupy,
             List<String> grupy, List<String> wykladowcySkrot);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.wykladowcy.skrot IN :wykladowcySkrot" +
             " AND p.grupyGrup.grupy.grupa IN :grupy" +
             " AND p.tydzien IN :tydzien" +
@@ -2137,7 +2133,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> wykladowcyName, List<String> tydzien,
             List<String> grupy, List<String> wykladowcySkrot);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.wykladowcy.skrot IN :wykladowcySkrot" +
             " AND p.sale.sala IN :sale" +
             " AND p.dzien IN :dzien" +
@@ -2151,7 +2147,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> wykladowcyName, List<String> sale,
             List<String> dzien, List<String> wykladowcySkrot);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.wykladowcy.skrot IN :wykladowcySkrot" +
             " AND p.sale.sala IN :sale" +
             " AND p.godz IN :godz" +
@@ -2165,7 +2161,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> wykladowcyName, List<String> godz,
             List<String> sale, List<String> wykladowcySkrot);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.wykladowcy.skrot IN :wykladowcySkrot" +
             " AND p.sale.sala IN :sale" +
             " AND p.tydzien IN :tydzien" +
@@ -2179,7 +2175,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> wykladowcyName, List<String> tydzien,
             List<String> sale, List<String> wykladowcySkrot);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.wykladowcy.skrot IN :wykladowcySkrot" +
             " AND p.sale.sala IN :sale" +
             " AND p.zajecia.nazwa IN :zajeciaNazwa" +
@@ -2193,7 +2189,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> wykladowcyName, List<String> zajeciaNazwa,
             List<String> sale, List<String> wykladowcySkrot);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.wykladowcy.skrot IN :wykladowcySkrot" +
             " AND p.grupyGrup.grupaGrupy IN :grupaGrupy" +
             " AND p.sale.sala IN :sale" +
@@ -2207,7 +2203,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> wykladowcyName, List<String> grupaGrupy,
             List<String> sale, List<String> wykladowcySkrot);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.wykladowcy.skrot IN :wykladowcySkrot" +
             " AND p.grupyGrup.grupy.grupa IN :grupy" +
             " AND p.sale.sala IN :sale" +
@@ -3233,7 +3229,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
 
 
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.zajecia.nazwa IN :zajeciaNazwa" +
             " AND p.godz IN :godz" +
             " AND p.tydzien IN :tydzien" +
@@ -3248,7 +3244,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> wykladowcyName, List<String> godz,
             List<String> dzien, List<String> tydzien, List<String> zajeciaNazwa);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.grupyGrup.grupaGrupy IN :grupaGrupy" +
             " AND p.godz IN :godz" +
             " AND p.tydzien IN :tydzien" +
@@ -3263,7 +3259,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> wykladowcyName, List<String> godz,
             List<String> dzien, List<String> tydzien, List<String> grupaGrupy);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.grupyGrup.grupaGrupy IN :grupaGrupy" +
             " AND p.godz IN :godz" +
             " AND p.zajecia.nazwa IN :zajeciaNazwa" +
@@ -3278,7 +3274,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> wykladowcyName, List<String> godz,
             List<String> dzien, List<String> zajeciaNazwa, List<String> grupaGrupy);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.grupyGrup.grupaGrupy IN :grupaGrupy" +
             " AND p.tydzien IN :tydzien" +
             " AND p.zajecia.nazwa IN :zajeciaNazwa" +
@@ -3293,7 +3289,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> wykladowcyName, List<String> dzien,
             List<String> tydzien, List<String> zajeciaNazwa, List<String> grupaGrupy);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.grupyGrup.grupaGrupy IN :grupaGrupy" +
             " AND p.tydzien IN :tydzien" +
             " AND p.zajecia.nazwa IN :zajeciaNazwa" +
@@ -3308,7 +3304,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> wykladowcyName, List<String> godz,
             List<String> tydzien, List<String> zajeciaNazwa, List<String> grupaGrupy);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.grupyGrup.grupy.grupa IN :grupy" +
             " AND p.tydzien IN :tydzien" +
             " AND p.dzien IN :dzien" +
@@ -3323,7 +3319,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> wykladowcyName, List<String> godz,
             List<String> tydzien, List<String> dzien, List<String> grupy);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.grupyGrup.grupy.grupa IN :grupy" +
             " AND p.zajecia.nazwa IN :zajeciaNazwa" +
             " AND p.dzien IN :dzien" +
@@ -3338,7 +3334,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> wykladowcyName, List<String> godz,
             List<String> zajeciaNazwa, List<String> dzien, List<String> grupy);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.grupyGrup.grupy.grupa IN :grupy" +
             " AND p.zajecia.nazwa IN :zajeciaNazwa" +
             " AND p.dzien IN :dzien" +
@@ -3353,7 +3349,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> wykladowcyName, List<String> tydzien,
             List<String> zajeciaNazwa, List<String> dzien, List<String> grupy);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.grupyGrup.grupy.grupa IN :grupy" +
             " AND p.zajecia.nazwa IN :zajeciaNazwa" +
             " AND p.godz IN :godz" +
@@ -3368,7 +3364,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> wykladowcyName, List<String> tydzien,
             List<String> zajeciaNazwa, List<String> godz, List<String> grupy);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.grupyGrup.grupy.grupa IN :grupy" +
             " AND p.grupyGrup.grupaGrupy IN :grupaGrupy" +
             " AND p.godz IN :godz" +
@@ -3383,7 +3379,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> wykladowcyName, List<String> dzien,
             List<String> grupaGrupy, List<String> godz, List<String> grupy);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.grupyGrup.grupy.grupa IN :grupy" +
             " AND p.grupyGrup.grupaGrupy IN :grupaGrupy" +
             " AND p.tydzien IN :tydzien" +
@@ -3398,7 +3394,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> wykladowcyName, List<String> dzien,
             List<String> grupaGrupy, List<String> tydzien, List<String> grupy);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.grupyGrup.grupy.grupa IN :grupy" +
             " AND p.grupyGrup.grupaGrupy IN :grupaGrupy" +
             " AND p.zajecia.nazwa IN :zajeciaNazwa" +
@@ -3413,7 +3409,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> wykladowcyName, List<String> dzien,
             List<String> grupaGrupy, List<String> zajeciaNazwa, List<String> grupy);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.grupyGrup.grupy.grupa IN :grupy" +
             " AND p.grupyGrup.grupaGrupy IN :grupaGrupy" +
             " AND p.zajecia.nazwa IN :zajeciaNazwa" +
@@ -3428,7 +3424,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> wykladowcyName, List<String> godz,
             List<String> grupaGrupy, List<String> zajeciaNazwa, List<String> grupy);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.grupyGrup.grupy.grupa IN :grupy" +
             " AND p.grupyGrup.grupaGrupy IN :grupaGrupy" +
             " AND p.zajecia.nazwa IN :zajeciaNazwa" +
@@ -3443,7 +3439,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> wykladowcyName, List<String> tydzien,
             List<String> grupaGrupy, List<String> zajeciaNazwa, List<String> grupy);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.godz IN :godz" +
             " AND p.dzien IN :dzien" +
             " AND p.sale.sala IN :sale" +
@@ -3458,7 +3454,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> wykladowcyName, List<String> tydzien,
             List<String> godz, List<String> dzien, List<String> sale);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.zajecia.nazwa IN :zajeciaNazwa" +
             " AND p.dzien IN :dzien" +
             " AND p.sale.sala IN :sale" +
@@ -3473,7 +3469,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> wykladowcyName, List<String> zajeciaNazwa,
             List<String> godz, List<String> dzien, List<String> sale);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.zajecia.nazwa IN :zajeciaNazwa" +
             " AND p.dzien IN :dzien" +
             " AND p.sale.sala IN :sale" +
@@ -3488,7 +3484,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> wykladowcyName, List<String> zajeciaNazwa,
             List<String> tydzien, List<String> dzien, List<String> sale);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.zajecia.nazwa IN :zajeciaNazwa" +
             " AND p.godz IN :godz" +
             " AND p.sale.sala IN :sale" +
@@ -3503,7 +3499,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> wykladowcyName, List<String> zajeciaNazwa,
             List<String> tydzien, List<String> godz, List<String> sale);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.grupyGrup.grupaGrupy IN :grupaGrupy" +
             " AND p.godz IN :godz" +
             " AND p.sale.sala IN :sale" +
@@ -3518,7 +3514,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> wykladowcyName, List<String> grupaGrupy,
             List<String> dzien, List<String> godz, List<String> sale);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.grupyGrup.grupaGrupy IN :grupaGrupy" +
             " AND p.tydzien IN :tydzien" +
             " AND p.sale.sala IN :sale" +
@@ -3533,7 +3529,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> wykladowcyName, List<String> grupaGrupy,
             List<String> dzien, List<String> tydzien, List<String> sale);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.grupyGrup.grupaGrupy IN :grupaGrupy" +
             " AND p.tydzien IN :tydzien" +
             " AND p.sale.sala IN :sale" +
@@ -3548,7 +3544,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> wykladowcyName, List<String> grupaGrupy,
             List<String> godz, List<String> tydzien, List<String> sale);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.grupyGrup.grupaGrupy IN :grupaGrupy" +
             " AND p.zajecia.nazwa IN :zajeciaNazwa" +
             " AND p.sale.sala IN :sale" +
@@ -3563,7 +3559,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> wykladowcyName, List<String> grupaGrupy,
             List<String> dzien, List<String> zajeciaNazwa, List<String> sale);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.grupyGrup.grupaGrupy IN :grupaGrupy" +
             " AND p.zajecia.nazwa IN :zajeciaNazwa" +
             " AND p.sale.sala IN :sale" +
@@ -3578,7 +3574,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> wykladowcyName, List<String> grupaGrupy,
             List<String> godz, List<String> zajeciaNazwa, List<String> sale);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.grupyGrup.grupaGrupy IN :grupaGrupy" +
             " AND p.zajecia.nazwa IN :zajeciaNazwa" +
             " AND p.sale.sala IN :sale" +
@@ -3593,7 +3589,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> wykladowcyName, List<String> grupaGrupy,
             List<String> tydzien, List<String> zajeciaNazwa, List<String> sale);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.grupyGrup.grupy.grupa IN :grupy" +
             " AND p.godz IN :godz" +
             " AND p.sale.sala IN :sale" +
@@ -3608,7 +3604,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> wykladowcyName, List<String> godz,
             List<String> dzien, List<String> grupy, List<String> sale);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.grupyGrup.grupy.grupa IN :grupy" +
             " AND p.tydzien IN :tydzien" +
             " AND p.sale.sala IN :sale" +
@@ -3623,7 +3619,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> wykladowcyName, List<String> tydzien,
             List<String> dzien, List<String> grupy, List<String> sale);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.grupyGrup.grupy.grupa IN :grupy" +
             " AND p.tydzien IN :tydzien" +
             " AND p.sale.sala IN :sale" +
@@ -3638,7 +3634,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> wykladowcyName, List<String> tydzien,
             List<String> godz, List<String> grupy, List<String> sale);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.grupyGrup.grupy.grupa IN :grupy" +
             " AND p.zajecia.nazwa IN :zajeciaNazwa" +
             " AND p.sale.sala IN :sale" +
@@ -3653,7 +3649,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> wykladowcyName, List<String> dzien,
             List<String> zajeciaNazwa, List<String> grupy, List<String> sale);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.grupyGrup.grupy.grupa IN :grupy" +
             " AND p.zajecia.nazwa IN :zajeciaNazwa" +
             " AND p.sale.sala IN :sale" +
@@ -3668,7 +3664,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> wykladowcyName, List<String> godz,
             List<String> zajeciaNazwa, List<String> grupy, List<String> sale);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.grupyGrup.grupy.grupa IN :grupy" +
             " AND p.zajecia.nazwa IN :zajeciaNazwa" +
             " AND p.sale.sala IN :sale" +
@@ -3683,7 +3679,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> wykladowcyName, List<String> tydzien,
             List<String> zajeciaNazwa, List<String> grupy, List<String> sale);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.grupyGrup.grupy.grupa IN :grupy" +
             " AND p.grupyGrup.grupaGrupy IN :grupaGrupy" +
             " AND p.sale.sala IN :sale" +
@@ -3698,7 +3694,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> wykladowcyName, List<String> dzien,
             List<String> grupaGrupy, List<String> grupy, List<String> sale);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.grupyGrup.grupy.grupa IN :grupy" +
             " AND p.grupyGrup.grupaGrupy IN :grupaGrupy" +
             " AND p.sale.sala IN :sale" +
@@ -3713,22 +3709,8 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> wykladowcyName, List<String> godz,
             List<String> grupaGrupy, List<String> grupy, List<String> sale);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
-            " AND p.tydzien IN :tydzien" +
-            " AND p.grupyGrup.grupaGrupy IN :grupaGrupy" +
-            " AND p.sale.sala IN :sale" +
-            " AND p.godz IN :godz" +
-            " ORDER BY p.tydzien ASC, CASE WHEN p.dzien LIKE 'Pon' THEN 1" +
-            " WHEN p.dzien LIKE 'Wt' THEN 2" +
-            " WHEN p.dzien LIKE 'Sr' THEN 3" +
-            " WHEN p.dzien LIKE 'Czw' THEN 4" +
-            " ELSE 5 END," +
-            " p.godz ASC")
-    List<Plan> getPlanByWykladowcyNazwiskoAndSaleAndGrupyAndGrupaGrupyAndTydzienAndGodz(
-            List<String> wykladowcyName, List<String> godz,
-            List<String> tydzien, List<String> grupy, List<String> sale);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.grupyGrup.grupy.grupa IN :grupy" +
             " AND p.grupyGrup.grupaGrupy IN :grupaGrupy" +
             " AND p.sale.sala IN :sale" +
@@ -3743,7 +3725,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> wykladowcyName, List<String> zajeciaNazwa,
             List<String> grupaGrupy, List<String> grupy, List<String> sale);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.dzien IN :dzien" +
             " AND p.wykladowcy.skrot IN :wykladowcySkrot" +
             " AND p.godz IN :godz" +
@@ -3758,7 +3740,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> wykladowcyName, List<String> godz,
             List<String> dzien, List<String> tydzien, List<String> wykladowcySkrot);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.dzien IN :dzien" +
             " AND p.wykladowcy.skrot IN :wykladowcySkrot" +
             " AND p.godz IN :godz" +
@@ -3773,7 +3755,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> wykladowcyName, List<String> godz,
             List<String> dzien, List<String> zajeciaNazwa, List<String> wykladowcySkrot);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.dzien IN :dzien" +
             " AND p.wykladowcy.skrot IN :wykladowcySkrot" +
             " AND p.tydzien IN :tydzien" +
@@ -3788,7 +3770,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> wykladowcyName, List<String> zajeciaNazwa,
             List<String> dzien, List<String> tydzien, List<String> wykladowcySkrot);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.godz IN :godz" +
             " AND p.wykladowcy.skrot IN :wykladowcySkrot" +
             " AND p.tydzien IN :tydzien" +
@@ -3803,7 +3785,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> wykladowcyName, List<String> godz,
             List<String> zajeciaNazwa, List<String> tydzien, List<String> wykladowcySkrot);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.godz IN :godz" +
             " AND p.wykladowcy.skrot IN :wykladowcySkrot" +
             " AND p.dzien IN :dzien" +
@@ -3818,7 +3800,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> wykladowcyName, List<String> godz,
             List<String> dzien, List<String> grupaGrupy, List<String> wykladowcySkrot);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.tydzien IN :tydzien" +
             " AND p.wykladowcy.skrot IN :wykladowcySkrot" +
             " AND p.dzien IN :dzien" +
@@ -3833,7 +3815,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> wykladowcyName, List<String> grupaGrupy,
             List<String> dzien, List<String> tydzien, List<String> wykladowcySkrot);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.zajecia.nazwa IN :zajeciaNazwa" +
             " AND p.wykladowcy.skrot IN :wykladowcySkrot" +
             " AND p.dzien IN :dzien" +
@@ -3848,7 +3830,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> wykladowcyName, List<String> zajeciaNazwa,
             List<String> dzien, List<String> grupaGrupy, List<String> wykladowcySkrot);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.zajecia.nazwa IN :zajeciaNazwa" +
             " AND p.wykladowcy.skrot IN :wykladowcySkrot" +
             " AND p.godz IN :godz" +
@@ -3863,7 +3845,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> wykladowcyName, List<String> godz,
             List<String> zajeciaNazwa, List<String> grupaGrupy, List<String> wykladowcySkrot);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.zajecia.nazwa IN :zajeciaNazwa" +
             " AND p.wykladowcy.skrot IN :wykladowcySkrot" +
             " AND p.tydzien IN :tydzien" +
@@ -3878,7 +3860,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> wykladowcyName, List<String> zajeciaNazwa,
             List<String> grupaGrupy, List<String> tydzien, List<String> wykladowcySkrot);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.grupyGrup.grupy.grupa IN :grupy" +
             " AND p.wykladowcy.skrot IN :wykladowcySkrot" +
             " AND p.godz IN :godz" +
@@ -3893,7 +3875,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> wykladowcyName, List<String> godz,
             List<String> dzien, List<String> grupy, List<String> wykladowcySkrot);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.grupyGrup.grupy.grupa IN :grupy" +
             " AND p.wykladowcy.skrot IN :wykladowcySkrot" +
             " AND p.tydzien IN :tydzien" +
@@ -3908,7 +3890,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> wykladowcyName, List<String> grupy,
             List<String> dzien, List<String> tydzien, List<String> wykladowcySkrot);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.grupyGrup.grupy.grupa IN :grupy" +
             " AND p.wykladowcy.skrot IN :wykladowcySkrot" +
             " AND p.tydzien IN :tydzien" +
@@ -3923,7 +3905,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> wykladowcyName, List<String> godz,
             List<String> grupy, List<String> tydzien, List<String> wykladowcySkrot);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.grupyGrup.grupy.grupa IN :grupy" +
             " AND p.wykladowcy.skrot IN :wykladowcySkrot" +
             " AND p.zajecia.nazwa IN :zajeciaNazwa" +
@@ -3938,7 +3920,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> wykladowcyName, List<String> zajeciaNazwa,
             List<String> dzien, List<String> grupy, List<String> wykladowcySkrot);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.grupyGrup.grupy.grupa IN :grupy" +
             " AND p.wykladowcy.skrot IN :wykladowcySkrot" +
             " AND p.zajecia.nazwa IN :zajeciaNazwa" +
@@ -3953,7 +3935,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> wykladowcyName, List<String> godz,
             List<String> zajeciaNazwa, List<String> grupy, List<String> wykladowcySkrot);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.grupyGrup.grupy.grupa IN :grupy" +
             " AND p.wykladowcy.skrot IN :wykladowcySkrot" +
             " AND p.zajecia.nazwa IN :zajeciaNazwa" +
@@ -3968,7 +3950,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> wykladowcyName, List<String> zajeciaNazwa,
             List<String> grupy, List<String> tydzien, List<String> wykladowcySkrot);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.grupyGrup.grupy.grupa IN :grupy" +
             " AND p.wykladowcy.skrot IN :wykladowcySkrot" +
             " AND p.grupyGrup.grupaGrupy IN :grupaGrupy" +
@@ -3983,7 +3965,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> wykladowcyName, List<String> grupaGrupy,
             List<String> dzien, List<String> grupy, List<String> wykladowcySkrot);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.grupyGrup.grupy.grupa IN :grupy" +
             " AND p.wykladowcy.skrot IN :wykladowcySkrot" +
             " AND p.grupyGrup.grupaGrupy IN :grupaGrupy" +
@@ -3998,7 +3980,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> wykladowcyName, List<String> godz,
             List<String> grupaGrupy, List<String> grupy, List<String> wykladowcySkrot);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.grupyGrup.grupy.grupa IN :grupy" +
             " AND p.wykladowcy.skrot IN :wykladowcySkrot" +
             " AND p.tydzien IN :tydzien" +
@@ -4013,7 +3995,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> wykladowcyName, List<String> godz,
             List<String> grupy, List<String> tydzien, List<String> wykladowcySkrot);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.grupyGrup.grupy.grupa IN :grupy" +
             " AND p.wykladowcy.skrot IN :wykladowcySkrot" +
             " AND p.zajecia.nazwa IN :zajeciaNazwa" +
@@ -4028,7 +4010,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> wykladowcyName, List<String> zajeciaNazwa,
             List<String> grupaGrupy, List<String> grupy, List<String> wykladowcySkrot);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.sale.sala IN :sale" +
             " AND p.wykladowcy.skrot IN :wykladowcySkrot" +
             " AND p.dzien IN :dzien" +
@@ -4043,7 +4025,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> wykladowcyName, List<String> godz,
             List<String> dzien, List<String> sale, List<String> wykladowcySkrot);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.sale.sala IN :sale" +
             " AND p.wykladowcy.skrot IN :wykladowcySkrot" +
             " AND p.dzien IN :dzien" +
@@ -4058,7 +4040,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> wykladowcyName, List<String> sale,
             List<String> dzien, List<String> tydzien, List<String> wykladowcySkrot);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.sale.sala IN :sale" +
             " AND p.wykladowcy.skrot IN :wykladowcySkrot" +
             " AND p.godz IN :godz" +
@@ -4073,7 +4055,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> wykladowcyName, List<String> godz,
             List<String> sale, List<String> tydzien, List<String> wykladowcySkrot);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.sale.sala IN :sale" +
             " AND p.wykladowcy.skrot IN :wykladowcySkrot" +
             " AND p.zajecia.nazwa IN :zajeciaNazwa" +
@@ -4088,7 +4070,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> wykladowcyName, List<String> zajeciaNazwa,
             List<String> dzien, List<String> sale, List<String> wykladowcySkrot);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.sale.sala IN :sale" +
             " AND p.wykladowcy.skrot IN :wykladowcySkrot" +
             " AND p.zajecia.nazwa IN :zajeciaNazwa" +
@@ -4103,7 +4085,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> wykladowcyName, List<String> godz,
             List<String> zajeciaNazwa, List<String> sale, List<String> wykladowcySkrot);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.sale.sala IN :sale" +
             " AND p.wykladowcy.skrot IN :wykladowcySkrot" +
             " AND p.zajecia.nazwa IN :zajeciaNazwa" +
@@ -4118,7 +4100,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> wykladowcyName, List<String> zajeciaNazwa,
             List<String> sale, List<String> tydzien, List<String> wykladowcySkrot);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.sale.sala IN :sale" +
             " AND p.wykladowcy.skrot IN :wykladowcySkrot" +
             " AND p.grupyGrup.grupaGrupy IN :grupaGrupy" +
@@ -4133,7 +4115,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> wykladowcyName, List<String> grupaGrupy,
             List<String> dzien, List<String> sale, List<String> wykladowcySkrot);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.sale.sala IN :sale" +
             " AND p.wykladowcy.skrot IN :wykladowcySkrot" +
             " AND p.grupyGrup.grupaGrupy IN :grupaGrupy" +
@@ -4148,7 +4130,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> wykladowcyName, List<String> godz,
             List<String> grupaGrupy, List<String> sale, List<String> wykladowcySkrot);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.sale.sala IN :sale" +
             " AND p.wykladowcy.skrot IN :wykladowcySkrot" +
             " AND p.grupyGrup.grupaGrupy IN :grupaGrupy" +
@@ -4163,7 +4145,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> wykladowcyName, List<String> grupaGrupy,
             List<String> sale, List<String> tydzien, List<String> wykladowcySkrot);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.sale.sala IN :sale" +
             " AND p.wykladowcy.skrot IN :wykladowcySkrot" +
             " AND p.grupyGrup.grupaGrupy IN :grupaGrupy" +
@@ -4178,7 +4160,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> wykladowcyName, List<String> zajeciaNazwa,
             List<String> grupaGrupy, List<String> sale, List<String> wykladowcySkrot);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.sale.sala IN :sale" +
             " AND p.wykladowcy.skrot IN :wykladowcySkrot" +
             " AND p.grupyGrup.grupy.grupa IN :grupy" +
@@ -4193,7 +4175,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> wykladowcyName, List<String> grupy,
             List<String> dzien, List<String> sale, List<String> wykladowcySkrot);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.sale.sala IN :sale" +
             " AND p.wykladowcy.skrot IN :wykladowcySkrot" +
             " AND p.grupyGrup.grupy.grupa IN :grupy" +
@@ -4208,7 +4190,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> wykladowcyName, List<String> godz,
             List<String> grupy, List<String> sale, List<String> wykladowcySkrot);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.sale.sala IN :sale" +
             " AND p.wykladowcy.skrot IN :wykladowcySkrot" +
             " AND p.grupyGrup.grupy.grupa IN :grupy" +
@@ -4223,7 +4205,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> wykladowcyName, List<String> grupy,
             List<String> sale, List<String> tydzien, List<String> wykladowcySkrot);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.sale.sala IN :sale" +
             " AND p.wykladowcy.skrot IN :wykladowcySkrot" +
             " AND p.grupyGrup.grupy.grupa IN :grupy" +
@@ -4238,7 +4220,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> wykladowcyName, List<String> zajeciaNazwa,
             List<String> grupy, List<String> sale, List<String> wykladowcySkrot);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.godz IN :godz" +
             " AND p.wykladowcy.skrot IN :wykladowcySkrot" +
             " AND p.dzien IN :dzien" +
@@ -4253,7 +4235,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> wykladowcyName, List<String> godz,
             List<String> dzien, List<String> tydzien, List<String> wykladowcySkrot);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.grupyGrup.grupy.grupa IN :grupy" +
             " AND p.wykladowcy.skrot IN :wykladowcySkrot" +
             " AND p.sale.sala IN :sale" +
@@ -4586,7 +4568,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
     @Query("Select p from Plan p WHERE p.wykladowcy.skrot IN :wykladowcySkrot" +
             " AND p.grupyGrup.grupaGrupy IN :grupaGrupy" +
             " AND p.zajecia.nazwa IN :zajeciaNazwa" +
-            " AND p.tydzien IN :tydzien" +
+            " AND p.godz IN :godz" +
             " AND p.dzien IN :dzien" +
             " ORDER BY p.tydzien ASC, CASE WHEN p.dzien LIKE 'Pon' THEN 1" +
             " WHEN p.dzien LIKE 'Wt' THEN 2" +
@@ -5033,11 +5015,24 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> zajeciaNazwa, List<String> grupaGrupy,
             List<String> grupy, List<String> sale, List<String> tydzien);
 
-
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
+            " AND p.tydzien IN :tydzien" +
+            " AND p.grupyGrup.grupy.grupa IN :grupy" +
+            " AND p.sale.sala IN :sale" +
+            " AND p.grupyGrup.grupaGrupy IN :grupaGrupy" +
+            " ORDER BY p.tydzien ASC, CASE WHEN p.dzien LIKE 'Pon' THEN 1" +
+            " WHEN p.dzien LIKE 'Wt' THEN 2" +
+            " WHEN p.dzien LIKE 'Sr' THEN 3" +
+            " WHEN p.dzien LIKE 'Czw' THEN 4" +
+            " ELSE 5 END," +
+            " p.godz ASC")
+    List<Plan> getPlanByWykladowcyNazwiskoAndSaleAndGrupyAndGrupaGrupyAndTydzien(
+            List<String> wykladowcyName, List<String> tydzien,
+            List<String> grupy, List<String> grupaGrupy, List<String> sale);
 
     //6 warunków
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.grupyGrup.grupaGrupy IN :grupaGrupy" +
             " AND p.tydzien IN :tydzien" +
             " AND p.zajecia.nazwa IN :zajeciaNazwa" +
@@ -5054,7 +5049,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> dzien, List<String> tydzien,
             List<String> zajeciaNazwa, List<String> grupaGrupy);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.grupyGrup.grupy.grupa IN :grupy" +
             " AND p.tydzien IN :tydzien" +
             " AND p.zajecia.nazwa IN :zajeciaNazwa" +
@@ -5072,7 +5067,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> zajeciaNazwa, List<String> grupy);
 
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.grupyGrup.grupy.grupa IN :grupy" +
             " AND p.tydzien IN :tydzien" +
             " AND p.grupyGrup.grupaGrupy IN :grupaGrupy" +
@@ -5089,7 +5084,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> dzien, List<String> tydzien,
             List<String> grupaGrupy, List<String> grupy);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.grupyGrup.grupy.grupa IN :grupy" +
             " AND p.zajecia.nazwa IN :zajeciaNazwa" +
             " AND p.grupyGrup.grupaGrupy IN :grupaGrupy" +
@@ -5106,7 +5101,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> dzien, List<String> zajeciaNazwa,
             List<String> grupaGrupy, List<String> grupy);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.grupyGrup.grupy.grupa IN :grupy" +
             " AND p.zajecia.nazwa IN :zajeciaNazwa" +
             " AND p.grupyGrup.grupaGrupy IN :grupaGrupy" +
@@ -5123,7 +5118,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> dzien, List<String> zajeciaNazwa,
             List<String> grupaGrupy, List<String> grupy);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.grupyGrup.grupy.grupa IN :grupy" +
             " AND p.zajecia.nazwa IN :zajeciaNazwa" +
             " AND p.grupyGrup.grupaGrupy IN :grupaGrupy" +
@@ -5140,7 +5135,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> godz, List<String> zajeciaNazwa,
             List<String> grupaGrupy, List<String> grupy);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.sale.sala IN :sale" +
             " AND p.zajecia.nazwa IN :zajeciaNazwa" +
             " AND p.dzien IN :dzien" +
@@ -5157,9 +5152,9 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> godz, List<String> zajeciaNazwa,
             List<String> dzien, List<String> sale);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.sale.sala IN :sale" +
-            " AND p.grupyGrup.grupaGrupy IN :zajeciaNazwa" +
+            " AND p.grupyGrup.grupaGrupy IN :grupaGrupy" +
             " AND p.dzien IN :dzien" +
             " AND p.tydzien IN :tydzien" +
             " AND p.godz IN :godz" +
@@ -5174,7 +5169,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> godz, List<String> grupaGrupy,
             List<String> dzien, List<String> sale);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.sale.sala IN :sale" +
             " AND p.grupyGrup.grupaGrupy IN :grupaGrupy" +
             " AND p.dzien IN :dzien" +
@@ -5191,9 +5186,9 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> godz, List<String> grupaGrupy,
             List<String> dzien, List<String> sale);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.sale.sala IN :sale" +
-            " AND p.grupyGrup.grupaGrupy IN :zajeciaNazwa" +
+            " AND p.grupyGrup.grupaGrupy IN :grupaGrupy" +
             " AND p.dzien IN :dzien" +
             " AND p.zajecia.nazwa IN :zajeciaNazwa" +
             " AND p.tydzien IN :tydzien" +
@@ -5208,7 +5203,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> tydzien, List<String> grupaGrupy,
             List<String> dzien, List<String> sale);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.sale.sala IN :sale" +
             " AND p.grupyGrup.grupaGrupy IN :grupaGrupy" +
             " AND p.godz IN :godz" +
@@ -5225,7 +5220,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> tydzien, List<String> grupaGrupy,
             List<String> godz, List<String> sale);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.sale.sala IN :sale" +
             " AND p.grupyGrup.grupy.grupa IN :grupy" +
             " AND p.godz IN :godz" +
@@ -5242,7 +5237,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> tydzien, List<String> dzien,
             List<String> grupy, List<String> sale);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.sale.sala IN :sale" +
             " AND p.grupyGrup.grupy.grupa IN :grupy" +
             " AND p.godz IN :godz" +
@@ -5259,7 +5254,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> zajeciaNazwa, List<String> dzien,
             List<String> grupy, List<String> sale);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.sale.sala IN :sale" +
             " AND p.grupyGrup.grupy.grupa IN :grupy" +
             " AND p.tydzien IN :tydzien" +
@@ -5276,7 +5271,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> zajeciaNazwa, List<String> dzien,
             List<String> grupy, List<String> sale);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.sale.sala IN :sale" +
             " AND p.grupyGrup.grupy.grupa IN :grupy" +
             " AND p.tydzien IN :tydzien" +
@@ -5293,7 +5288,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> zajeciaNazwa, List<String> godz,
             List<String> grupy, List<String> sale);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.sale.sala IN :sale" +
             " AND p.grupyGrup.grupy.grupa IN :grupy" +
             " AND p.dzien IN :dzien" +
@@ -5310,7 +5305,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> grupaGrupy, List<String> godz,
             List<String> grupy, List<String> sale);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.sale.sala IN :sale" +
             " AND p.grupyGrup.grupy.grupa IN :grupy" +
             " AND p.dzien IN :dzien" +
@@ -5327,7 +5322,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> grupaGrupy, List<String> tydzien,
             List<String> grupy, List<String> sale);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.sale.sala IN :sale" +
             " AND p.grupyGrup.grupy.grupa IN :grupy" +
             " AND p.dzien IN :dzien" +
@@ -5344,7 +5339,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> grupaGrupy, List<String> zajeciaNazwa,
             List<String> grupy, List<String> sale);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.sale.sala IN :sale" +
             " AND p.grupyGrup.grupy.grupa IN :grupy" +
             " AND p.godz IN :godz" +
@@ -5361,7 +5356,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> grupaGrupy, List<String> zajeciaNazwa,
             List<String> grupy, List<String> sale);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.sale.sala IN :sale" +
             " AND p.grupyGrup.grupy.grupa IN :grupy" +
             " AND p.tydzien IN :tydzien" +
@@ -5378,7 +5373,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> grupaGrupy, List<String> zajeciaNazwa,
             List<String> grupy, List<String> sale);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.wykladowcy.skrot IN :wykladowcySkrot" +
             " AND p.dzien IN :dzien" +
             " AND p.tydzien IN :tydzien" +
@@ -5395,7 +5390,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> godz, List<String> zajeciaNazwa,
             List<String> dzien, List<String> wykladowcySkrot);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.wykladowcy.skrot IN :wykladowcySkrot" +
             " AND p.dzien IN :dzien" +
             " AND p.tydzien IN :tydzien" +
@@ -5412,7 +5407,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> godz, List<String> grupaGrupy,
             List<String> dzien, List<String> wykladowcySkrot);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.wykladowcy.skrot IN :wykladowcySkrot" +
             " AND p.dzien IN :dzien" +
             " AND p.zajecia.nazwa IN :zajeciaNazwa" +
@@ -5429,7 +5424,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> godz, List<String> grupaGrupy,
             List<String> dzien, List<String> wykladowcySkrot);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.wykladowcy.skrot IN :wykladowcySkrot" +
             " AND p.dzien IN :dzien" +
             " AND p.zajecia.nazwa IN :zajeciaNazwa" +
@@ -5446,7 +5441,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> tydzien, List<String> grupaGrupy,
             List<String> dzien, List<String> wykladowcySkrot);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.wykladowcy.skrot IN :wykladowcySkrot" +
             " AND p.godz IN :godz" +
             " AND p.zajecia.nazwa IN :zajeciaNazwa" +
@@ -5463,7 +5458,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> tydzien, List<String> grupaGrupy,
             List<String> godz, List<String> wykladowcySkrot);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.wykladowcy.skrot IN :wykladowcySkrot" +
             " AND p.godz IN :godz" +
             " AND p.dzien IN :dzien" +
@@ -5480,7 +5475,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> tydzien, List<String> grupy,
             List<String> godz, List<String> wykladowcySkrot);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.wykladowcy.skrot IN :wykladowcySkrot" +
             " AND p.godz IN :godz" +
             " AND p.dzien IN :dzien" +
@@ -5497,7 +5492,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> zajeciaNazwa, List<String> grupy,
             List<String> godz, List<String> wykladowcySkrot);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.wykladowcy.skrot IN :wykladowcySkrot" +
             " AND p.tydzien IN :tydzien" +
             " AND p.dzien IN :dzien" +
@@ -5514,7 +5509,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> zajeciaNazwa, List<String> grupy,
             List<String> tydzien, List<String> wykladowcySkrot);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.wykladowcy.skrot IN :wykladowcySkrot" +
             " AND p.tydzien IN :tydzien" +
             " AND p.godz IN :godz" +
@@ -5531,7 +5526,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> zajeciaNazwa, List<String> grupy,
             List<String> tydzien, List<String> wykladowcySkrot);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.wykladowcy.skrot IN :wykladowcySkrot" +
             " AND p.dzien IN :dzien" +
             " AND p.godz IN :godz" +
@@ -5548,12 +5543,12 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> dzien, List<String> grupy,
             List<String> grupaGrupy, List<String> wykladowcySkrot);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.wykladowcy.skrot IN :wykladowcySkrot" +
             " AND p.dzien IN :dzien" +
             " AND p.tydzien IN :tydzien" +
             " AND p.grupyGrup.grupy.grupa IN :grupy" +
-            " AND p.grupyGrup.grupaGrupy IN :grupyGrupy" +
+            " AND p.grupyGrup.grupaGrupy IN :grupaGrupy" +
             " ORDER BY p.tydzien ASC, CASE WHEN p.dzien LIKE 'Pon' THEN 1" +
             " WHEN p.dzien LIKE 'Wt' THEN 2" +
             " WHEN p.dzien LIKE 'Sr' THEN 3" +
@@ -5565,12 +5560,12 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> dzien, List<String> grupy,
             List<String> grupaGrupy, List<String> wykladowcySkrot);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.wykladowcy.skrot IN :wykladowcySkrot" +
             " AND p.godz IN :godz" +
             " AND p.zajecia.nazwa IN :zajeciaNazwa" +
             " AND p.grupyGrup.grupy.grupa IN :grupy" +
-            " AND p.grupyGrup.grupaGrupy IN :grupyGrupy" +
+            " AND p.grupyGrup.grupaGrupy IN :grupaGrupy" +
             " ORDER BY p.tydzien ASC, CASE WHEN p.dzien LIKE 'Pon' THEN 1" +
             " WHEN p.dzien LIKE 'Wt' THEN 2" +
             " WHEN p.dzien LIKE 'Sr' THEN 3" +
@@ -5582,12 +5577,12 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> zajeciaNazwa, List<String> grupy,
             List<String> grupaGrupy, List<String> wykladowcySkrot);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.wykladowcy.skrot IN :wykladowcySkrot" +
             " AND p.dzien IN :dzien" +
             " AND p.zajecia.nazwa IN :zajeciaNazwa" +
             " AND p.grupyGrup.grupy.grupa IN :grupy" +
-            " AND p.grupyGrup.grupaGrupy IN :grupyGrupy" +
+            " AND p.grupyGrup.grupaGrupy IN :grupaGrupy" +
             " ORDER BY p.tydzien ASC, CASE WHEN p.dzien LIKE 'Pon' THEN 1" +
             " WHEN p.dzien LIKE 'Wt' THEN 2" +
             " WHEN p.dzien LIKE 'Sr' THEN 3" +
@@ -5599,12 +5594,12 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> zajeciaNazwa, List<String> grupy,
             List<String> grupaGrupy, List<String> wykladowcySkrot);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.wykladowcy.skrot IN :wykladowcySkrot" +
             " AND p.tydzien IN :tydzien" +
             " AND p.zajecia.nazwa IN :zajeciaNazwa" +
             " AND p.grupyGrup.grupy.grupa IN :grupy" +
-            " AND p.grupyGrup.grupaGrupy IN :grupyGrupy" +
+            " AND p.grupyGrup.grupaGrupy IN :grupaGrupy" +
             " ORDER BY p.tydzien ASC, CASE WHEN p.dzien LIKE 'Pon' THEN 1" +
             " WHEN p.dzien LIKE 'Wt' THEN 2" +
             " WHEN p.dzien LIKE 'Sr' THEN 3" +
@@ -5616,7 +5611,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> zajeciaNazwa, List<String> grupy,
             List<String> grupaGrupy, List<String> wykladowcySkrot);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.wykladowcy.skrot IN :wykladowcySkrot" +
             " AND p.tydzien IN :tydzien" +
             " AND p.sale.sala IN :sale" +
@@ -5633,7 +5628,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> godz, List<String> dzien,
             List<String> sale, List<String> wykladowcySkrot);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.wykladowcy.skrot IN :wykladowcySkrot" +
             " AND p.zajecia.nazwa IN :zajeciaNazwa" +
             " AND p.sale.sala IN :sale" +
@@ -5650,7 +5645,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> godz, List<String> dzien,
             List<String> sale, List<String> wykladowcySkrot);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.wykladowcy.skrot IN :wykladowcySkrot" +
             " AND p.zajecia.nazwa IN :zajeciaNazwa" +
             " AND p.sale.sala IN :sale" +
@@ -5667,7 +5662,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> tydzien, List<String> dzien,
             List<String> sale, List<String> wykladowcySkrot);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.wykladowcy.skrot IN :wykladowcySkrot" +
             " AND p.zajecia.nazwa IN :zajeciaNazwa" +
             " AND p.sale.sala IN :sale" +
@@ -5684,7 +5679,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> tydzien, List<String> godz,
             List<String> sale, List<String> wykladowcySkrot);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.wykladowcy.skrot IN :wykladowcySkrot" +
             " AND p.grupyGrup.grupaGrupy IN :grupaGrupy" +
             " AND p.sale.sala IN :sale" +
@@ -5701,7 +5696,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> dzien, List<String> godz,
             List<String> sale, List<String> wykladowcySkrot);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.wykladowcy.skrot IN :wykladowcySkrot" +
             " AND p.grupyGrup.grupaGrupy IN :grupaGrupy" +
             " AND p.sale.sala IN :sale" +
@@ -5718,7 +5713,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> dzien, List<String> tydzien,
             List<String> sale, List<String> wykladowcySkrot);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.wykladowcy.skrot IN :wykladowcySkrot" +
             " AND p.grupyGrup.grupaGrupy IN :grupaGrupy" +
             " AND p.sale.sala IN :sale" +
@@ -5735,7 +5730,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> godz, List<String> tydzien,
             List<String> sale, List<String> wykladowcySkrot);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.wykladowcy.skrot IN :wykladowcySkrot" +
             " AND p.grupyGrup.grupaGrupy IN :grupaGrupy" +
             " AND p.sale.sala IN :sale" +
@@ -5752,7 +5747,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> dzien, List<String> zajeciaNazwa,
             List<String> sale, List<String> wykladowcySkrot);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.wykladowcy.skrot IN :wykladowcySkrot" +
             " AND p.grupyGrup.grupaGrupy IN :grupaGrupy" +
             " AND p.sale.sala IN :sale" +
@@ -5769,7 +5764,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> godz, List<String> zajeciaNazwa,
             List<String> sale, List<String> wykladowcySkrot);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.wykladowcy.skrot IN :wykladowcySkrot" +
             " AND p.grupyGrup.grupaGrupy IN :grupaGrupy" +
             " AND p.sale.sala IN :sale" +
@@ -5786,7 +5781,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> tydzien, List<String> zajeciaNazwa,
             List<String> sale, List<String> wykladowcySkrot);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.wykladowcy.skrot IN :wykladowcySkrot" +
             " AND p.grupyGrup.grupy.grupa IN :grupy" +
             " AND p.sale.sala IN :sale" +
@@ -5803,7 +5798,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> godz, List<String> dzien,
             List<String> sale, List<String> wykladowcySkrot);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.wykladowcy.skrot IN :wykladowcySkrot" +
             " AND p.grupyGrup.grupy.grupa IN :grupy" +
             " AND p.sale.sala IN :sale" +
@@ -5820,7 +5815,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> tydzien, List<String> dzien,
             List<String> sale, List<String> wykladowcySkrot);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.wykladowcy.skrot IN :wykladowcySkrot" +
             " AND p.grupyGrup.grupy.grupa IN :grupy" +
             " AND p.sale.sala IN :sale" +
@@ -5837,7 +5832,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> tydzien, List<String> godz,
             List<String> sale, List<String> wykladowcySkrot);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.wykladowcy.skrot IN :wykladowcySkrot" +
             " AND p.grupyGrup.grupy.grupa IN :grupy" +
             " AND p.sale.sala IN :sale" +
@@ -5854,7 +5849,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> dzien, List<String> zajeciaNazwa,
             List<String> sale, List<String> wykladowcySkrot);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.wykladowcy.skrot IN :wykladowcySkrot" +
             " AND p.grupyGrup.grupy.grupa IN :grupy" +
             " AND p.sale.sala IN :sale" +
@@ -5871,7 +5866,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> godz, List<String> zajeciaNazwa,
             List<String> sale, List<String> wykladowcySkrot);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.wykladowcy.skrot IN :wykladowcySkrot" +
             " AND p.grupyGrup.grupy.grupa IN :grupy" +
             " AND p.sale.sala IN :sale" +
@@ -5888,7 +5883,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> tydzien, List<String> zajeciaNazwa,
             List<String> sale, List<String> wykladowcySkrot);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.wykladowcy.skrot IN :wykladowcySkrot" +
             " AND p.grupyGrup.grupy.grupa IN :grupy" +
             " AND p.sale.sala IN :sale" +
@@ -5905,7 +5900,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> dzien, List<String> grupaGrupy,
             List<String> sale, List<String> wykladowcySkrot);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.wykladowcy.skrot IN :wykladowcySkrot" +
             " AND p.grupyGrup.grupy.grupa IN :grupy" +
             " AND p.sale.sala IN :sale" +
@@ -5922,7 +5917,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> godz, List<String> grupaGrupy,
             List<String> sale, List<String> wykladowcySkrot);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.wykladowcy.skrot IN :wykladowcySkrot" +
             " AND p.grupyGrup.grupy.grupa IN :grupy" +
             " AND p.sale.sala IN :sale" +
@@ -5939,7 +5934,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> godz, List<String> tydzien,
             List<String> sale, List<String> wykladowcySkrot);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.wykladowcy.skrot IN :wykladowcySkrot" +
             " AND p.grupyGrup.grupy.grupa IN :grupy" +
             " AND p.sale.sala IN :sale" +
@@ -6365,10 +6360,27 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> grupy, List<String> sale,
             List<String> tydzien, List<String> wykladowcySkrot);
 
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
+            " AND p.tydzien IN :tydzien" +
+            " AND p.grupyGrup.grupy.grupa IN :grupaGrupy" +
+            " AND p.sale.sala IN :sale" +
+            " AND p.grupyGrup.grupy.grupa IN :grupy" +
+            " AND p.godz IN :godz" +
+            " ORDER BY p.tydzien ASC, CASE WHEN p.dzien LIKE 'Pon' THEN 1" +
+            " WHEN p.dzien LIKE 'Wt' THEN 2" +
+            " WHEN p.dzien LIKE 'Sr' THEN 3" +
+            " WHEN p.dzien LIKE 'Czw' THEN 4" +
+            " ELSE 5 END," +
+            " p.godz ASC")
+    List<Plan> getPlanByWykladowcyNazwiskoAndSaleAndGrupyAndGrupaGrupyAndTydzienAndGodz(
+            List<String> wykladowcyName, List<String> godz,
+            List<String> tydzien, List<String> grupaGrupy,
+            List<String> grupy, List<String> sale);
+
 
     //7 warunków
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.grupyGrup.grupy.grupa IN :grupy" +
             " AND p.zajecia.nazwa IN :zajeciaNazwa" +
             " AND p.grupyGrup.grupaGrupy IN :grupaGrupy" +
@@ -6387,7 +6399,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> zajeciaNazwa, List<String> grupaGrupy, List<String> grupy);
 
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.sale.sala IN :sale" +
             " AND p.zajecia.nazwa IN :zajeciaNazwa" +
             " AND p.grupyGrup.grupaGrupy IN :grupaGrupy" +
@@ -6405,7 +6417,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> godz, List<String> dzien,
             List<String> zajeciaNazwa, List<String> grupaGrupy, List<String> sale);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.sale.sala IN :sale" +
             " AND p.zajecia.nazwa IN :zajeciaNazwa" +
             " AND p.grupyGrup.grupy.grupa IN :grupy" +
@@ -6424,9 +6436,9 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> zajeciaNazwa, List<String> grupy, List<String> sale);
 
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.sale.sala IN :sale" +
-            " AND p.grupyGrup.grupaGrupy IN :grupyGrup" +
+            " AND p.grupyGrup.grupaGrupy IN :grupaGrupy" +
             " AND p.grupyGrup.grupy.grupa IN :grupy" +
             " AND p.tydzien IN :tydzien" +
             " AND p.godz IN :godz" +
@@ -6443,9 +6455,9 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> grupaGrupy, List<String> grupy, List<String> sale);
 
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.sale.sala IN :sale" +
-            " AND p.grupyGrup.grupaGrupy IN :grupyGrup" +
+            " AND p.grupyGrup.grupaGrupy IN :grupaGrupy" +
             " AND p.grupyGrup.grupy.grupa IN :grupy" +
             " AND p.zajecia.nazwa IN :zajeciaNazwa" +
             " AND p.godz IN :godz" +
@@ -6462,9 +6474,9 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> grupaGrupy, List<String> grupy, List<String> sale);
 
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.sale.sala IN :sale" +
-            " AND p.grupyGrup.grupaGrupy IN :grupyGrup" +
+            " AND p.grupyGrup.grupaGrupy IN :grupaGrupy" +
             " AND p.grupyGrup.grupy.grupa IN :grupy" +
             " AND p.zajecia.nazwa IN :zajeciaNazwa" +
             " AND p.tydzien IN :tydzien" +
@@ -6480,9 +6492,9 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> tydzien, List<String> dzien,
             List<String> grupaGrupy, List<String> grupy, List<String> sale);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.sale.sala IN :sale" +
-            " AND p.grupyGrup.grupaGrupy IN :grupyGrup" +
+            " AND p.grupyGrup.grupaGrupy IN :grupaGrupy" +
             " AND p.grupyGrup.grupy.grupa IN :grupy" +
             " AND p.zajecia.nazwa IN :zajeciaNazwa" +
             " AND p.tydzien IN :tydzien" +
@@ -6498,9 +6510,9 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> tydzien, List<String> godz,
             List<String> grupaGrupy, List<String> grupy, List<String> sale);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.wykladowcy.skrot IN :wykladowcySkrot" +
-            " AND p.grupyGrup.grupaGrupy IN :grupyGrup" +
+            " AND p.grupyGrup.grupaGrupy IN :grupaGrupy" +
             " AND p.dzien IN :dzien" +
             " AND p.zajecia.nazwa IN :zajeciaNazwa" +
             " AND p.tydzien IN :tydzien" +
@@ -6516,7 +6528,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> tydzien, List<String> godz,
             List<String> grupaGrupy, List<String> dzien, List<String> wykladowcySkrot);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.wykladowcy.skrot IN :wykladowcySkrot" +
             " AND p.grupyGrup.grupy.grupa IN :grupy" +
             " AND p.dzien IN :dzien" +
@@ -6534,7 +6546,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> tydzien, List<String> godz,
             List<String> grupy, List<String> dzien, List<String> wykladowcySkrot);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.wykladowcy.skrot IN :wykladowcySkrot" +
             " AND p.grupyGrup.grupy.grupa IN :grupy" +
             " AND p.dzien IN :dzien" +
@@ -6552,7 +6564,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> tydzien, List<String> godz,
             List<String> grupy, List<String> dzien, List<String> wykladowcySkrot);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.wykladowcy.skrot IN :wykladowcySkrot" +
             " AND p.grupyGrup.grupy.grupa IN :grupy" +
             " AND p.dzien IN :dzien" +
@@ -6570,7 +6582,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> zajeciaNazwa, List<String> godz,
             List<String> grupy, List<String> dzien, List<String> wykladowcySkrot);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.wykladowcy.skrot IN :wykladowcySkrot" +
             " AND p.grupyGrup.grupy.grupa IN :grupy" +
             " AND p.dzien IN :dzien" +
@@ -6588,7 +6600,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> zajeciaNazwa, List<String> tydzien,
             List<String> grupy, List<String> dzien, List<String> wykladowcySkrot);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.wykladowcy.skrot IN :wykladowcySkrot" +
             " AND p.grupyGrup.grupy.grupa IN :grupy" +
             " AND p.godz IN :godz" +
@@ -6606,7 +6618,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> zajeciaNazwa, List<String> tydzien,
             List<String> grupy, List<String> godz, List<String> wykladowcySkrot);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.wykladowcy.skrot IN :wykladowcySkrot" +
             " AND p.sale.sala IN :sale" +
             " AND p.godz IN :godz" +
@@ -6624,7 +6636,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> zajeciaNazwa, List<String> tydzien,
             List<String> sale, List<String> godz, List<String> wykladowcySkrot);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.wykladowcy.skrot IN :wykladowcySkrot" +
             " AND p.sale.sala IN :sale" +
             " AND p.godz IN :godz" +
@@ -6642,7 +6654,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> grupaGrupy, List<String> tydzien,
             List<String> sale, List<String> godz, List<String> wykladowcySkrot);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.wykladowcy.skrot IN :wykladowcySkrot" +
             " AND p.sale.sala IN :sale" +
             " AND p.godz IN :godz" +
@@ -6660,7 +6672,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> grupaGrupy, List<String> zajeciaNazwa,
             List<String> sale, List<String> godz, List<String> wykladowcySkrot);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.wykladowcy.skrot IN :wykladowcySkrot" +
             " AND p.sale.sala IN :sale" +
             " AND p.tydzien IN :tydzien" +
@@ -6678,7 +6690,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> grupaGrupy, List<String> zajeciaNazwa,
             List<String> sale, List<String> tydzien, List<String> wykladowcySkrot);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.wykladowcy.skrot IN :wykladowcySkrot" +
             " AND p.sale.sala IN :sale" +
             " AND p.tydzien IN :tydzien" +
@@ -6696,7 +6708,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> grupaGrupy, List<String> zajeciaNazwa,
             List<String> sale, List<String> tydzien, List<String> wykladowcySkrot);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.wykladowcy.skrot IN :wykladowcySkrot" +
             " AND p.sale.sala IN :sale" +
             " AND p.tydzien IN :tydzien" +
@@ -6714,7 +6726,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> dzien, List<String> grupy,
             List<String> sale, List<String> tydzien, List<String> wykladowcySkrot);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.wykladowcy.skrot IN :wykladowcySkrot" +
             " AND p.sale.sala IN :sale" +
             " AND p.zajecia.nazwa IN :zajeciaNazwa" +
@@ -6732,7 +6744,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> dzien, List<String> grupy,
             List<String> sale, List<String> zajeciaNazwa, List<String> wykladowcySkrot);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.wykladowcy.skrot IN :wykladowcySkrot" +
             " AND p.sale.sala IN :sale" +
             " AND p.zajecia.nazwa IN :zajeciaNazwa" +
@@ -6750,7 +6762,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> dzien, List<String> grupy,
             List<String> sale, List<String> zajeciaNazwa, List<String> wykladowcySkrot);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.wykladowcy.skrot IN :wykladowcySkrot" +
             " AND p.sale.sala IN :sale" +
             " AND p.zajecia.nazwa IN :zajeciaNazwa" +
@@ -6768,7 +6780,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> godz, List<String> grupy,
             List<String> sale, List<String> zajeciaNazwa, List<String> wykladowcySkrot);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.wykladowcy.skrot IN :wykladowcySkrot" +
             " AND p.sale.sala IN :sale" +
             " AND p.grupyGrup.grupaGrupy IN :grupaGrupy" +
@@ -6786,7 +6798,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> godz, List<String> grupy,
             List<String> sale, List<String> grupaGrupy, List<String> wykladowcySkrot);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.wykladowcy.skrot IN :wykladowcySkrot" +
             " AND p.sale.sala IN :sale" +
             " AND p.grupyGrup.grupaGrupy IN :grupaGrupy" +
@@ -6804,7 +6816,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> tydzien, List<String> grupy,
             List<String> sale, List<String> grupaGrupy, List<String> wykladowcySkrot);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.wykladowcy.skrot IN :wykladowcySkrot" +
             " AND p.sale.sala IN :sale" +
             " AND p.grupyGrup.grupaGrupy IN :grupaGrupy" +
@@ -6822,7 +6834,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> zajeciaNazwa, List<String> grupy,
             List<String> sale, List<String> grupaGrupy, List<String> wykladowcySkrot);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.wykladowcy.skrot IN :wykladowcySkrot" +
             " AND p.sale.sala IN :sale" +
             " AND p.grupyGrup.grupaGrupy IN :grupaGrupy" +
@@ -6840,7 +6852,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> zajeciaNazwa, List<String> grupy,
             List<String> sale, List<String> grupaGrupy, List<String> wykladowcySkrot);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.wykladowcy.skrot IN :wykladowcySkrot" +
             " AND p.sale.sala IN :sale" +
             " AND p.grupyGrup.grupaGrupy IN :grupaGrupy" +
@@ -6989,9 +7001,9 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
     //8 warunków
 
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.sale.sala IN :sale" +
-            " AND p.grupyGrup.grupaGrupy IN :grupyGrup" +
+            " AND p.grupyGrup.grupaGrupy IN :grupaGrupy" +
             " AND p.grupyGrup.grupy.grupa IN :grupy" +
             " AND p.zajecia.nazwa IN :zajeciaNazwa" +
             " AND p.tydzien IN :tydzien" +
@@ -7009,9 +7021,9 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> dzien, List<String> grupaGrupy,
             List<String> grupy, List<String> sale);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.wykladowcy.skrot IN :wykladowcySkrot" +
-            " AND p.grupyGrup.grupaGrupy IN :grupyGrup" +
+            " AND p.grupyGrup.grupaGrupy IN :grupaGrupy" +
             " AND p.grupyGrup.grupy.grupa IN :grupy" +
             " AND p.zajecia.nazwa IN :zajeciaNazwa" +
             " AND p.tydzien IN :tydzien" +
@@ -7029,9 +7041,9 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> dzien, List<String> grupaGrupy,
             List<String> grupy, List<String> wykladowcySkrot);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.wykladowcy.skrot IN :wykladowcySkrot" +
-            " AND p.grupyGrup.grupaGrupy IN :grupyGrup" +
+            " AND p.grupyGrup.grupaGrupy IN :grupaGrupy" +
             " AND p.sale.sala IN :sale" +
             " AND p.zajecia.nazwa IN :zajeciaNazwa" +
             " AND p.tydzien IN :tydzien" +
@@ -7049,7 +7061,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> dzien, List<String> grupaGrupy,
             List<String> sale, List<String> wykladowcySkrot);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.wykladowcy.skrot IN :wykladowcySkrot" +
             " AND p.grupyGrup.grupy.grupa IN :grupy" +
             " AND p.sale.sala IN :sale" +
@@ -7069,7 +7081,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> dzien, List<String> grupy,
             List<String> sale, List<String> wykladowcySkrot);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.wykladowcy.skrot IN :wykladowcySkrot" +
             " AND p.grupyGrup.grupy.grupa IN :grupy" +
             " AND p.sale.sala IN :sale" +
@@ -7089,7 +7101,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> dzien, List<String> grupy,
             List<String> sale, List<String> wykladowcySkrot);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.wykladowcy.skrot IN :wykladowcySkrot" +
             " AND p.grupyGrup.grupy.grupa IN :grupy" +
             " AND p.sale.sala IN :sale" +
@@ -7109,7 +7121,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> dzien, List<String> grupy,
             List<String> sale, List<String> wykladowcySkrot);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.wykladowcy.skrot IN :wykladowcySkrot" +
             " AND p.grupyGrup.grupy.grupa IN :grupy" +
             " AND p.sale.sala IN :sale" +
@@ -7129,7 +7141,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             List<String> dzien, List<String> grupy,
             List<String> sale, List<String> wykladowcySkrot);
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.wykladowcy.skrot IN :wykladowcySkrot" +
             " AND p.grupyGrup.grupy.grupa IN :grupy" +
             " AND p.sale.sala IN :sale" +
@@ -7156,6 +7168,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             " AND p.zajecia.nazwa IN :zajeciaNazwa" +
             " AND p.tydzien IN :tydzien" +
             " AND p.godz IN :godz" +
+            " AND p.dzien IN :dzien" +
             " ORDER BY p.tydzien ASC, CASE WHEN p.dzien LIKE 'Pon' THEN 1" +
             " WHEN p.dzien LIKE 'Wt' THEN 2" +
             " WHEN p.dzien LIKE 'Sr' THEN 3" +
@@ -7172,7 +7185,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
     //9 warunków
 
 
-    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyNazwa" +
+    @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " AND p.wykladowcy.skrot IN :wykladowcySkrot" +
             " AND p.grupyGrup.grupy.grupa IN :grupy" +
             " AND p.sale.sala IN :sale" +

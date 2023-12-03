@@ -908,6 +908,13 @@ public class PlanService {
         );
     }
 
+    public List<Plan> getPlanByWykladowcyNazwiskoAndGrupaGrupyAndTydzien(
+            List<String> wykladowcyName, List<String> grupaGrupy, List<String> tydzien) {
+        return planRepository.getPlanByWykladowcyNazwiskoAndGrupaGrupyAndTydzien(
+                wykladowcyName, grupaGrupy, tydzien
+        );
+    }
+
     //4 warunki
 
     public List<Plan> getPlanByWykladowcyNazwiskoAndTydzienAndGodzAndDzien(
@@ -1186,9 +1193,9 @@ public class PlanService {
 
     public List<Plan> getPlanByWykladowcyNazwiskoAndSaleAndGrupyAndGrupaGrupyAndTydzien(
             List<String> wykladowcyName, List<String> tydzien,
-            List<String> grupy, List<String> sale) {
+            List<String> grupy, List<String> grupaGrupy, List<String> sale) {
         return planRepository.getPlanByWykladowcyNazwiskoAndSaleAndGrupyAndGrupaGrupyAndTydzien(
-                wykladowcyName, tydzien, grupy, sale
+                wykladowcyName, tydzien, grupy, grupaGrupy, sale
         );
     }
 
@@ -2219,10 +2226,10 @@ public class PlanService {
 
     public List<Plan> getPlanByWykladowcyNazwiskoAndSaleAndGrupyAndGrupaGrupyAndTydzienAndGodz(
             List<String> wykladowcyName, List<String> godz,
-            List<String> tydzien, List<String> grupy, List<String> sale) {
+            List<String> tydzien, List<String> grupaGrupy, List<String> grupy, List<String> sale) {
         return planRepository.getPlanByWykladowcyNazwiskoAndSaleAndGrupyAndGrupaGrupyAndTydzienAndGodz(
                 wykladowcyName, godz, tydzien,
-                grupy, sale
+                grupaGrupy ,grupy, sale
         );
     }
 
@@ -4317,4 +4324,6 @@ public class PlanService {
                 tydzien, dzien, godz, grupy, sale, wykladowcySkrot
         );
     }
+
+
 }

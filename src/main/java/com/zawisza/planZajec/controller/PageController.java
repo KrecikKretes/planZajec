@@ -220,7 +220,7 @@ public class PageController {
                                 }else{
                                     if(godz == null){
                                         if(dzien == null){
-                                            return planService.getPlanByWykladowcyNazwiskoAndTydzien(wykladowcyName, tydzien);
+                                            return planService.getPlanByWykladowcyNazwiskoAndGrupaGrupyAndTydzien(wykladowcyName, grupaGrupy, tydzien);
                                         }else{
                                             return planService.getPlanByWykladowcyNazwiskoAndGrupaGrupyAndTydzienAndDzien(wykladowcyName,dzien,tydzien, grupaGrupy);
                                         }
@@ -600,13 +600,13 @@ public class PageController {
                                 }else{
                                     if(godz == null){
                                         if(dzien == null){
-                                            return planService.getPlanByWykladowcyNazwiskoAndSaleAndGrupyAndGrupaGrupyAndTydzien(wykladowcyName, tydzien, grupy, sale);
+                                            return planService.getPlanByWykladowcyNazwiskoAndSaleAndGrupyAndGrupaGrupyAndTydzien(wykladowcyName, tydzien, grupy, grupaGrupy, sale);
                                         }else{
                                             return planService.getPlanByWykladowcyNazwiskoAndSaleAndGrupyAndGrupaGrupyAndTydzienAndDzien(wykladowcyName,dzien,tydzien, grupaGrupy, grupy, sale);
                                         }
                                     }else{
                                         if(dzien == null){
-                                            return planService.getPlanByWykladowcyNazwiskoAndSaleAndGrupyAndGrupaGrupyAndTydzienAndGodz(wykladowcyName,godz,tydzien, grupy, sale);
+                                            return planService.getPlanByWykladowcyNazwiskoAndSaleAndGrupyAndGrupaGrupyAndTydzienAndGodz(wykladowcyName,godz,tydzien, grupaGrupy, grupy, sale);
                                         }else{
                                             return planService.getPlanByWykladowcyNazwiskoAndSaleAndGrupyAndGrupaGrupyAndTydzienAndGodzAndDzien(wykladowcyName,godz,dzien, tydzien, grupaGrupy, grupy, sale);
                                         }
