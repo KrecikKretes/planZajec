@@ -78,7 +78,7 @@ public class PageController {
         String[] week = {"Pon", "Wt", "Sr", "Czw", "Pt"};
         model.addAttribute("week", week);
 
-        String[] hours = {"7:30- 8:15", "8:15- 9:00", "9:15-10:00",
+        String[] hours = {"7:30-8:15", "8:15-9:00", "9:15-10:00",
                 "10:00-10:45", "11:00-11:45", "11:45-12:30",
                 "12:45-13:30", "13:30-14:15", "14:30-15:15",
                 "15:15-16:00", "16:15-17:00", "17:00-17:45",
@@ -647,9 +647,6 @@ public class PageController {
                     }
                 }
             }else{
-                //
-                //
-                //
                 if(sale == null){
                     if(grupy == null){
                         if(grupaGrupy == null){
@@ -671,15 +668,15 @@ public class PageController {
                                 }else{
                                     if(godz == null){
                                         if(dzien == null){
-                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndTydzien(wykladowcyName, tydzien);
+                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndTydzien(wykladowcyName, tydzien, wykladowcySkrot);
                                         }else{
-                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndTydzienAndDzien(wykladowcyName,dzien,tydzien);
+                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndTydzienAndDzien(wykladowcyName,dzien,tydzien, wykladowcySkrot);
                                         }
                                     }else{
                                         if(dzien == null){
-                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndTydzienAndGodz(wykladowcyName,godz,tydzien);
+                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndTydzienAndGodz(wykladowcyName,godz,tydzien, wykladowcySkrot);
                                         }else{
-                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndTydzienAndGodzAndDzien(wykladowcyName,godz,dzien, tydzien);
+                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndTydzienAndGodzAndDzien(wykladowcyName,godz,dzien, tydzien, wykladowcySkrot);
                                         }
                                     }
                                 }
@@ -687,29 +684,29 @@ public class PageController {
                                 if(tydzien == null){
                                     if(godz == null){
                                         if(dzien == null){
-                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndZajeciaNazwa(wykladowcyName, zajeciaNazwa);
+                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndZajeciaNazwa(wykladowcyName, zajeciaNazwa, wykladowcySkrot);
                                         }else{
-                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndZajeciaNazwaAndDzien(wykladowcyName,dzien, zajeciaNazwa);
+                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndZajeciaNazwaAndDzien(wykladowcyName,dzien, zajeciaNazwa, wykladowcySkrot);
                                         }
                                     }else{
                                         if(dzien == null){
-                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndZajeciaNazwaAndGodz(wykladowcyName,godz, zajeciaNazwa);
+                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndZajeciaNazwaAndGodz(wykladowcyName,godz, zajeciaNazwa, wykladowcySkrot);
                                         }else{
-                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndZajeciaNazwaAndGodzAndDzien(wykladowcyName,godz,dzien, zajeciaNazwa);
+                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndZajeciaNazwaAndGodzAndDzien(wykladowcyName,godz,dzien, zajeciaNazwa, wykladowcySkrot);
                                         }
                                     }
                                 }else{
                                     if(godz == null){
                                         if(dzien == null){
-                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndZajeciaNazwaAndTydzien(wykladowcyName, tydzien, zajeciaNazwa);
+                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndZajeciaNazwaAndTydzien(wykladowcyName, tydzien, zajeciaNazwa, wykladowcySkrot);
                                         }else{
-                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndZajeciaNazwaAndTydzienAndDzien(wykladowcyName,dzien,tydzien, zajeciaNazwa);
+                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndZajeciaNazwaAndTydzienAndDzien(wykladowcyName,dzien,tydzien, zajeciaNazwa, wykladowcySkrot);
                                         }
                                     }else{
                                         if(dzien == null){
-                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndZajeciaNazwaAndTydzienAndGodz(wykladowcyName,godz,tydzien, zajeciaNazwa);
+                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndZajeciaNazwaAndTydzienAndGodz(wykladowcyName,godz,tydzien, zajeciaNazwa, wykladowcySkrot);
                                         }else{
-                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndZajeciaNazwaAndTydzienAndGodzAndDzien(wykladowcyName,godz,dzien, tydzien, zajeciaNazwa);
+                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndZajeciaNazwaAndTydzienAndGodzAndDzien(wykladowcyName,godz,dzien, tydzien, zajeciaNazwa, wykladowcySkrot);
                                         }
                                     }
                                 }
@@ -719,29 +716,29 @@ public class PageController {
                                 if(tydzien == null){
                                     if(godz == null){
                                         if(dzien == null){
-                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndGrupaGrupy(wykladowcyName, grupaGrupy);
+                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndGrupaGrupy(wykladowcyName, grupaGrupy, wykladowcySkrot);
                                         }else{
-                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndGrupaGrupyAndDzien(wykladowcyName,dzien, grupaGrupy);
+                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndGrupaGrupyAndDzien(wykladowcyName,dzien, grupaGrupy, wykladowcySkrot);
                                         }
                                     }else{
                                         if(dzien == null){
-                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndGrupaGrupyAndGodz(wykladowcyName,godz, grupaGrupy);
+                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndGrupaGrupyAndGodz(wykladowcyName,godz, grupaGrupy, wykladowcySkrot);
                                         }else{
-                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndGrupaGrupyAndGodzAndDzien(wykladowcyName,godz,dzien, grupaGrupy);
+                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndGrupaGrupyAndGodzAndDzien(wykladowcyName,godz,dzien, grupaGrupy, wykladowcySkrot);
                                         }
                                     }
                                 }else{
                                     if(godz == null){
                                         if(dzien == null){
-                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndTydzien(wykladowcyName, tydzien);
+                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndGrupaGrupyAndTydzien(wykladowcyName, tydzien, grupaGrupy, wykladowcySkrot);
                                         }else{
-                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndGrupaGrupyAndTydzienAndDzien(wykladowcyName,dzien,tydzien, grupaGrupy);
+                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndGrupaGrupyAndTydzienAndDzien(wykladowcyName,dzien,tydzien, grupaGrupy, wykladowcySkrot);
                                         }
                                     }else{
                                         if(dzien == null){
-                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndTydzienAndGodz(wykladowcyName,godz,tydzien);
+                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndTydzienAndGodz(wykladowcyName,godz,tydzien, wykladowcySkrot);
                                         }else{
-                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndGrupaGrupyAndTydzienAndGodzAndDzien(wykladowcyName,godz,dzien, tydzien, grupaGrupy);
+                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndGrupaGrupyAndTydzienAndGodzAndDzien(wykladowcyName,godz,dzien, tydzien, grupaGrupy, wykladowcySkrot);
                                         }
                                     }
                                 }
@@ -749,29 +746,29 @@ public class PageController {
                                 if(tydzien == null){
                                     if(godz == null){
                                         if(dzien == null){
-                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndGrupaGrupyAndZajeciaNazwa(wykladowcyName, zajeciaNazwa, grupaGrupy);
+                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndGrupaGrupyAndZajeciaNazwa(wykladowcyName, zajeciaNazwa, grupaGrupy, wykladowcySkrot);
                                         }else{
-                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndGrupaGrupyAndZajeciaNazwaAndDzien(wykladowcyName,dzien, zajeciaNazwa, grupaGrupy);
+                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndGrupaGrupyAndZajeciaNazwaAndDzien(wykladowcyName,dzien, zajeciaNazwa, grupaGrupy, wykladowcySkrot);
                                         }
                                     }else{
                                         if(dzien == null){
-                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndGrupaGrupyAndZajeciaNazwaAndGodz(wykladowcyName,godz, zajeciaNazwa, grupaGrupy);
+                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndGrupaGrupyAndZajeciaNazwaAndGodz(wykladowcyName, godz, zajeciaNazwa, grupaGrupy, wykladowcySkrot);
                                         }else{
-                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndGrupaGrupyAndZajeciaNazwaAndGodzAndDzien(wykladowcyName,godz,dzien, zajeciaNazwa, grupaGrupy);
+                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndGrupaGrupyAndZajeciaNazwaAndGodzAndDzien(wykladowcyName,godz,dzien, zajeciaNazwa, grupaGrupy, wykladowcySkrot);
                                         }
                                     }
                                 }else{
                                     if(godz == null){
                                         if(dzien == null){
-                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndGrupaGrupyAndZajeciaNazwaAndTydzien(wykladowcyName, tydzien, zajeciaNazwa, grupaGrupy);
+                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndGrupaGrupyAndZajeciaNazwaAndTydzien(wykladowcyName, tydzien, zajeciaNazwa, grupaGrupy, wykladowcySkrot);
                                         }else{
-                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndGrupaGrupyAndZajeciaNazwaAndTydzienAndDzien(wykladowcyName,dzien,tydzien, zajeciaNazwa, grupaGrupy);
+                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndGrupaGrupyAndZajeciaNazwaAndTydzienAndDzien(wykladowcyName,dzien,tydzien, zajeciaNazwa, grupaGrupy, wykladowcySkrot);
                                         }
                                     }else{
                                         if(dzien == null){
-                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndGrupaGrupyAndZajeciaNazwaAndTydzienAndGodz(wykladowcyName,godz,tydzien, zajeciaNazwa, grupaGrupy);
+                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndGrupaGrupyAndZajeciaNazwaAndTydzienAndGodz(wykladowcyName,godz,tydzien, zajeciaNazwa, grupaGrupy, wykladowcySkrot);
                                         }else{
-                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndGrupaGrupyAndZajeciaNazwaAndTydzienAndGodzAndDzien(wykladowcyName,godz,dzien, tydzien, zajeciaNazwa, grupaGrupy);
+                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndGrupaGrupyAndZajeciaNazwaAndTydzienAndGodzAndDzien(wykladowcyName,godz,dzien, tydzien, zajeciaNazwa, grupaGrupy, wykladowcySkrot);
                                         }
                                     }
                                 }
@@ -783,29 +780,29 @@ public class PageController {
                                 if(tydzien == null){
                                     if(godz == null){
                                         if(dzien == null){
-                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndGrupy(wykladowcyName, grupy);
+                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndGrupy(wykladowcyName, grupy, wykladowcySkrot);
                                         }else{
-                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndGrupyAndDzien(wykladowcyName,dzien,grupy);
+                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndGrupyAndDzien(wykladowcyName,dzien,grupy, wykladowcySkrot);
                                         }
                                     }else{
                                         if(dzien == null){
-                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndGrupyAndGodz(wykladowcyName,godz, grupy);
+                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndGrupyAndGodz(wykladowcyName,godz, grupy, wykladowcySkrot);
                                         }else{
-                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndGrupyAndGodzAndDzien(wykladowcyName,godz,dzien, grupy);
+                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndGrupyAndGodzAndDzien(wykladowcyName,godz,dzien, grupy, wykladowcySkrot);
                                         }
                                     }
                                 }else{
                                     if(godz == null){
                                         if(dzien == null){
-                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndGrupyAndTydzien(wykladowcyName, tydzien, grupy);
+                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndGrupyAndTydzien(wykladowcyName, tydzien, grupy, wykladowcySkrot);
                                         }else{
-                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndGrupyAndTydzienAndDzien(wykladowcyName,dzien,tydzien, grupy);
+                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndGrupyAndTydzienAndDzien(wykladowcyName,dzien,tydzien, grupy, wykladowcySkrot);
                                         }
                                     }else{
                                         if(dzien == null){
-                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndGrupyAndTydzienAndGodz(wykladowcyName,godz,tydzien, grupy);
+                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndGrupyAndTydzienAndGodz(wykladowcyName,godz,tydzien, grupy, wykladowcySkrot);
                                         }else{
-                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndGrupyAndTydzienAndGodzAndDzien(wykladowcyName,godz,dzien, tydzien, grupy);
+                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndGrupyAndTydzienAndGodzAndDzien(wykladowcyName,godz,dzien, tydzien, grupy, wykladowcySkrot);
                                         }
                                     }
                                 }
@@ -813,29 +810,29 @@ public class PageController {
                                 if(tydzien == null){
                                     if(godz == null){
                                         if(dzien == null){
-                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndGrupyAndZajeciaNazwa(wykladowcyName, zajeciaNazwa, grupy);
+                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndGrupyAndZajeciaNazwa(wykladowcyName, zajeciaNazwa, grupy, wykladowcySkrot);
                                         }else{
-                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndGrupyAndZajeciaNazwaAndDzien(wykladowcyName,dzien, zajeciaNazwa, grupy);
+                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndGrupyAndZajeciaNazwaAndDzien(wykladowcyName,dzien, zajeciaNazwa, grupy, wykladowcySkrot);
                                         }
                                     }else{
                                         if(dzien == null){
-                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndGrupyAndZajeciaNazwaAndGodz(wykladowcyName,godz, zajeciaNazwa, grupy);
+                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndGrupyAndZajeciaNazwaAndGodz(wykladowcyName, godz, zajeciaNazwa, grupy, wykladowcySkrot);
                                         }else{
-                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndGrupyAndZajeciaNazwaAndGodzAndDzien(wykladowcyName,godz,dzien, zajeciaNazwa, grupy);
+                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndGrupyAndZajeciaNazwaAndGodzAndDzien(wykladowcyName,godz,dzien, zajeciaNazwa, grupy, wykladowcySkrot);
                                         }
                                     }
                                 }else{
                                     if(godz == null){
                                         if(dzien == null){
-                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndGrupyAndZajeciaNazwaAndTydzien(wykladowcyName, tydzien, zajeciaNazwa, grupy);
+                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndGrupyAndZajeciaNazwaAndTydzien(wykladowcyName, tydzien, zajeciaNazwa, grupy, wykladowcySkrot);
                                         }else{
-                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndGrupyAndZajeciaNazwaAndTydzienAndDzien(wykladowcyName,dzien,tydzien, zajeciaNazwa, grupy);
+                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndGrupyAndZajeciaNazwaAndTydzienAndDzien(wykladowcyName,dzien,tydzien, zajeciaNazwa, grupy, wykladowcySkrot);
                                         }
                                     }else{
                                         if(dzien == null){
-                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndGrupyAndZajeciaNazwaAndTydzienAndGodz(wykladowcyName,godz,tydzien, zajeciaNazwa, grupy);
+                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndGrupyAndZajeciaNazwaAndTydzienAndGodz(wykladowcyName,godz,tydzien, zajeciaNazwa, grupy, wykladowcySkrot);
                                         }else{
-                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndGrupyAndZajeciaNazwaAndTydzienAndGodzAndDzien(wykladowcyName,godz,dzien, tydzien, zajeciaNazwa, grupy);
+                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndGrupyAndZajeciaNazwaAndTydzienAndGodzAndDzien(wykladowcyName,godz,dzien, tydzien, zajeciaNazwa, grupy, wykladowcySkrot);
                                         }
                                     }
                                 }
@@ -845,29 +842,29 @@ public class PageController {
                                 if(tydzien == null){
                                     if(godz == null){
                                         if(dzien == null){
-                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndGrupyAndGrupaGrupy(wykladowcyName, grupaGrupy, grupy);
+                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndGrupyAndGrupaGrupy(wykladowcyName, grupaGrupy, grupy, wykladowcySkrot);
                                         }else{
-                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndGrupyAndGrupaGrupyAndDzien(wykladowcyName,dzien, grupaGrupy, grupy);
+                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndGrupyAndGrupaGrupyAndDzien(wykladowcyName,dzien, grupaGrupy, grupy, wykladowcySkrot);
                                         }
                                     }else{
                                         if(dzien == null){
-                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndGrupyAndGrupaGrupyAndGodz(wykladowcyName,godz, grupaGrupy, grupy);
+                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndGrupyAndGrupaGrupyAndGodz(wykladowcyName,godz, grupaGrupy, grupy, wykladowcySkrot);
                                         }else{
-                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndGrupyAndGrupaGrupyAndGodzAndDzien(wykladowcyName,godz,dzien, grupaGrupy, grupy);
+                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndGrupyAndGrupaGrupyAndGodzAndDzien(wykladowcyName,godz,dzien, grupaGrupy, grupy, wykladowcySkrot);
                                         }
                                     }
                                 }else{
                                     if(godz == null){
                                         if(dzien == null){
-                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndGrupyAndGrupaGrupyAndTydzien(wykladowcyName, tydzien, grupy);
+                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndGrupyAndGrupaGrupyAndTydzien(wykladowcyName, tydzien, grupy, wykladowcySkrot);
                                         }else{
-                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndGrupyAndGrupaGrupyAndTydzienAndDzien(wykladowcyName,dzien,tydzien, grupaGrupy, grupy);
+                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndGrupyAndGrupaGrupyAndTydzienAndDzien(wykladowcyName,dzien,tydzien, grupaGrupy, grupy, wykladowcySkrot);
                                         }
                                     }else{
                                         if(dzien == null){
-                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndGrupyAndGrupaGrupyAndTydzienAndGodz(wykladowcyName,godz,tydzien, grupy);
+                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndGrupyAndGrupaGrupyAndTydzienAndGodz(wykladowcyName,godz,tydzien, grupy, wykladowcySkrot);
                                         }else{
-                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndGrupyAndGrupaGrupyAndTydzienAndGodzAndDzien(wykladowcyName,godz,dzien, tydzien, grupaGrupy, grupy);
+                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndGrupyAndGrupaGrupyAndTydzienAndGodzAndDzien(wykladowcyName,godz,dzien, tydzien, grupaGrupy, grupy, wykladowcySkrot);
                                         }
                                     }
                                 }
@@ -875,29 +872,29 @@ public class PageController {
                                 if(tydzien == null){
                                     if(godz == null){
                                         if(dzien == null){
-                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndGrupyAndGrupaGrupyAndZajeciaNazwa(wykladowcyName, zajeciaNazwa, grupaGrupy, grupy);
+                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndGrupyAndGrupaGrupyAndZajeciaNazwa(wykladowcyName, zajeciaNazwa, grupaGrupy, grupy, wykladowcySkrot);
                                         }else{
-                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndGrupyAndGrupaGrupyAndZajeciaNazwaAndDzien(wykladowcyName,dzien, zajeciaNazwa, grupaGrupy, grupy);
+                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndGrupyAndGrupaGrupyAndZajeciaNazwaAndDzien(wykladowcyName,dzien, zajeciaNazwa, grupaGrupy, grupy, wykladowcySkrot);
                                         }
                                     }else{
                                         if(dzien == null){
-                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndGrupyAndGrupaGrupyAndZajeciaNazwaAndGodz(wykladowcyName,godz, zajeciaNazwa, grupaGrupy, grupy);
+                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndGrupyAndGrupaGrupyAndZajeciaNazwaAndGodz(wykladowcyName,godz, zajeciaNazwa, grupaGrupy, grupy, wykladowcySkrot);
                                         }else{
-                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndGrupyAndGrupaGrupyAndZajeciaNazwaAndGodzAndDzien(wykladowcyName,godz,dzien, zajeciaNazwa, grupaGrupy, grupy);
+                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndGrupyAndGrupaGrupyAndZajeciaNazwaAndGodzAndDzien(wykladowcyName,godz,dzien, zajeciaNazwa, grupaGrupy, grupy, wykladowcySkrot);
                                         }
                                     }
                                 }else{
                                     if(godz == null){
                                         if(dzien == null){
-                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndGrupyAndGrupaGrupyAndZajeciaNazwaAndTydzien(wykladowcyName, tydzien, zajeciaNazwa, grupaGrupy, grupy);
+                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndGrupyAndGrupaGrupyAndZajeciaNazwaAndTydzien(wykladowcyName, tydzien, zajeciaNazwa, grupaGrupy, grupy, wykladowcySkrot);
                                         }else{
-                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndGrupyAndGrupaGrupyAndZajeciaNazwaAndTydzienAndDzien(wykladowcyName,dzien,tydzien, zajeciaNazwa, grupaGrupy, grupy);
+                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndGrupyAndGrupaGrupyAndZajeciaNazwaAndTydzienAndDzien(wykladowcyName,dzien,tydzien, zajeciaNazwa, grupaGrupy, grupy, wykladowcySkrot);
                                         }
                                     }else{
                                         if(dzien == null){
-                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndGrupyAndGrupaGrupyAndZajeciaNazwaAndTydzienAndGodz(wykladowcyName,godz,tydzien, zajeciaNazwa, grupaGrupy, grupy);
+                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndGrupyAndGrupaGrupyAndZajeciaNazwaAndTydzienAndGodz(wykladowcyName,godz,tydzien, zajeciaNazwa, grupaGrupy, grupy, wykladowcySkrot);
                                         }else{
-                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndGrupyAndGrupaGrupyAndZajeciaNazwaAndTydzienAndGodzAndDzien(wykladowcyName,godz,dzien, tydzien, zajeciaNazwa, grupaGrupy, grupy);
+                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndGrupyAndGrupaGrupyAndZajeciaNazwaAndTydzienAndGodzAndDzien(wykladowcyName,godz,dzien, tydzien, zajeciaNazwa, grupaGrupy, grupy, wykladowcySkrot);
                                         }
                                     }
                                 }
@@ -911,29 +908,29 @@ public class PageController {
                                 if(tydzien == null){
                                     if(godz == null){
                                         if(dzien == null){
-                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndSale(wykladowcyName,sale);
+                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndSale(wykladowcyName,sale, wykladowcySkrot);
                                         }else{
-                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndSaleAndDzien(wykladowcyName,dzien,sale);
+                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndSaleAndDzien(wykladowcyName,dzien,sale, wykladowcySkrot);
                                         }
                                     }else{
                                         if(dzien == null){
-                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndSaleAndGodz(wykladowcyName,godz,sale);
+                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndSaleAndGodz(wykladowcyName,godz,sale, wykladowcySkrot);
                                         }else{
-                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndSaleAndGodzAndDzien(wykladowcyName,godz,dzien,sale);
+                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndSaleAndGodzAndDzien(wykladowcyName,godz,dzien,sale, wykladowcySkrot);
                                         }
                                     }
                                 }else{
                                     if(godz == null){
                                         if(dzien == null){
-                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndSaleAndTydzien(wykladowcyName,tydzien,sale);
+                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndSaleAndTydzien(wykladowcyName,tydzien,sale, wykladowcySkrot);
                                         }else{
-                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndSaleAndTydzienAndDzien(wykladowcyName,dzien,tydzien,sale);
+                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndSaleAndTydzienAndDzien(wykladowcyName,dzien,tydzien,sale, wykladowcySkrot);
                                         }
                                     }else{
                                         if(dzien == null){
-                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndSaleAndTydzienAndGodz(wykladowcyName,godz,tydzien,sale);
+                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndSaleAndTydzienAndGodz(wykladowcyName,godz,tydzien,sale, wykladowcySkrot);
                                         }else{
-                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndSaleAndTydzienAndGodzAndDzien(wykladowcyName,godz,dzien, tydzien,sale);
+                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndSaleAndTydzienAndGodzAndDzien(wykladowcyName,godz,dzien, tydzien,sale, wykladowcySkrot);
                                         }
                                     }
                                 }
@@ -941,29 +938,29 @@ public class PageController {
                                 if(tydzien == null){
                                     if(godz == null){
                                         if(dzien == null){
-                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndSaleAndZajeciaNazwa(wykladowcyName, zajeciaNazwa,sale);
+                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndSaleAndZajeciaNazwa(wykladowcyName, zajeciaNazwa,sale, wykladowcySkrot);
                                         }else{
-                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndSaleAndZajeciaNazwaAndDzien(wykladowcyName,dzien, zajeciaNazwa, sale);
+                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndSaleAndZajeciaNazwaAndDzien(wykladowcyName,dzien, zajeciaNazwa, sale, wykladowcySkrot);
                                         }
                                     }else{
                                         if(dzien == null){
-                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndSaleAndZajeciaNazwaAndGodz(wykladowcyName,godz, zajeciaNazwa, sale);
+                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndSaleAndZajeciaNazwaAndGodz(wykladowcyName,godz, zajeciaNazwa, sale, wykladowcySkrot);
                                         }else{
-                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndSaleAndZajeciaNazwaAndGodzAndDzien(wykladowcyName,godz,dzien, zajeciaNazwa, sale);
+                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndSaleAndZajeciaNazwaAndGodzAndDzien(wykladowcyName,godz,dzien, zajeciaNazwa, sale, wykladowcySkrot);
                                         }
                                     }
                                 }else{
                                     if(godz == null){
                                         if(dzien == null){
-                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndSaleAndZajeciaNazwaAndTydzien(wykladowcyName, tydzien, zajeciaNazwa, sale);
+                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndSaleAndZajeciaNazwaAndTydzien(wykladowcyName, tydzien, zajeciaNazwa, sale, wykladowcySkrot);
                                         }else{
-                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndSaleAndZajeciaNazwaAndTydzienAndDzien(wykladowcyName,dzien,tydzien, zajeciaNazwa, sale);
+                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndSaleAndZajeciaNazwaAndTydzienAndDzien(wykladowcyName,dzien,tydzien, zajeciaNazwa, sale, wykladowcySkrot);
                                         }
                                     }else{
                                         if(dzien == null){
-                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndSaleAndZajeciaNazwaAndTydzienAndGodz(wykladowcyName,godz,tydzien, zajeciaNazwa, sale);
+                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndSaleAndZajeciaNazwaAndTydzienAndGodz(wykladowcyName,godz,tydzien, zajeciaNazwa, sale, wykladowcySkrot);
                                         }else{
-                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndSaleAndZajeciaNazwaAndTydzienAndGodzAndDzien(wykladowcyName,godz,dzien, tydzien, zajeciaNazwa, sale);
+                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndSaleAndZajeciaNazwaAndTydzienAndGodzAndDzien(wykladowcyName,godz,dzien, tydzien, zajeciaNazwa, sale, wykladowcySkrot);
                                         }
                                     }
                                 }
@@ -973,29 +970,29 @@ public class PageController {
                                 if(tydzien == null){
                                     if(godz == null){
                                         if(dzien == null){
-                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndSaleAndGrupaGrupy(wykladowcyName, grupaGrupy, sale);
+                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndSaleAndGrupaGrupy(wykladowcyName, grupaGrupy, sale, wykladowcySkrot);
                                         }else{
-                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndSaleAndGrupaGrupyAndDzien(wykladowcyName,dzien, grupaGrupy, sale);
+                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndSaleAndGrupaGrupyAndDzien(wykladowcyName,dzien, grupaGrupy, sale, wykladowcySkrot);
                                         }
                                     }else{
                                         if(dzien == null){
-                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndSaleAndGrupaGrupyAndGodz(wykladowcyName,godz, grupaGrupy, sale);
+                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndSaleAndGrupaGrupyAndGodz(wykladowcyName,godz, grupaGrupy, sale, wykladowcySkrot);
                                         }else{
-                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndSaleAndGrupaGrupyAndGodzAndDzien(wykladowcyName,godz,dzien, grupaGrupy, sale);
+                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndSaleAndGrupaGrupyAndGodzAndDzien(wykladowcyName,godz,dzien, grupaGrupy, sale, wykladowcySkrot);
                                         }
                                     }
                                 }else{
                                     if(godz == null){
                                         if(dzien == null){
-                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndSaleAndGrupyGrupAndTydzien(wykladowcyName, tydzien, grupaGrupy, sale);
+                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndSaleAndGrupyGrupAndTydzien(wykladowcyName, tydzien, grupaGrupy, sale, wykladowcySkrot);
                                         }else{
-                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndSaleAndGrupaGrupyAndTydzienAndDzien(wykladowcyName,dzien,tydzien, grupaGrupy, sale);
+                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndSaleAndGrupaGrupyAndTydzienAndDzien(wykladowcyName,dzien,tydzien, grupaGrupy, sale, wykladowcySkrot);
                                         }
                                     }else{
                                         if(dzien == null){
-                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndSaleAndGrupaGrupyAndTydzienAndGodz(wykladowcyName,godz,tydzien, grupaGrupy, sale);
+                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndSaleAndGrupaGrupyAndTydzienAndGodz(wykladowcyName,godz,tydzien, grupaGrupy, sale, wykladowcySkrot);
                                         }else{
-                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndSaleAndGrupaGrupyAndTydzienAndGodzAndDzien(wykladowcyName,godz,dzien, tydzien, grupaGrupy, sale);
+                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndSaleAndGrupaGrupyAndTydzienAndGodzAndDzien(wykladowcyName,godz,dzien, tydzien, grupaGrupy, sale, wykladowcySkrot);
                                         }
                                     }
                                 }
@@ -1003,29 +1000,29 @@ public class PageController {
                                 if(tydzien == null){
                                     if(godz == null){
                                         if(dzien == null){
-                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndSaleAndGrupaGrupyAndZajeciaNazwa(wykladowcyName, zajeciaNazwa, grupaGrupy, sale);
+                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndSaleAndGrupaGrupyAndZajeciaNazwa(wykladowcyName, zajeciaNazwa, grupaGrupy, sale, wykladowcySkrot);
                                         }else{
-                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndSaleAndGrupaGrupyAndZajeciaNazwaAndDzien(wykladowcyName,dzien, zajeciaNazwa, grupaGrupy, sale);
+                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndSaleAndGrupaGrupyAndZajeciaNazwaAndDzien(wykladowcyName,dzien, zajeciaNazwa, grupaGrupy, sale, wykladowcySkrot);
                                         }
                                     }else{
                                         if(dzien == null){
-                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndSaleAndGrupaGrupyAndZajeciaNazwaAndGodz(wykladowcyName,godz, zajeciaNazwa, grupaGrupy, sale);
+                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndSaleAndGrupaGrupyAndZajeciaNazwaAndGodz(wykladowcyName,godz, zajeciaNazwa, grupaGrupy, sale, wykladowcySkrot);
                                         }else{
-                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndSaleAndGrupaGrupyAndZajeciaNazwaAndGodzAndDzien(wykladowcyName,godz,dzien, zajeciaNazwa, grupaGrupy, sale);
+                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndSaleAndGrupaGrupyAndZajeciaNazwaAndGodzAndDzien(wykladowcyName,godz,dzien, zajeciaNazwa, grupaGrupy, sale, wykladowcySkrot);
                                         }
                                     }
                                 }else{
                                     if(godz == null){
                                         if(dzien == null){
-                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndSaleAndGrupaGrupyAndZajeciaNazwaAndTydzien(wykladowcyName, tydzien, zajeciaNazwa, grupaGrupy, sale);
+                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndSaleAndGrupaGrupyAndZajeciaNazwaAndTydzien(wykladowcyName, tydzien, zajeciaNazwa, grupaGrupy, sale, wykladowcySkrot);
                                         }else{
-                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndSaleAndGrupaGrupyAndZajeciaNazwaAndTydzienAndDzien(wykladowcyName,dzien,tydzien, zajeciaNazwa, grupaGrupy, sale);
+                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndSaleAndGrupaGrupyAndZajeciaNazwaAndTydzienAndDzien(wykladowcyName,dzien,tydzien, zajeciaNazwa, grupaGrupy, sale, wykladowcySkrot);
                                         }
                                     }else{
                                         if(dzien == null){
-                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndSaleAndGrupaGrupyAndZajeciaNazwaAndTydzienAndGodz(wykladowcyName,godz,tydzien, zajeciaNazwa, grupaGrupy, sale);
+                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndSaleAndGrupaGrupyAndZajeciaNazwaAndTydzienAndGodz(wykladowcyName,godz,tydzien, zajeciaNazwa, grupaGrupy, sale, wykladowcySkrot);
                                         }else{
-                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndSaleAndGrupaGrupyAndZajeciaNazwaAndTydzienAndGodzAndDzien(wykladowcyName,godz,dzien, tydzien, zajeciaNazwa, grupaGrupy, sale);
+                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndSaleAndGrupaGrupyAndZajeciaNazwaAndTydzienAndGodzAndDzien(wykladowcyName,godz,dzien, tydzien, zajeciaNazwa, grupaGrupy, sale, wykladowcySkrot);
                                         }
                                     }
                                 }
@@ -1037,29 +1034,29 @@ public class PageController {
                                 if(tydzien == null){
                                     if(godz == null){
                                         if(dzien == null){
-                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndSaleAndGrupy(wykladowcyName, grupy, sale);
+                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndSaleAndGrupy(wykladowcyName, grupy, sale, wykladowcySkrot);
                                         }else{
-                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndSaleAndGrupyAndDzien(wykladowcyName,dzien,grupy, sale);
+                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndSaleAndGrupyAndDzien(wykladowcyName,dzien,grupy, sale, wykladowcySkrot);
                                         }
                                     }else{
                                         if(dzien == null){
-                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndSaleAndGrupyAndGodz(wykladowcyName,godz, grupy, sale);
+                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndSaleAndGrupyAndGodz(wykladowcyName,godz, grupy, sale, wykladowcySkrot);
                                         }else{
-                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndSaleAndGrupyAndGodzAndDzien(wykladowcyName,godz,dzien, grupy, sale);
+                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndSaleAndGrupyAndGodzAndDzien(wykladowcyName,godz,dzien, grupy, sale, wykladowcySkrot);
                                         }
                                     }
                                 }else{
                                     if(godz == null){
                                         if(dzien == null){
-                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndSaleAndGrupyAndTydzien(wykladowcyName, tydzien, grupy, sale);
+                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndSaleAndGrupyAndTydzien(wykladowcyName, tydzien, grupy, sale, wykladowcySkrot);
                                         }else{
-                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndSaleAndGrupyAndTydzienAndDzien(wykladowcyName,dzien,tydzien, grupy, sale);
+                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndSaleAndGrupyAndTydzienAndDzien(wykladowcyName,dzien,tydzien, grupy, sale, wykladowcySkrot);
                                         }
                                     }else{
                                         if(dzien == null){
-                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndSaleAndGrupyAndTydzienAndGodz(wykladowcyName,godz,tydzien, grupy, sale);
+                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndSaleAndGrupyAndTydzienAndGodz(wykladowcyName,godz,tydzien, grupy, sale, wykladowcySkrot);
                                         }else{
-                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndSaleAndGrupyAndTydzienAndGodzAndDzien(wykladowcyName,godz,dzien, tydzien, grupy, sale);
+                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndSaleAndGrupyAndTydzienAndGodzAndDzien(wykladowcyName,godz,dzien, tydzien, grupy, sale, wykladowcySkrot);
                                         }
                                     }
                                 }
@@ -1067,29 +1064,29 @@ public class PageController {
                                 if(tydzien == null){
                                     if(godz == null){
                                         if(dzien == null){
-                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndSaleAndGrupyAndZajeciaNazwa(wykladowcyName, zajeciaNazwa, grupy, sale);
+                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndSaleAndGrupyAndZajeciaNazwa(wykladowcyName, zajeciaNazwa, grupy, sale, wykladowcySkrot);
                                         }else{
-                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndSaleAndGrupyAndZajeciaNazwaAndDzien(wykladowcyName,dzien, zajeciaNazwa, grupy, sale);
+                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndSaleAndGrupyAndZajeciaNazwaAndDzien(wykladowcyName,dzien, zajeciaNazwa, grupy, sale, wykladowcySkrot);
                                         }
                                     }else{
                                         if(dzien == null){
-                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndSaleAndGrupyAndZajeciaNazwaAndGodz(wykladowcyName,godz, zajeciaNazwa, grupy, sale);
+                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndSaleAndGrupyAndZajeciaNazwaAndGodz(wykladowcyName,godz, zajeciaNazwa, grupy, sale, wykladowcySkrot);
                                         }else{
-                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndSaleAndGrupyAndZajeciaNazwaAndGodzAndDzien(wykladowcyName,godz,dzien, zajeciaNazwa, grupy, sale);
+                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndSaleAndGrupyAndZajeciaNazwaAndGodzAndDzien(wykladowcyName,godz,dzien, zajeciaNazwa, grupy, sale, wykladowcySkrot);
                                         }
                                     }
                                 }else{
                                     if(godz == null){
                                         if(dzien == null){
-                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndSaleAndGrupyAndZajeciaNazwaAndTydzien(wykladowcyName, tydzien, zajeciaNazwa, grupy, sale);
+                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndSaleAndGrupyAndZajeciaNazwaAndTydzien(wykladowcyName, tydzien, zajeciaNazwa, grupy, sale, wykladowcySkrot);
                                         }else{
-                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndSaleAndGrupyAndZajeciaNazwaAndTydzienAndDzien(wykladowcyName,dzien,tydzien, zajeciaNazwa, grupy, sale);
+                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndSaleAndGrupyAndZajeciaNazwaAndTydzienAndDzien(wykladowcyName,dzien,tydzien, zajeciaNazwa, grupy, sale, wykladowcySkrot);
                                         }
                                     }else{
                                         if(dzien == null){
-                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndSaleAndGrupyAndZajeciaNazwaAndTydzienAndGodz(wykladowcyName,godz,tydzien, zajeciaNazwa, grupy, sale);
+                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndSaleAndGrupyAndZajeciaNazwaAndTydzienAndGodz(wykladowcyName,godz,tydzien, zajeciaNazwa, grupy, sale, wykladowcySkrot);
                                         }else{
-                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndSaleAndGrupyAndZajeciaNazwaAndTydzienAndGodzAndDzien(wykladowcyName,godz,dzien, tydzien, zajeciaNazwa, grupy, sale);
+                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndSaleAndGrupyAndZajeciaNazwaAndTydzienAndGodzAndDzien(wykladowcyName,godz,dzien, tydzien, zajeciaNazwa, grupy, sale, wykladowcySkrot);
                                         }
                                     }
                                 }
@@ -1099,29 +1096,29 @@ public class PageController {
                                 if(tydzien == null){
                                     if(godz == null){
                                         if(dzien == null){
-                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndSaleAndGrupyAndGrupaGrupy(wykladowcyName, grupaGrupy, grupy, sale);
+                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndSaleAndGrupyAndGrupaGrupy(wykladowcyName, grupaGrupy, grupy, sale, wykladowcySkrot);
                                         }else{
-                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndSaleAndGrupyAndGrupaGrupyAndDzien(wykladowcyName,dzien, grupaGrupy, grupy, sale);
+                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndSaleAndGrupyAndGrupaGrupyAndDzien(wykladowcyName,dzien, grupaGrupy, grupy, sale, wykladowcySkrot);
                                         }
                                     }else{
                                         if(dzien == null){
-                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndSaleAndGrupyAndGrupaGrupyAndGodz(wykladowcyName,godz, grupaGrupy, grupy, sale);
+                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndSaleAndGrupyAndGrupaGrupyAndGodz(wykladowcyName,godz, grupaGrupy, grupy, sale, wykladowcySkrot);
                                         }else{
-                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndSaleAndGrupyAndGrupaGrupyAndGodzAndDzien(wykladowcyName,godz,dzien, grupaGrupy, grupy, sale);
+                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndSaleAndGrupyAndGrupaGrupyAndGodzAndDzien(wykladowcyName,godz,dzien, grupaGrupy, grupy, sale, wykladowcySkrot);
                                         }
                                     }
                                 }else{
                                     if(godz == null){
                                         if(dzien == null){
-                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndSaleAndGrupyAndGrupaGrupyAndTydzien(wykladowcyName, tydzien, grupy, sale);
+                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndSaleAndGrupyAndGrupaGrupyAndTydzien(wykladowcyName, tydzien, grupy, sale, wykladowcySkrot);
                                         }else{
-                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndSaleAndGrupyAndGrupaGrupyAndTydzienAndDzien(wykladowcyName,dzien,tydzien, grupaGrupy, grupy, sale);
+                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndSaleAndGrupyAndGrupaGrupyAndTydzienAndDzien(wykladowcyName,dzien,tydzien, grupaGrupy, grupy, sale, wykladowcySkrot);
                                         }
                                     }else{
                                         if(dzien == null){
-                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndSaleAndGrupyAndGrupaGrupyAndTydzienAndGodz(wykladowcyName,godz,tydzien, grupy, sale);
+                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndSaleAndGrupyAndGrupaGrupyAndTydzienAndGodz(wykladowcyName,godz,tydzien, grupy, sale, wykladowcySkrot);
                                         }else{
-                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndSaleAndGrupyAndGrupaGrupyAndTydzienAndGodzAndDzien(wykladowcyName,godz,dzien, tydzien, grupaGrupy, grupy, sale);
+                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndSaleAndGrupyAndGrupaGrupyAndTydzienAndGodzAndDzien(wykladowcyName,godz,dzien, tydzien, grupaGrupy, grupy, sale, wykladowcySkrot);
                                         }
                                     }
                                 }
@@ -1129,29 +1126,29 @@ public class PageController {
                                 if(tydzien == null){
                                     if(godz == null){
                                         if(dzien == null){
-                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndSaleAndGrupyAndGrupaGrupyAndZajeciaNazwa(wykladowcyName, zajeciaNazwa, grupaGrupy, grupy, sale);
+                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndSaleAndGrupyAndGrupaGrupyAndZajeciaNazwa(wykladowcyName, zajeciaNazwa, grupaGrupy, grupy, sale, wykladowcySkrot);
                                         }else{
-                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndSaleAndGrupyAndGrupaGrupyAndZajeciaNazwaAndDzien(wykladowcyName,dzien, zajeciaNazwa, grupaGrupy, grupy, sale);
+                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndSaleAndGrupyAndGrupaGrupyAndZajeciaNazwaAndDzien(wykladowcyName,dzien, zajeciaNazwa, grupaGrupy, grupy, sale, wykladowcySkrot);
                                         }
                                     }else{
                                         if(dzien == null){
-                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndSaleAndGrupyAndGrupaGrupyAndZajeciaNazwaAndGodz(wykladowcyName,godz, zajeciaNazwa, grupaGrupy, grupy, sale);
+                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndSaleAndGrupyAndGrupaGrupyAndZajeciaNazwaAndGodz(wykladowcyName,godz, zajeciaNazwa, grupaGrupy, grupy, sale, wykladowcySkrot);
                                         }else{
-                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndSaleAndGrupyAndGrupaGrupyAndZajeciaNazwaAndGodzAndDzien(wykladowcyName,godz,dzien, zajeciaNazwa, grupaGrupy, grupy, sale);
+                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndSaleAndGrupyAndGrupaGrupyAndZajeciaNazwaAndGodzAndDzien(wykladowcyName,godz,dzien, zajeciaNazwa, grupaGrupy, grupy, sale, wykladowcySkrot);
                                         }
                                     }
                                 }else{
                                     if(godz == null){
                                         if(dzien == null){
-                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndSaleAndGrupyAndGrupaGrupyAndZajeciaNazwaAndTydzien(wykladowcyName, tydzien, zajeciaNazwa, grupaGrupy, grupy, sale);
+                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndSaleAndGrupyAndGrupaGrupyAndZajeciaNazwaAndTydzien(wykladowcyName, tydzien, zajeciaNazwa, grupaGrupy, grupy, sale, wykladowcySkrot);
                                         }else{
-                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndSaleAndGrupyAndGrupaGrupyAndZajeciaNazwaAndTydzienAndDzien(wykladowcyName,dzien,tydzien, zajeciaNazwa, grupaGrupy, grupy, sale);
+                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndSaleAndGrupyAndGrupaGrupyAndZajeciaNazwaAndTydzienAndDzien(wykladowcyName,dzien,tydzien, zajeciaNazwa, grupaGrupy, grupy, sale, wykladowcySkrot);
                                         }
                                     }else{
                                         if(dzien == null){
-                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndSaleAndGrupyAndGrupaGrupyAndZajeciaNazwaAndTydzienAndGodz(wykladowcyName,godz,tydzien, zajeciaNazwa, grupaGrupy, grupy, sale);
+                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndSaleAndGrupyAndGrupaGrupyAndZajeciaNazwaAndTydzienAndGodz(wykladowcyName,godz,tydzien, zajeciaNazwa, grupaGrupy, grupy, sale, wykladowcySkrot);
                                         }else{
-                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndSaleAndGrupyAndGrupaGrupyAndZajeciaNazwaAndTydzienAndGodzAndDzien(wykladowcyName,godz,dzien, tydzien, zajeciaNazwa, grupaGrupy, grupy, sale);
+                                            return planService.getPlanByWykladowcyNazwiskoAndWykladowcySkrotAndSaleAndGrupyAndGrupaGrupyAndZajeciaNazwaAndTydzienAndGodzAndDzien(wykladowcyName,godz,dzien, tydzien, zajeciaNazwa, grupaGrupy, grupy, sale, wykladowcySkrot);
                                         }
                                     }
                                 }
@@ -1159,47 +1156,1021 @@ public class PageController {
                         }
                     }
                 }
-                //
-                //
-                //
             }
-
-
         }else{
-
-
-
-
-            if(wykladowcySkrot != null && sale == null && grupy == null &&
-                    grupaGrupy == null && zajeciaNazwa == null &&
-                    tydzien == null && godz == null && dzien == null){
-                return planService.getPlanByWykladowcySkrot(wykladowcySkrot);
-            }else{
-                if(sale != null && grupy == null && grupaGrupy == null &&
-                        zajeciaNazwa == null && tydzien == null &&
-                        godz == null && dzien == null){
-                    return planService.getPlanBySale(sale);
-                }else{
-                    if(grupy != null && grupaGrupy == null && zajeciaNazwa == null &&
-                            tydzien == null && godz == null && dzien == null){
-                        return planService.getPlanByGrupyGrupGrupy(grupy);
-                    }else{
-                        if(grupaGrupy != null && zajeciaNazwa == null &&
-                                tydzien == null && godz == null && dzien == null){
-                            return planService.getPlanByGrupyGrup(grupaGrupy);
-                        }else{
-                            if(zajeciaNazwa != null && tydzien == null &&
-                                    godz == null && dzien == null){
-                                return planService.getPlanByZajeciaNazwa(zajeciaNazwa);
-                            }else{
-                                if (tydzien != null && godz == null && dzien == null) {
-                                    return planService.getPlanByTydzien(tydzien);
-                                }else{
-                                    if (godz != null && dzien == null) {
-                                        return planService.getPlanByGodz(godz);
-                                    }else{
-                                        if (dzien != null) {
+            if(wykladowcySkrot == null){
+                if(sale == null){
+                    if(grupy == null){
+                        if(grupaGrupy == null){
+                            if(zajeciaNazwa == null){
+                                if(tydzien == null){
+                                    if(godz == null){
+                                        if(dzien == null){
+                                            return null;
+                                        }else{
                                             return planService.getPlanByDzien(dzien);
+                                        }
+                                    }else{
+                                        if(dzien == null){
+                                            return planService.getPlanByGodz(godz);
+                                        }else{
+                                            return planService.getPlanByGodzAndDzien(godz,dzien);
+                                        }
+                                    }
+                                }else{
+                                    if(godz == null){
+                                        if(dzien == null){
+                                            return planService.getPlanByTydzien(tydzien);
+                                        }else{
+                                            return planService.getPlanByTydzienAndDzien(dzien,tydzien);
+                                        }
+                                    }else{
+                                        if(dzien == null){
+                                            return planService.getPlanByTydzienAndGodz(godz,tydzien);
+                                        }else{
+                                            return planService.getPlanByTydzienAndGodzAndDzien(godz,dzien, tydzien);
+                                        }
+                                    }
+                                }
+                            }else{
+                                if(tydzien == null){
+                                    if(godz == null){
+                                        if(dzien == null){
+                                            return planService.getPlanByZajeciaNazwa(zajeciaNazwa);
+                                        }else{
+                                            return planService.getPlanByZajeciaNazwaAndDzien(dzien, zajeciaNazwa);
+                                        }
+                                    }else{
+                                        if(dzien == null){
+                                            return planService.getPlanByZajeciaNazwaAndGodz(godz, zajeciaNazwa);
+                                        }else{
+                                            return planService.getPlanByZajeciaNazwaAndGodzAndDzien(godz,dzien, zajeciaNazwa);
+                                        }
+                                    }
+                                }else{
+                                    if(godz == null){
+                                        if(dzien == null){
+                                            return planService.getPlanByZajeciaNazwaAndTydzien(tydzien, zajeciaNazwa);
+                                        }else{
+                                            return planService.getPlanByZajeciaNazwaAndTydzienAndDzien(dzien,tydzien, zajeciaNazwa);
+                                        }
+                                    }else{
+                                        if(dzien == null){
+                                            return planService.getPlanByZajeciaNazwaAndTydzienAndGodz(godz,tydzien, zajeciaNazwa);
+                                        }else{
+                                            return planService.getPlanByZajeciaNazwaAndTydzienAndGodzAndDzien(godz,dzien, tydzien, zajeciaNazwa);
+                                        }
+                                    }
+                                }
+                            }
+                        }else{
+                            if(zajeciaNazwa == null){
+                                if(tydzien == null){
+                                    if(godz == null){
+                                        if(dzien == null){
+                                            return planService.getPlanByGrupaGrupy(grupaGrupy);
+                                        }else{
+                                            return planService.getPlanByGrupaGrupyAndDzien(dzien, grupaGrupy);
+                                        }
+                                    }else{
+                                        if(dzien == null){
+                                            return planService.getPlanByGrupaGrupyAndGodz(godz, grupaGrupy);
+                                        }else{
+                                            return planService.getPlanByGrupaGrupyAndGodzAndDzien(godz,dzien, grupaGrupy);
+                                        }
+                                    }
+                                }else{
+                                    if(godz == null){
+                                        if(dzien == null){
+                                            return planService.getPlanByTydzien(tydzien);
+                                        }else{
+                                            return planService.getPlanByGrupaGrupyAndTydzienAndDzien(dzien,tydzien, grupaGrupy);
+                                        }
+                                    }else{
+                                        if(dzien == null){
+                                            return planService.getPlanByTydzienAndGodz(godz,tydzien);
+                                        }else{
+                                            return planService.getPlanByGrupaGrupyAndTydzienAndGodzAndDzien(godz,dzien, tydzien, grupaGrupy);
+                                        }
+                                    }
+                                }
+                            }else{
+                                if(tydzien == null){
+                                    if(godz == null){
+                                        if(dzien == null){
+                                            return planService.getPlanByGrupaGrupyAndZajeciaNazwa(zajeciaNazwa, grupaGrupy);
+                                        }else{
+                                            return planService.getPlanByGrupaGrupyAndZajeciaNazwaAndDzien(dzien, zajeciaNazwa, grupaGrupy);
+                                        }
+                                    }else{
+                                        if(dzien == null){
+                                            return planService.getPlanByGrupaGrupyAndZajeciaNazwaAndGodz(godz, zajeciaNazwa, grupaGrupy);
+                                        }else{
+                                            return planService.getPlanByGrupaGrupyAndZajeciaNazwaAndGodzAndDzien(godz,dzien, zajeciaNazwa, grupaGrupy);
+                                        }
+                                    }
+                                }else{
+                                    if(godz == null){
+                                        if(dzien == null){
+                                            return planService.getPlanByGrupaGrupyAndZajeciaNazwaAndTydzien(tydzien, zajeciaNazwa, grupaGrupy);
+                                        }else{
+                                            return planService.getPlanByGrupaGrupyAndZajeciaNazwaAndTydzienAndDzien(dzien,tydzien, zajeciaNazwa, grupaGrupy);
+                                        }
+                                    }else{
+                                        if(dzien == null){
+                                            return planService.getPlanByGrupaGrupyAndZajeciaNazwaAndTydzienAndGodz(godz,tydzien, zajeciaNazwa, grupaGrupy);
+                                        }else{
+                                            return planService.getPlanByGrupaGrupyAndZajeciaNazwaAndTydzienAndGodzAndDzien(godz,dzien, tydzien, zajeciaNazwa, grupaGrupy);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }else{
+                        if(grupaGrupy == null){
+                            if(zajeciaNazwa == null){
+                                if(tydzien == null){
+                                    if(godz == null){
+                                        if(dzien == null){
+                                            return planService.getPlanByGrupy(grupy);
+                                        }else{
+                                            return planService.getPlanByGrupyAndDzien(dzien,grupy);
+                                        }
+                                    }else{
+                                        if(dzien == null){
+                                            return planService.getPlanByGrupyAndGodz(godz, grupy);
+                                        }else{
+                                            return planService.getPlanByGrupyAndGodzAndDzien(godz,dzien, grupy);
+                                        }
+                                    }
+                                }else{
+                                    if(godz == null){
+                                        if(dzien == null){
+                                            return planService.getPlanByGrupyAndTydzien(tydzien, grupy);
+                                        }else{
+                                            return planService.getPlanByGrupyAndTydzienAndDzien(dzien,tydzien, grupy);
+                                        }
+                                    }else{
+                                        if(dzien == null){
+                                            return planService.getPlanByGrupyAndTydzienAndGodz(godz,tydzien, grupy);
+                                        }else{
+                                            return planService.getPlanByGrupyAndTydzienAndGodzAndDzien(godz,dzien, tydzien, grupy);
+                                        }
+                                    }
+                                }
+                            }else{
+                                if(tydzien == null){
+                                    if(godz == null){
+                                        if(dzien == null){
+                                            return planService.getPlanByGrupyAndZajeciaNazwa(zajeciaNazwa, grupy);
+                                        }else{
+                                            return planService.getPlanByGrupyAndZajeciaNazwaAndDzien(dzien, zajeciaNazwa, grupy);
+                                        }
+                                    }else{
+                                        if(dzien == null){
+                                            return planService.getPlanByGrupyAndZajeciaNazwaAndGodz(godz, zajeciaNazwa, grupy);
+                                        }else{
+                                            return planService.getPlanByGrupyAndZajeciaNazwaAndGodzAndDzien(godz,dzien, zajeciaNazwa, grupy);
+                                        }
+                                    }
+                                }else{
+                                    if(godz == null){
+                                        if(dzien == null){
+                                            return planService.getPlanByGrupyAndZajeciaNazwaAndTydzien(tydzien, zajeciaNazwa, grupy);
+                                        }else{
+                                            return planService.getPlanByGrupyAndZajeciaNazwaAndTydzienAndDzien(dzien,tydzien, zajeciaNazwa, grupy);
+                                        }
+                                    }else{
+                                        if(dzien == null){
+                                            return planService.getPlanByGrupyAndZajeciaNazwaAndTydzienAndGodz(godz,tydzien, zajeciaNazwa, grupy);
+                                        }else{
+                                            return planService.getPlanByGrupyAndZajeciaNazwaAndTydzienAndGodzAndDzien(godz,dzien, tydzien, zajeciaNazwa, grupy);
+                                        }
+                                    }
+                                }
+                            }
+                        }else{
+                            if(zajeciaNazwa == null){
+                                if(tydzien == null){
+                                    if(godz == null){
+                                        if(dzien == null){
+                                            return planService.getPlanByGrupyAndGrupaGrupy(grupaGrupy, grupy);
+                                        }else{
+                                            return planService.getPlanByGrupyAndGrupaGrupyAndDzien(dzien, grupaGrupy, grupy);
+                                        }
+                                    }else{
+                                        if(dzien == null){
+                                            return planService.getPlanByGrupyAndGrupaGrupyAndGodz(godz, grupaGrupy, grupy);
+                                        }else{
+                                            return planService.getPlanByGrupyAndGrupaGrupyAndGodzAndDzien(godz,dzien, grupaGrupy, grupy);
+                                        }
+                                    }
+                                }else{
+                                    if(godz == null){
+                                        if(dzien == null){
+                                            return planService.getPlanByGrupyAndGrupaGrupyAndTydzien(tydzien, grupy);
+                                        }else{
+                                            return planService.getPlanByGrupyAndGrupaGrupyAndTydzienAndDzien(dzien,tydzien, grupaGrupy, grupy);
+                                        }
+                                    }else{
+                                        if(dzien == null){
+                                            return planService.getPlanByGrupyAndGrupaGrupyAndTydzienAndGodz(godz,tydzien, grupy);
+                                        }else{
+                                            return planService.getPlanByGrupyAndGrupaGrupyAndTydzienAndGodzAndDzien(godz,dzien, tydzien, grupaGrupy, grupy);
+                                        }
+                                    }
+                                }
+                            }else{
+                                if(tydzien == null){
+                                    if(godz == null){
+                                        if(dzien == null){
+                                            return planService.getPlanByGrupyAndGrupaGrupyAndZajeciaNazwa(zajeciaNazwa, grupaGrupy, grupy);
+                                        }else{
+                                            return planService.getPlanByGrupyAndGrupaGrupyAndZajeciaNazwaAndDzien(dzien, zajeciaNazwa, grupaGrupy, grupy);
+                                        }
+                                    }else{
+                                        if(dzien == null){
+                                            return planService.getPlanByGrupyAndGrupaGrupyAndZajeciaNazwaAndGodz(godz, zajeciaNazwa, grupaGrupy, grupy);
+                                        }else{
+                                            return planService.getPlanByGrupyAndGrupaGrupyAndZajeciaNazwaAndGodzAndDzien(godz,dzien, zajeciaNazwa, grupaGrupy, grupy);
+                                        }
+                                    }
+                                }else{
+                                    if(godz == null){
+                                        if(dzien == null){
+                                            return planService.getPlanByGrupyAndGrupaGrupyAndZajeciaNazwaAndTydzien(tydzien, zajeciaNazwa, grupaGrupy, grupy);
+                                        }else{
+                                            return planService.getPlanByGrupyAndGrupaGrupyAndZajeciaNazwaAndTydzienAndDzien(dzien,tydzien, zajeciaNazwa, grupaGrupy, grupy);
+                                        }
+                                    }else{
+                                        if(dzien == null){
+                                            return planService.getPlanByGrupyAndGrupaGrupyAndZajeciaNazwaAndTydzienAndGodz(godz,tydzien, zajeciaNazwa, grupaGrupy, grupy);
+                                        }else{
+                                            return planService.getPlanByGrupyAndGrupaGrupyAndZajeciaNazwaAndTydzienAndGodzAndDzien(godz,dzien, tydzien, zajeciaNazwa, grupaGrupy, grupy);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }else{
+                    if(grupy == null){
+                        if(grupaGrupy == null){
+                            if(zajeciaNazwa == null){
+                                if(tydzien == null){
+                                    if(godz == null){
+                                        if(dzien == null){
+                                            return planService.getPlanBySale(sale);
+                                        }else{
+                                            return planService.getPlanBySaleAndDzien(dzien,sale);
+                                        }
+                                    }else{
+                                        if(dzien == null){
+                                            return planService.getPlanBySaleAndGodz(godz,sale);
+                                        }else{
+                                            return planService.getPlanBySaleAndGodzAndDzien(godz,dzien,sale);
+                                        }
+                                    }
+                                }else{
+                                    if(godz == null){
+                                        if(dzien == null){
+                                            return planService.getPlanBySaleAndTydzien(tydzien,sale);
+                                        }else{
+                                            return planService.getPlanBySaleAndTydzienAndDzien(dzien,tydzien,sale);
+                                        }
+                                    }else{
+                                        if(dzien == null){
+                                            return planService.getPlanBySaleAndTydzienAndGodz(godz,tydzien,sale);
+                                        }else{
+                                            return planService.getPlanBySaleAndTydzienAndGodzAndDzien(godz,dzien, tydzien,sale);
+                                        }
+                                    }
+                                }
+                            }else{
+                                if(tydzien == null){
+                                    if(godz == null){
+                                        if(dzien == null){
+                                            return planService.getPlanBySaleAndZajeciaNazwa(zajeciaNazwa,sale);
+                                        }else{
+                                            return planService.getPlanBySaleAndZajeciaNazwaAndDzien(dzien, zajeciaNazwa, sale);
+                                        }
+                                    }else{
+                                        if(dzien == null){
+                                            return planService.getPlanBySaleAndZajeciaNazwaAndGodz(godz, zajeciaNazwa, sale);
+                                        }else{
+                                            return planService.getPlanBySaleAndZajeciaNazwaAndGodzAndDzien(godz,dzien, zajeciaNazwa, sale);
+                                        }
+                                    }
+                                }else{
+                                    if(godz == null){
+                                        if(dzien == null){
+                                            return planService.getPlanBySaleAndZajeciaNazwaAndTydzien(tydzien, zajeciaNazwa, sale);
+                                        }else{
+                                            return planService.getPlanBySaleAndZajeciaNazwaAndTydzienAndDzien(dzien,tydzien, zajeciaNazwa, sale);
+                                        }
+                                    }else{
+                                        if(dzien == null){
+                                            return planService.getPlanBySaleAndZajeciaNazwaAndTydzienAndGodz(godz,tydzien, zajeciaNazwa, sale);
+                                        }else{
+                                            return planService.getPlanBySaleAndZajeciaNazwaAndTydzienAndGodzAndDzien(godz,dzien, tydzien, zajeciaNazwa, sale);
+                                        }
+                                    }
+                                }
+                            }
+                        }else{
+                            if(zajeciaNazwa == null){
+                                if(tydzien == null){
+                                    if(godz == null){
+                                        if(dzien == null){
+                                            return planService.getPlanBySaleAndGrupaGrupy(grupaGrupy, sale);
+                                        }else{
+                                            return planService.getPlanBySaleAndGrupaGrupyAndDzien(dzien, grupaGrupy, sale);
+                                        }
+                                    }else{
+                                        if(dzien == null){
+                                            return planService.getPlanBySaleAndGrupaGrupyAndGodz(godz, grupaGrupy, sale);
+                                        }else{
+                                            return planService.getPlanBySaleAndGrupaGrupyAndGodzAndDzien(godz,dzien, grupaGrupy, sale);
+                                        }
+                                    }
+                                }else{
+                                    if(godz == null){
+                                        if(dzien == null){
+                                            return planService.getPlanBySaleAndGrupyGrupAndTydzien(tydzien, grupaGrupy, sale);
+                                        }else{
+                                            return planService.getPlanBySaleAndGrupaGrupyAndTydzienAndDzien(dzien,tydzien, grupaGrupy, sale);
+                                        }
+                                    }else{
+                                        if(dzien == null){
+                                            return planService.getPlanBySaleAndGrupaGrupyAndTydzienAndGodz(godz,tydzien, grupaGrupy, sale);
+                                        }else{
+                                            return planService.getPlanBySaleAndGrupaGrupyAndTydzienAndGodzAndDzien(godz,dzien, tydzien, grupaGrupy, sale);
+                                        }
+                                    }
+                                }
+                            }else{
+                                if(tydzien == null){
+                                    if(godz == null){
+                                        if(dzien == null){
+                                            return planService.getPlanBySaleAndGrupaGrupyAndZajeciaNazwa(zajeciaNazwa, grupaGrupy, sale);
+                                        }else{
+                                            return planService.getPlanBySaleAndGrupaGrupyAndZajeciaNazwaAndDzien(dzien, zajeciaNazwa, grupaGrupy, sale);
+                                        }
+                                    }else{
+                                        if(dzien == null){
+                                            return planService.getPlanBySaleAndGrupaGrupyAndZajeciaNazwaAndGodz(godz, zajeciaNazwa, grupaGrupy, sale);
+                                        }else{
+                                            return planService.getPlanBySaleAndGrupaGrupyAndZajeciaNazwaAndGodzAndDzien(godz,dzien, zajeciaNazwa, grupaGrupy, sale);
+                                        }
+                                    }
+                                }else{
+                                    if(godz == null){
+                                        if(dzien == null){
+                                            return planService.getPlanBySaleAndGrupaGrupyAndZajeciaNazwaAndTydzien(tydzien, zajeciaNazwa, grupaGrupy, sale);
+                                        }else{
+                                            return planService.getPlanBySaleAndGrupaGrupyAndZajeciaNazwaAndTydzienAndDzien(dzien,tydzien, zajeciaNazwa, grupaGrupy, sale);
+                                        }
+                                    }else{
+                                        if(dzien == null){
+                                            return planService.getPlanBySaleAndGrupaGrupyAndZajeciaNazwaAndTydzienAndGodz(godz,tydzien, zajeciaNazwa, grupaGrupy, sale);
+                                        }else{
+                                            return planService.getPlanBySaleAndGrupaGrupyAndZajeciaNazwaAndTydzienAndGodzAndDzien(godz,dzien, tydzien, zajeciaNazwa, grupaGrupy, sale);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }else{
+                        if(grupaGrupy == null){
+                            if(zajeciaNazwa == null){
+                                if(tydzien == null){
+                                    if(godz == null){
+                                        if(dzien == null){
+                                            return planService.getPlanBySaleAndGrupy(grupy, sale);
+                                        }else{
+                                            return planService.getPlanBySaleAndGrupyAndDzien(dzien,grupy, sale);
+                                        }
+                                    }else{
+                                        if(dzien == null){
+                                            return planService.getPlanBySaleAndGrupyAndGodz(godz, grupy, sale);
+                                        }else{
+                                            return planService.getPlanBySaleAndGrupyAndGodzAndDzien(godz,dzien, grupy, sale);
+                                        }
+                                    }
+                                }else{
+                                    if(godz == null){
+                                        if(dzien == null){
+                                            return planService.getPlanBySaleAndGrupyAndTydzien(tydzien, grupy, sale);
+                                        }else{
+                                            return planService.getPlanBySaleAndGrupyAndTydzienAndDzien(dzien,tydzien, grupy, sale);
+                                        }
+                                    }else{
+                                        if(dzien == null){
+                                            return planService.getPlanBySaleAndGrupyAndTydzienAndGodz(godz,tydzien, grupy, sale);
+                                        }else{
+                                            return planService.getPlanBySaleAndGrupyAndTydzienAndGodzAndDzien(godz,dzien, tydzien, grupy, sale);
+                                        }
+                                    }
+                                }
+                            }else{
+                                if(tydzien == null){
+                                    if(godz == null){
+                                        if(dzien == null){
+                                            return planService.getPlanBySaleAndGrupyAndZajeciaNazwa(zajeciaNazwa, grupy, sale);
+                                        }else{
+                                            return planService.getPlanBySaleAndGrupyAndZajeciaNazwaAndDzien(dzien, zajeciaNazwa, grupy, sale);
+                                        }
+                                    }else{
+                                        if(dzien == null){
+                                            return planService.getPlanBySaleAndGrupyAndZajeciaNazwaAndGodz(godz, zajeciaNazwa, grupy, sale);
+                                        }else{
+                                            return planService.getPlanBySaleAndGrupyAndZajeciaNazwaAndGodzAndDzien(godz,dzien, zajeciaNazwa, grupy, sale);
+                                        }
+                                    }
+                                }else{
+                                    if(godz == null){
+                                        if(dzien == null){
+                                            return planService.getPlanBySaleAndGrupyAndZajeciaNazwaAndTydzien(tydzien, zajeciaNazwa, grupy, sale);
+                                        }else{
+                                            return planService.getPlanBySaleAndGrupyAndZajeciaNazwaAndTydzienAndDzien(dzien,tydzien, zajeciaNazwa, grupy, sale);
+                                        }
+                                    }else{
+                                        if(dzien == null){
+                                            return planService.getPlanBySaleAndGrupyAndZajeciaNazwaAndTydzienAndGodz(godz,tydzien, zajeciaNazwa, grupy, sale);
+                                        }else{
+                                            return planService.getPlanBySaleAndGrupyAndZajeciaNazwaAndTydzienAndGodzAndDzien(godz,dzien, tydzien, zajeciaNazwa, grupy, sale);
+                                        }
+                                    }
+                                }
+                            }
+                        }else{
+                            if(zajeciaNazwa == null){
+                                if(tydzien == null){
+                                    if(godz == null){
+                                        if(dzien == null){
+                                            return planService.getPlanBySaleAndGrupyAndGrupaGrupy(grupaGrupy, grupy, sale);
+                                        }else{
+                                            return planService.getPlanBySaleAndGrupyAndGrupaGrupyAndDzien(dzien, grupaGrupy, grupy, sale);
+                                        }
+                                    }else{
+                                        if(dzien == null){
+                                            return planService.getPlanBySaleAndGrupyAndGrupaGrupyAndGodz(godz, grupaGrupy, grupy, sale);
+                                        }else{
+                                            return planService.getPlanBySaleAndGrupyAndGrupaGrupyAndGodzAndDzien(godz,dzien, grupaGrupy, grupy, sale);
+                                        }
+                                    }
+                                }else{
+                                    if(godz == null){
+                                        if(dzien == null){
+                                            return planService.getPlanBySaleAndGrupyAndGrupaGrupyAndTydzien(tydzien, grupaGrupy, grupy, sale);
+                                        }else{
+                                            return planService.getPlanBySaleAndGrupyAndGrupaGrupyAndTydzienAndDzien(dzien,tydzien, grupaGrupy, grupy, sale);
+                                        }
+                                    }else{
+                                        if(dzien == null){
+                                            return planService.getPlanBySaleAndGrupyAndGrupaGrupyAndTydzienAndGodz(godz,tydzien, grupy, sale);
+                                        }else{
+                                            return planService.getPlanBySaleAndGrupyAndGrupaGrupyAndTydzienAndGodzAndDzien(godz,dzien, tydzien, grupaGrupy, grupy, sale);
+                                        }
+                                    }
+                                }
+                            }else{
+                                if(tydzien == null){
+                                    if(godz == null){
+                                        if(dzien == null){
+                                            return planService.getPlanBySaleAndGrupyAndGrupaGrupyAndZajeciaNazwa(zajeciaNazwa, grupaGrupy, grupy, sale);
+                                        }else{
+                                            return planService.getPlanBySaleAndGrupyAndGrupaGrupyAndZajeciaNazwaAndDzien(dzien, zajeciaNazwa, grupaGrupy, grupy, sale);
+                                        }
+                                    }else{
+                                        if(dzien == null){
+                                            return planService.getPlanBySaleAndGrupyAndGrupaGrupyAndZajeciaNazwaAndGodz(godz, zajeciaNazwa, grupaGrupy, grupy, sale);
+                                        }else{
+                                            return planService.getPlanBySaleAndGrupyAndGrupaGrupyAndZajeciaNazwaAndGodzAndDzien(godz,dzien, zajeciaNazwa, grupaGrupy, grupy, sale);
+                                        }
+                                    }
+                                }else{
+                                    if(godz == null){
+                                        if(dzien == null){
+                                            return planService.getPlanBySaleAndGrupyAndGrupaGrupyAndZajeciaNazwaAndTydzien(tydzien, zajeciaNazwa, grupaGrupy, grupy, sale);
+                                        }else{
+                                            return planService.getPlanBySaleAndGrupyAndGrupaGrupyAndZajeciaNazwaAndTydzienAndDzien(dzien,tydzien, zajeciaNazwa, grupaGrupy, grupy, sale);
+                                        }
+                                    }else{
+                                        if(dzien == null){
+                                            return planService.getPlanBySaleAndGrupyAndGrupaGrupyAndZajeciaNazwaAndTydzienAndGodz(godz,tydzien, zajeciaNazwa, grupaGrupy, grupy, sale);
+                                        }else{
+                                            return planService.getPlanBySaleAndGrupyAndGrupaGrupyAndZajeciaNazwaAndTydzienAndGodzAndDzien(godz,dzien, tydzien, zajeciaNazwa, grupaGrupy, grupy, sale);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }else{
+                if(sale == null){
+                    if(grupy == null){
+                        if(grupaGrupy == null){
+                            if(zajeciaNazwa == null){
+                                if(tydzien == null){
+                                    if(godz == null){
+                                        if(dzien == null){
+                                            return planService.getPlanByWykladowcySkrot(wykladowcySkrot);
+                                        }else{
+                                            return planService.getPlanByWykladowcySkrotAndDzien(dzien, wykladowcySkrot);
+                                        }
+                                    }else{
+                                        if(dzien == null){
+                                            return planService.getPlanByWykladowcySkrotAndGodz(godz, wykladowcySkrot);
+                                        }else{
+                                            return planService.getPlanByWykladowcySkrotAndGodzAndDzien(godz,dzien, wykladowcySkrot);
+                                        }
+                                    }
+                                }else{
+                                    if(godz == null){
+                                        if(dzien == null){
+                                            return planService.getPlanByWykladowcySkrotAndTydzien(tydzien, wykladowcySkrot);
+                                        }else{
+                                            return planService.getPlanByWykladowcySkrotAndTydzienAndDzien(dzien,tydzien, wykladowcySkrot);
+                                        }
+                                    }else{
+                                        if(dzien == null){
+                                            return planService.getPlanByWykladowcySkrotAndTydzienAndGodz(godz,tydzien, wykladowcySkrot);
+                                        }else{
+                                            return planService.getPlanByWykladowcySkrotAndTydzienAndGodzAndDzien(godz,dzien, tydzien, wykladowcySkrot);
+                                        }
+                                    }
+                                }
+                            }else{
+                                if(tydzien == null){
+                                    if(godz == null){
+                                        if(dzien == null){
+                                            return planService.getPlanByWykladowcySkrotAndZajeciaNazwa(zajeciaNazwa, wykladowcySkrot);
+                                        }else{
+                                            return planService.getPlanByWykladowcySkrotAndZajeciaNazwaAndDzien(dzien, zajeciaNazwa, wykladowcySkrot);
+                                        }
+                                    }else{
+                                        if(dzien == null){
+                                            return planService.getPlanByWykladowcySkrotAndZajeciaNazwaAndGodz(godz, zajeciaNazwa, wykladowcySkrot);
+                                        }else{
+                                            return planService.getPlanByWykladowcySkrotAndZajeciaNazwaAndGodzAndDzien(godz,dzien, zajeciaNazwa, wykladowcySkrot);
+                                        }
+                                    }
+                                }else{
+                                    if(godz == null){
+                                        if(dzien == null){
+                                            return planService.getPlanByWykladowcySkrotAndZajeciaNazwaAndTydzien(tydzien, zajeciaNazwa, wykladowcySkrot);
+                                        }else{
+                                            return planService.getPlanByWykladowcySkrotAndZajeciaNazwaAndTydzienAndDzien(dzien,tydzien, zajeciaNazwa, wykladowcySkrot);
+                                        }
+                                    }else{
+                                        if(dzien == null){
+                                            return planService.getPlanByWykladowcySkrotAndZajeciaNazwaAndTydzienAndGodz(godz,tydzien, zajeciaNazwa, wykladowcySkrot);
+                                        }else{
+                                            return planService.getPlanByWykladowcySkrotAndZajeciaNazwaAndTydzienAndGodzAndDzien(godz,dzien, tydzien, zajeciaNazwa, wykladowcySkrot);
+                                        }
+                                    }
+                                }
+                            }
+                        }else{
+                            if(zajeciaNazwa == null){
+                                if(tydzien == null){
+                                    if(godz == null){
+                                        if(dzien == null){
+                                            return planService.getPlanByWykladowcySkrotAndGrupaGrupy(grupaGrupy, wykladowcySkrot);
+                                        }else{
+                                            return planService.getPlanByWykladowcySkrotAndGrupaGrupyAndDzien(dzien, grupaGrupy, wykladowcySkrot);
+                                        }
+                                    }else{
+                                        if(dzien == null){
+                                            return planService.getPlanByWykladowcySkrotAndGrupaGrupyAndGodz(godz, grupaGrupy, wykladowcySkrot);
+                                        }else{
+                                            return planService.getPlanByWykladowcySkrotAndGrupaGrupyAndGodzAndDzien(godz,dzien, grupaGrupy, wykladowcySkrot);
+                                        }
+                                    }
+                                }else{
+                                    if(godz == null){
+                                        if(dzien == null){
+                                            return planService.getPlanByWykladowcySkrotAndGrupaGrupyAndTydzien(tydzien, grupaGrupy, wykladowcySkrot);
+                                        }else{
+                                            return planService.getPlanByWykladowcySkrotAndGrupaGrupyAndTydzienAndDzien(dzien,tydzien, grupaGrupy, wykladowcySkrot);
+                                        }
+                                    }else{
+                                        if(dzien == null){
+                                            return planService.getPlanByWykladowcySkrotAndGrupaGrupyAndTydzienAndGodz(godz,tydzien, grupaGrupy, wykladowcySkrot);
+                                        }else{
+                                            return planService.getPlanByWykladowcySkrotAndGrupaGrupyAndTydzienAndGodzAndDzien(godz,dzien, tydzien, grupaGrupy, wykladowcySkrot);
+                                        }
+                                    }
+                                }
+                            }else{
+                                if(tydzien == null){
+                                    if(godz == null){
+                                        if(dzien == null){
+                                            return planService.getPlanByWykladowcySkrotAndGrupaGrupyAndZajeciaNazwa(zajeciaNazwa, grupaGrupy, wykladowcySkrot);
+                                        }else{
+                                            return planService.getPlanByWykladowcySkrotAndGrupaGrupyAndZajeciaNazwaAndDzien(dzien, zajeciaNazwa, grupaGrupy, wykladowcySkrot);
+                                        }
+                                    }else{
+                                        if(dzien == null){
+                                            return planService.getPlanByWykladowcySkrotAndGrupaGrupyAndZajeciaNazwaAndGodz(godz, zajeciaNazwa, grupaGrupy, wykladowcySkrot);
+                                        }else{
+                                            return planService.getPlanByWykladowcySkrotAndGrupaGrupyAndZajeciaNazwaAndGodzAndDzien(godz,dzien, zajeciaNazwa, grupaGrupy, wykladowcySkrot);
+                                        }
+                                    }
+                                }else{
+                                    if(godz == null){
+                                        if(dzien == null){
+                                            return planService.getPlanByWykladowcySkrotAndGrupaGrupyAndZajeciaNazwaAndTydzien(tydzien, zajeciaNazwa, grupaGrupy, wykladowcySkrot);
+                                        }else{
+                                            return planService.getPlanByWykladowcySkrotAndGrupaGrupyAndZajeciaNazwaAndTydzienAndDzien(dzien,tydzien, zajeciaNazwa, grupaGrupy, wykladowcySkrot);
+                                        }
+                                    }else{
+                                        if(dzien == null){
+                                            return planService.getPlanByWykladowcySkrotAndGrupaGrupyAndZajeciaNazwaAndTydzienAndGodz(godz,tydzien, zajeciaNazwa, grupaGrupy, wykladowcySkrot);
+                                        }else{
+                                            return planService.getPlanByWykladowcySkrotAndGrupaGrupyAndZajeciaNazwaAndTydzienAndGodzAndDzien(godz,dzien, tydzien, zajeciaNazwa, grupaGrupy, wykladowcySkrot);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }else{
+                        if(grupaGrupy == null){
+                            if(zajeciaNazwa == null){
+                                if(tydzien == null){
+                                    if(godz == null){
+                                        if(dzien == null){
+                                            return planService.getPlanByWykladowcySkrotAndGrupy(grupy, wykladowcySkrot);
+                                        }else{
+                                            return planService.getPlanByWykladowcySkrotAndGrupyAndDzien(dzien,grupy, wykladowcySkrot);
+                                        }
+                                    }else{
+                                        if(dzien == null){
+                                            return planService.getPlanByWykladowcySkrotAndGrupyAndGodz(godz, grupy, wykladowcySkrot);
+                                        }else{
+                                            return planService.getPlanByWykladowcySkrotAndGrupyAndGodzAndDzien(godz,dzien, grupy, wykladowcySkrot);
+                                        }
+                                    }
+                                }else{
+                                    if(godz == null){
+                                        if(dzien == null){
+                                            return planService.getPlanByWykladowcySkrotAndGrupyAndTydzien(tydzien, grupy, wykladowcySkrot);
+                                        }else{
+                                            return planService.getPlanByWykladowcySkrotAndGrupyAndTydzienAndDzien(dzien,tydzien, grupy, wykladowcySkrot);
+                                        }
+                                    }else{
+                                        if(dzien == null){
+                                            return planService.getPlanByWykladowcySkrotAndGrupyAndTydzienAndGodz(godz,tydzien, grupy, wykladowcySkrot);
+                                        }else{
+                                            return planService.getPlanByWykladowcySkrotAndGrupyAndTydzienAndGodzAndDzien(godz,dzien, tydzien, grupy, wykladowcySkrot);
+                                        }
+                                    }
+                                }
+                            }else{
+                                if(tydzien == null){
+                                    if(godz == null){
+                                        if(dzien == null){
+                                            return planService.getPlanByWykladowcySkrotAndGrupyAndZajeciaNazwa(zajeciaNazwa, grupy, wykladowcySkrot);
+                                        }else{
+                                            return planService.getPlanByWykladowcySkrotAndGrupyAndZajeciaNazwaAndDzien(dzien, zajeciaNazwa, grupy, wykladowcySkrot);
+                                        }
+                                    }else{
+                                        if(dzien == null){
+                                            return planService.getPlanByWykladowcySkrotAndGrupyAndZajeciaNazwaAndGodz(godz, zajeciaNazwa, grupy, wykladowcySkrot);
+                                        }else{
+                                            return planService.getPlanByWykladowcySkrotAndGrupyAndZajeciaNazwaAndGodzAndDzien(godz,dzien, zajeciaNazwa, grupy, wykladowcySkrot);
+                                        }
+                                    }
+                                }else{
+                                    if(godz == null){
+                                        if(dzien == null){
+                                            return planService.getPlanByWykladowcySkrotAndGrupyAndZajeciaNazwaAndTydzien(tydzien, zajeciaNazwa, grupy, wykladowcySkrot);
+                                        }else{
+                                            return planService.getPlanByWykladowcySkrotAndGrupyAndZajeciaNazwaAndTydzienAndDzien(dzien,tydzien, zajeciaNazwa, grupy, wykladowcySkrot);
+                                        }
+                                    }else{
+                                        if(dzien == null){
+                                            return planService.getPlanByWykladowcySkrotAndGrupyAndZajeciaNazwaAndTydzienAndGodz(godz,tydzien, zajeciaNazwa, grupy, wykladowcySkrot);
+                                        }else{
+                                            return planService.getPlanByWykladowcySkrotAndGrupyAndZajeciaNazwaAndTydzienAndGodzAndDzien(godz,dzien, tydzien, zajeciaNazwa, grupy, wykladowcySkrot);
+                                        }
+                                    }
+                                }
+                            }
+                        }else{
+                            if(zajeciaNazwa == null){
+                                if(tydzien == null){
+                                    if(godz == null){
+                                        if(dzien == null){
+                                            return planService.getPlanByWykladowcySkrotAndGrupyAndGrupaGrupy(grupaGrupy, grupy, wykladowcySkrot);
+                                        }else{
+                                            return planService.getPlanByWykladowcySkrotAndGrupyAndGrupaGrupyAndDzien(dzien, grupaGrupy, grupy, wykladowcySkrot);
+                                        }
+                                    }else{
+                                        if(dzien == null){
+                                            return planService.getPlanByWykladowcySkrotAndGrupyAndGrupaGrupyAndGodz(godz, grupaGrupy, grupy, wykladowcySkrot);
+                                        }else{
+                                            return planService.getPlanByWykladowcySkrotAndGrupyAndGrupaGrupyAndGodzAndDzien(godz,dzien, grupaGrupy, grupy, wykladowcySkrot);
+                                        }
+                                    }
+                                }else{
+                                    if(godz == null){
+                                        if(dzien == null){
+                                            return planService.getPlanByWykladowcySkrotAndGrupyAndGrupaGrupyAndTydzien(tydzien, grupaGrupy, grupy, wykladowcySkrot);
+                                        }else{
+                                            return planService.getPlanByWykladowcySkrotAndGrupyAndGrupaGrupyAndTydzienAndDzien(dzien,tydzien, grupaGrupy, grupy, wykladowcySkrot);
+                                        }
+                                    }else{
+                                        if(dzien == null){
+                                            return planService.getPlanByWykladowcySkrotAndGrupyAndGrupaGrupyAndTydzienAndGodz(godz,tydzien, grupy, wykladowcySkrot);
+                                        }else{
+                                            return planService.getPlanByWykladowcySkrotAndGrupyAndGrupaGrupyAndTydzienAndGodzAndDzien(godz,dzien, tydzien, grupaGrupy, grupy, wykladowcySkrot);
+                                        }
+                                    }
+                                }
+                            }else{
+                                if(tydzien == null){
+                                    if(godz == null){
+                                        if(dzien == null){
+                                            return planService.getPlanByWykladowcySkrotAndGrupyAndGrupaGrupyAndZajeciaNazwa(zajeciaNazwa, grupaGrupy, grupy, wykladowcySkrot);
+                                        }else{
+                                            return planService.getPlanByWykladowcySkrotAndGrupyAndGrupaGrupyAndZajeciaNazwaAndDzien(dzien, zajeciaNazwa, grupaGrupy, grupy, wykladowcySkrot);
+                                        }
+                                    }else{
+                                        if(dzien == null){
+                                            return planService.getPlanByWykladowcySkrotAndGrupyAndGrupaGrupyAndZajeciaNazwaAndGodz(godz, zajeciaNazwa, grupaGrupy, grupy, wykladowcySkrot);
+                                        }else{
+                                            return planService.getPlanByWykladowcySkrotAndGrupyAndGrupaGrupyAndZajeciaNazwaAndGodzAndDzien(godz,dzien, zajeciaNazwa, grupaGrupy, grupy, wykladowcySkrot);
+                                        }
+                                    }
+                                }else{
+                                    if(godz == null){
+                                        if(dzien == null){
+                                            return planService.getPlanByWykladowcySkrotAndGrupyAndGrupaGrupyAndZajeciaNazwaAndTydzien(tydzien, zajeciaNazwa, grupaGrupy, grupy, wykladowcySkrot);
+                                        }else{
+                                            return planService.getPlanByWykladowcySkrotAndGrupyAndGrupaGrupyAndZajeciaNazwaAndTydzienAndDzien(dzien,tydzien, zajeciaNazwa, grupaGrupy, grupy, wykladowcySkrot);
+                                        }
+                                    }else{
+                                        if(dzien == null){
+                                            return planService.getPlanByWykladowcySkrotAndGrupyAndGrupaGrupyAndZajeciaNazwaAndTydzienAndGodz(godz,tydzien, zajeciaNazwa, grupaGrupy, grupy, wykladowcySkrot);
+                                        }else{
+                                            return planService.getPlanByWykladowcySkrotAndGrupyAndGrupaGrupyAndZajeciaNazwaAndTydzienAndGodzAndDzien(godz,dzien, tydzien, zajeciaNazwa, grupaGrupy, grupy, wykladowcySkrot);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }else{
+                    if(grupy == null){
+                        if(grupaGrupy == null){
+                            if(zajeciaNazwa == null){
+                                if(tydzien == null){
+                                    if(godz == null){
+                                        if(dzien == null){
+                                            return planService.getPlanByWykladowcySkrotAndSale(sale, wykladowcySkrot);
+                                        }else{
+                                            return planService.getPlanByWykladowcySkrotAndSaleAndDzien(dzien,sale, wykladowcySkrot);
+                                        }
+                                    }else{
+                                        if(dzien == null){
+                                            return planService.getPlanByWykladowcySkrotAndSaleAndGodz(godz,sale, wykladowcySkrot);
+                                        }else{
+                                            return planService.getPlanByWykladowcySkrotAndSaleAndGodzAndDzien(godz,dzien,sale, wykladowcySkrot);
+                                        }
+                                    }
+                                }else{
+                                    if(godz == null){
+                                        if(dzien == null){
+                                            return planService.getPlanByWykladowcySkrotAndSaleAndTydzien(tydzien,sale, wykladowcySkrot);
+                                        }else{
+                                            return planService.getPlanByWykladowcySkrotAndSaleAndTydzienAndDzien(dzien,tydzien,sale, wykladowcySkrot);
+                                        }
+                                    }else{
+                                        if(dzien == null){
+                                            return planService.getPlanByWykladowcySkrotAndSaleAndTydzienAndGodz(godz,tydzien,sale, wykladowcySkrot);
+                                        }else{
+                                            return planService.getPlanByWykladowcySkrotAndSaleAndTydzienAndGodzAndDzien(godz,dzien, tydzien,sale, wykladowcySkrot);
+                                        }
+                                    }
+                                }
+                            }else{
+                                if(tydzien == null){
+                                    if(godz == null){
+                                        if(dzien == null){
+                                            return planService.getPlanByWykladowcySkrotAndSaleAndZajeciaNazwa(zajeciaNazwa,sale, wykladowcySkrot);
+                                        }else{
+                                            return planService.getPlanByWykladowcySkrotAndSaleAndZajeciaNazwaAndDzien(dzien, zajeciaNazwa, sale, wykladowcySkrot);
+                                        }
+                                    }else{
+                                        if(dzien == null){
+                                            return planService.getPlanByWykladowcySkrotAndSaleAndZajeciaNazwaAndGodz(godz, zajeciaNazwa, sale, wykladowcySkrot);
+                                        }else{
+                                            return planService.getPlanByWykladowcySkrotAndSaleAndZajeciaNazwaAndGodzAndDzien(godz,dzien, zajeciaNazwa, sale, wykladowcySkrot);
+                                        }
+                                    }
+                                }else{
+                                    if(godz == null){
+                                        if(dzien == null){
+                                            return planService.getPlanByWykladowcySkrotAndSaleAndZajeciaNazwaAndTydzien(tydzien, zajeciaNazwa, sale, wykladowcySkrot);
+                                        }else{
+                                            return planService.getPlanByWykladowcySkrotAndSaleAndZajeciaNazwaAndTydzienAndDzien(dzien,tydzien, zajeciaNazwa, sale, wykladowcySkrot);
+                                        }
+                                    }else{
+                                        if(dzien == null){
+                                            return planService.getPlanByWykladowcySkrotAndSaleAndZajeciaNazwaAndTydzienAndGodz(godz,tydzien, zajeciaNazwa, sale, wykladowcySkrot);
+                                        }else{
+                                            return planService.getPlanByWykladowcySkrotAndSaleAndZajeciaNazwaAndTydzienAndGodzAndDzien(godz,dzien, tydzien, zajeciaNazwa, sale, wykladowcySkrot);
+                                        }
+                                    }
+                                }
+                            }
+                        }else{
+                            if(zajeciaNazwa == null){
+                                if(tydzien == null){
+                                    if(godz == null){
+                                        if(dzien == null){
+                                            return planService.getPlanByWykladowcySkrotAndSaleAndGrupaGrupy(grupaGrupy, sale, wykladowcySkrot);
+                                        }else{
+                                            return planService.getPlanByWykladowcySkrotAndSaleAndGrupaGrupyAndDzien(dzien, grupaGrupy, sale, wykladowcySkrot);
+                                        }
+                                    }else{
+                                        if(dzien == null){
+                                            return planService.getPlanByWykladowcySkrotAndSaleAndGrupaGrupyAndGodz(godz, grupaGrupy, sale, wykladowcySkrot);
+                                        }else{
+                                            return planService.getPlanByWykladowcySkrotAndSaleAndGrupaGrupyAndGodzAndDzien(godz,dzien, grupaGrupy, sale, wykladowcySkrot);
+                                        }
+                                    }
+                                }else{
+                                    if(godz == null){
+                                        if(dzien == null){
+                                            return planService.getPlanByWykladowcySkrotAndSaleAndGrupyGrupAndTydzien(tydzien, grupaGrupy, sale, wykladowcySkrot);
+                                        }else{
+                                            return planService.getPlanByWykladowcySkrotAndSaleAndGrupaGrupyAndTydzienAndDzien(dzien,tydzien, grupaGrupy, sale, wykladowcySkrot);
+                                        }
+                                    }else{
+                                        if(dzien == null){
+                                            return planService.getPlanByWykladowcySkrotAndSaleAndGrupaGrupyAndTydzienAndGodz(godz,tydzien, grupaGrupy, sale, wykladowcySkrot);
+                                        }else{
+                                            return planService.getPlanByWykladowcySkrotAndSaleAndGrupaGrupyAndTydzienAndGodzAndDzien(godz,dzien, tydzien, grupaGrupy, sale, wykladowcySkrot);
+                                        }
+                                    }
+                                }
+                            }else{
+                                if(tydzien == null){
+                                    if(godz == null){
+                                        if(dzien == null){
+                                            return planService.getPlanByWykladowcySkrotAndSaleAndGrupaGrupyAndZajeciaNazwa(zajeciaNazwa, grupaGrupy, sale, wykladowcySkrot);
+                                        }else{
+                                            return planService.getPlanByWykladowcySkrotAndSaleAndGrupaGrupyAndZajeciaNazwaAndDzien(dzien, zajeciaNazwa, grupaGrupy, sale, wykladowcySkrot);
+                                        }
+                                    }else{
+                                        if(dzien == null){
+                                            return planService.getPlanByWykladowcySkrotAndSaleAndGrupaGrupyAndZajeciaNazwaAndGodz(godz, zajeciaNazwa, grupaGrupy, sale, wykladowcySkrot);
+                                        }else{
+                                            return planService.getPlanByWykladowcySkrotAndSaleAndGrupaGrupyAndZajeciaNazwaAndGodzAndDzien(godz,dzien, zajeciaNazwa, grupaGrupy, sale, wykladowcySkrot);
+                                        }
+                                    }
+                                }else{
+                                    if(godz == null){
+                                        if(dzien == null){
+                                            return planService.getPlanByWykladowcySkrotAndSaleAndGrupaGrupyAndZajeciaNazwaAndTydzien(tydzien, zajeciaNazwa, grupaGrupy, sale, wykladowcySkrot);
+                                        }else{
+                                            return planService.getPlanByWykladowcySkrotAndSaleAndGrupaGrupyAndZajeciaNazwaAndTydzienAndDzien(dzien,tydzien, zajeciaNazwa, grupaGrupy, sale, wykladowcySkrot);
+                                        }
+                                    }else{
+                                        if(dzien == null){
+                                            return planService.getPlanByWykladowcySkrotAndSaleAndGrupaGrupyAndZajeciaNazwaAndTydzienAndGodz(godz,tydzien, zajeciaNazwa, grupaGrupy, sale, wykladowcySkrot);
+                                        }else{
+                                            return planService.getPlanByWykladowcySkrotAndSaleAndGrupaGrupyAndZajeciaNazwaAndTydzienAndGodzAndDzien(godz,dzien, tydzien, zajeciaNazwa, grupaGrupy, sale, wykladowcySkrot);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }else{
+                        if(grupaGrupy == null){
+                            if(zajeciaNazwa == null){
+                                if(tydzien == null){
+                                    if(godz == null){
+                                        if(dzien == null){
+                                            return planService.getPlanByWykladowcySkrotAndSaleAndGrupy(grupy, sale, wykladowcySkrot);
+                                        }else{
+                                            return planService.getPlanByWykladowcySkrotAndSaleAndGrupyAndDzien(dzien,grupy, sale, wykladowcySkrot);
+                                        }
+                                    }else{
+                                        if(dzien == null){
+                                            return planService.getPlanByWykladowcySkrotAndSaleAndGrupyAndGodz(godz, grupy, sale, wykladowcySkrot);
+                                        }else{
+                                            return planService.getPlanByWykladowcySkrotAndSaleAndGrupyAndGodzAndDzien(godz,dzien, grupy, sale, wykladowcySkrot);
+                                        }
+                                    }
+                                }else{
+                                    if(godz == null){
+                                        if(dzien == null){
+                                            return planService.getPlanByWykladowcySkrotAndSaleAndGrupyAndTydzien(tydzien, grupy, sale, wykladowcySkrot);
+                                        }else{
+                                            return planService.getPlanByWykladowcySkrotAndSaleAndGrupyAndTydzienAndDzien(dzien,tydzien, grupy, sale, wykladowcySkrot);
+                                        }
+                                    }else{
+                                        if(dzien == null){
+                                            return planService.getPlanByWykladowcySkrotAndSaleAndGrupyAndTydzienAndGodz(godz,tydzien, grupy, sale, wykladowcySkrot);
+                                        }else{
+                                            return planService.getPlanByWykladowcySkrotAndSaleAndGrupyAndTydzienAndGodzAndDzien(godz,dzien, tydzien, grupy, sale, wykladowcySkrot);
+                                        }
+                                    }
+                                }
+                            }else{
+                                if(tydzien == null){
+                                    if(godz == null){
+                                        if(dzien == null){
+                                            return planService.getPlanByWykladowcySkrotAndSaleAndGrupyAndZajeciaNazwa(zajeciaNazwa, grupy, sale, wykladowcySkrot);
+                                        }else{
+                                            return planService.getPlanByWykladowcySkrotAndSaleAndGrupyAndZajeciaNazwaAndDzien(dzien, zajeciaNazwa, grupy, sale, wykladowcySkrot);
+                                        }
+                                    }else{
+                                        if(dzien == null){
+                                            return planService.getPlanByWykladowcySkrotAndSaleAndGrupyAndZajeciaNazwaAndGodz(godz, zajeciaNazwa, grupy, sale, wykladowcySkrot);
+                                        }else{
+                                            return planService.getPlanByWykladowcySkrotAndSaleAndGrupyAndZajeciaNazwaAndGodzAndDzien(godz,dzien, zajeciaNazwa, grupy, sale, wykladowcySkrot);
+                                        }
+                                    }
+                                }else{
+                                    if(godz == null){
+                                        if(dzien == null){
+                                            return planService.getPlanByWykladowcySkrotAndSaleAndGrupyAndZajeciaNazwaAndTydzien(tydzien, zajeciaNazwa, grupy, sale, wykladowcySkrot);
+                                        }else{
+                                            return planService.getPlanByWykladowcySkrotAndSaleAndGrupyAndZajeciaNazwaAndTydzienAndDzien(dzien,tydzien, zajeciaNazwa, grupy, sale, wykladowcySkrot);
+                                        }
+                                    }else{
+                                        if(dzien == null){
+                                            return planService.getPlanByWykladowcySkrotAndSaleAndGrupyAndZajeciaNazwaAndTydzienAndGodz(godz,tydzien, zajeciaNazwa, grupy, sale, wykladowcySkrot);
+                                        }else{
+                                            return planService.getPlanByWykladowcySkrotAndSaleAndGrupyAndZajeciaNazwaAndTydzienAndGodzAndDzien(godz,dzien, tydzien, zajeciaNazwa, grupy, sale, wykladowcySkrot);
+                                        }
+                                    }
+                                }
+                            }
+                        }else{
+                            if(zajeciaNazwa == null){
+                                if(tydzien == null){
+                                    if(godz == null){
+                                        if(dzien == null){
+                                            return planService.getPlanByWykladowcySkrotAndSaleAndGrupyAndGrupaGrupy(grupaGrupy, grupy, sale, wykladowcySkrot);
+                                        }else{
+                                            return planService.getPlanByWykladowcySkrotAndSaleAndGrupyAndGrupaGrupyAndDzien(dzien, grupaGrupy, grupy, sale, wykladowcySkrot);
+                                        }
+                                    }else{
+                                        if(dzien == null){
+                                            return planService.getPlanByWykladowcySkrotAndSaleAndGrupyAndGrupaGrupyAndGodz(godz, grupaGrupy, grupy, sale, wykladowcySkrot);
+                                        }else{
+                                            return planService.getPlanByWykladowcySkrotAndSaleAndGrupyAndGrupaGrupyAndGodzAndDzien(godz,dzien, grupaGrupy, grupy, sale, wykladowcySkrot);
+                                        }
+                                    }
+                                }else{
+                                    if(godz == null){
+                                        if(dzien == null){
+                                            return planService.getPlanByWykladowcySkrotAndSaleAndGrupyAndGrupaGrupyAndTydzien(tydzien, grupy, sale, wykladowcySkrot);
+                                        }else{
+                                            return planService.getPlanByWykladowcySkrotAndSaleAndGrupyAndGrupaGrupyAndTydzienAndDzien(dzien,tydzien, grupaGrupy, grupy, sale, wykladowcySkrot);
+                                        }
+                                    }else{
+                                        if(dzien == null){
+                                            return planService.getPlanByWykladowcySkrotAndSaleAndGrupyAndGrupaGrupyAndTydzienAndGodz(godz,tydzien, grupy, sale, wykladowcySkrot);
+                                        }else{
+                                            return planService.getPlanByWykladowcySkrotAndSaleAndGrupyAndGrupaGrupyAndTydzienAndGodzAndDzien(godz,dzien, tydzien, grupaGrupy, grupy, sale, wykladowcySkrot);
+                                        }
+                                    }
+                                }
+                            }else{
+                                if(tydzien == null){
+                                    if(godz == null){
+                                        if(dzien == null){
+                                            return planService.getPlanByWykladowcySkrotAndSaleAndGrupyAndGrupaGrupyAndZajeciaNazwa(zajeciaNazwa, grupaGrupy, grupy, sale, wykladowcySkrot);
+                                        }else{
+                                            return planService.getPlanByWykladowcySkrotAndSaleAndGrupyAndGrupaGrupyAndZajeciaNazwaAndDzien(dzien, zajeciaNazwa, grupaGrupy, grupy, sale, wykladowcySkrot);
+                                        }
+                                    }else{
+                                        if(dzien == null){
+                                            return planService.getPlanByWykladowcySkrotAndSaleAndGrupyAndGrupaGrupyAndZajeciaNazwaAndGodz(godz, zajeciaNazwa, grupaGrupy, grupy, sale, wykladowcySkrot);
+                                        }else{
+                                            return planService.getPlanByWykladowcySkrotAndSaleAndGrupyAndGrupaGrupyAndZajeciaNazwaAndGodzAndDzien(godz,dzien, zajeciaNazwa, grupaGrupy, grupy, sale, wykladowcySkrot);
+                                        }
+                                    }
+                                }else{
+                                    if(godz == null){
+                                        if(dzien == null){
+                                            return planService.getPlanByWykladowcySkrotAndSaleAndGrupyAndGrupaGrupyAndZajeciaNazwaAndTydzien(tydzien, zajeciaNazwa, grupaGrupy, grupy, sale, wykladowcySkrot);
+                                        }else{
+                                            return planService.getPlanByWykladowcySkrotAndSaleAndGrupyAndGrupaGrupyAndZajeciaNazwaAndTydzienAndDzien(dzien,tydzien, zajeciaNazwa, grupaGrupy, grupy, sale, wykladowcySkrot);
+                                        }
+                                    }else{
+                                        if(dzien == null){
+                                            return planService.getPlanByWykladowcySkrotAndSaleAndGrupyAndGrupaGrupyAndZajeciaNazwaAndTydzienAndGodz(godz,tydzien, zajeciaNazwa, grupaGrupy, grupy, sale, wykladowcySkrot);
+                                        }else{
+                                            return planService.getPlanByWykladowcySkrotAndSaleAndGrupyAndGrupaGrupyAndZajeciaNazwaAndTydzienAndGodzAndDzien(godz,dzien, tydzien, zajeciaNazwa, grupaGrupy, grupy, sale, wykladowcySkrot);
                                         }
                                     }
                                 }
@@ -1209,9 +2180,6 @@ public class PageController {
                 }
             }
         }
-
-        return null;
-
     }
 
 }
