@@ -61,5 +61,5 @@ function button(){
     div.appendChild(button);
 }
 function changePage(){
-    document.location.href = "/page/complete";
+    document.location.href = "/complete";
 }

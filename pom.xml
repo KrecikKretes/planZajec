@@ -59,16 +59,7 @@
 			<artifactId>h2</artifactId>
 			<version>1.4.183</version>
 		</dependency>
-
-
-
-
-
 	</dependencies>
-
-
-
-
 
 
 	<build>
@@ -87,8 +78,30 @@
 						</exclude>
 					</excludes>
 				</configuration>
+
+				<executions>
+					<execution>
+						<configuration>
+							<outputDirectory>${basedir}/target/classes</outputDirectory>
+							<includeEmptyDirs>true</includeEmptyDirs>
+							<resources>
+								<resource>
+									<directory>${basedir}/src/main/java/resources</directory>
+									<filtering>false</filtering>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
 	</build>
+
+
+
 
 </project>

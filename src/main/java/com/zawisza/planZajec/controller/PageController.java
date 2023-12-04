@@ -41,8 +41,6 @@ public class PageController {
 
         ResultSet rs = new Csv().read("data/grupy.csv", null, null);
         ResultSet rs1 = new Csv().read("data/grupyGrup.csv", null, null);
-        ResultSetMetaData meta = rs.getMetaData();
-        ResultSetMetaData meta1 = rs1.getMetaData();
         while (rs.next()) {
             Grupy grupy = new Grupy(rs.getString(2));
             List<GrupyGrup> grupyGrupList = new ArrayList<>();
@@ -67,7 +65,6 @@ public class PageController {
         System.out.println("Grupy complete");
 
         rs = new Csv().read("data/sale.csv", null, null);
-        meta = rs.getMetaData();
         while (rs.next()) {
             Sale sale = new Sale(rs.getString(2), rs.getInt(3));
 
@@ -78,7 +75,6 @@ public class PageController {
         System.out.println("Sale complete");
 
         rs = new Csv().read("data/wykladowcy.csv", null, null);
-        meta = rs.getMetaData();
         while (rs.next()) {
             Wykladowcy wykladowcy = new Wykladowcy(rs.getString(2), rs.getString(3), rs.getInt(4));
             wykladowcyRepository.save(wykladowcy);
@@ -88,7 +84,6 @@ public class PageController {
         System.out.println("Wykladowcy complete");
 
         rs = new Csv().read("data/zajecia.csv", null, null);
-        meta = rs.getMetaData();
         while (rs.next()) {
             Zajecia zajecia = new Zajecia(rs.getString(2));
             zajeciaRepository.save(zajecia);
@@ -98,7 +93,6 @@ public class PageController {
         System.out.println("Zajecia complete");
 
         rs = new Csv().read("data/plan.csv", null, null);
-        meta = rs.getMetaData();
         while (rs.next()) {
             String tydzien = rs.getString(2);
             String godzina = rs.getString(3);
@@ -108,8 +102,12 @@ public class PageController {
             int idWykladowcy = rs.getInt(7);
             int idZajecia = rs.getInt(8);
 
+
+            System.out.println("idSale : " + idSale);
             GrupyGrup grupyGrup = grupyGrupService.findGrupyGrupById(idGG);
+
             Sale sale = saleService.getSaleById(idSale);
+            System.out.println(sale);
             Wykladowcy wykladowcy = wykladowcyService.findWykladowcyById(idWykladowcy);
             Zajecia zajecia = zajeciaService.findZajeciaById(idZajecia);
 
@@ -120,15 +118,17 @@ public class PageController {
 
         System.out.println("Plan complete");
 
+        //System.out.println(planService.getPlan());
+
         return "index";
     }
 
-    @GetMapping("/page/update")
-    public String update() throws SQLException {
-        return "/page/update";
+    @GetMapping("/update")
+    public String update() {
+        return "update";
     }
 
-    @GetMapping("/page/complete")
+    @GetMapping("/complete")
     public String complete() throws SQLException {
 
         SimpleResultSet rs = new SimpleResultSet();
@@ -220,10 +220,10 @@ public class PageController {
 
 
 
-        return "/page/complete";
+        return "complete";
     }
 
-    @GetMapping("/page/search")
+    @GetMapping("/search")
     public String search(Model model){
         int wykladowcySize = wykladowcyService.getCount();
         model.addAttribute("wykladowcySize", wykladowcySize);
@@ -276,12 +276,14 @@ public class PageController {
         };
         model.addAttribute("godziny", hours);
 
-        return "/page/search";
+        return "search";
     }
 
-    @PostMapping("/page/results")
+    @PostMapping("/results")
     public String submit(@ModelAttribute("search") Search search,
                          ModelMap model) {
+
+        System.out.println("Search : " + search);
 
         System.out.println(search.getWykladowcyName());
         System.out.println(search.getGrupy());
@@ -289,6 +291,27 @@ public class PageController {
         System.out.println(search.getWykladowcySkrot());
         System.out.println(search.getTydzien());
 
+
+
+
+        List<Plan> planList;
+
+        System.out.println();
+
+        planList = checkWhatIsNull(search);
+
+        System.out.println(planList);
+
+        model.addAttribute("planList", planList);
+
+
+
+
+
+        return "results";
+    }
+
+    private List<Plan> checkWhatIsNull(Search search) {
 
         List<String> wykladowcyName = search.getWykladowcyName();
         List<String> wykladowcySkrot = search.getWykladowcySkrot();
@@ -301,32 +324,12 @@ public class PageController {
         List<String> godz = search.getGodzina();
         List<String> dzien = search.getDzien();
 
-        List<Plan> planList;
 
-        System.out.println();
-
-        planList = checkWhatIsNull(wykladowcyName,wykladowcySkrot,
-                sale, grupy, grupaGrupy, zajeciaNazwa, tydzien, godz, dzien);
-
-
-
-        model.addAttribute("planList", planList);
-
-
-
-
-
-        return "/page/results";
-    }
-
-    private List<Plan> checkWhatIsNull(List<String> wykladowcyName,
-    List<String> wykladowcySkrot, List<String> sale,
-    List<String> grupy, List<String> grupaGrupy,
-    List<String> zajeciaNazwa, List<String> tydzien,
-    List<String> godz, List<String> dzien) {
 
         if(wykladowcyName != null){
+            System.out.println("wykladowcyName != null");
             if(wykladowcySkrot == null){
+                System.out.println("wykladowcySkrot == null");
                 if(sale == null){
                     if(grupy == null){
                         if(grupaGrupy == null){
@@ -1610,6 +1613,7 @@ public class PageController {
                                 if(tydzien == null){
                                     if(godz == null){
                                         if(dzien == null){
+                                            System.out.println("Only Sale");
                                             return planService.getPlanBySale(sale);
                                         }else{
                                             return planService.getPlanBySaleAndDzien(dzien,sale);

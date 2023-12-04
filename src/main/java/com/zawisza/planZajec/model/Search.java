@@ -18,4 +18,19 @@ public class Search {
     private List<String> tydzien;
     private List<String> dzien;
     private List<String> godzina;
+
+    @Override
+    public String toString() {
+        return "Search{" +
+                "wykladowcyName=" + wykladowcyName +
+                ", wykladowcySkrot=" + wykladowcySkrot +
+                ", sale=" + sale +
+                ", grupy=" + grupy +
+                ", zajecia=" + zajecia +
+                ", grupyGrup=" + grupyGrup +
+                ", tydzien=" + tydzien +
+                ", dzien=" + dzien +
+                ", godzina=" + godzina +
+                '}';
+    }
 }

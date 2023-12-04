@@ -41,6 +41,7 @@ public class PlanService {
     }
 
     public List<Plan> getPlanBySale(List<String> sale){
+        System.out.println("Service getPlanBySale");
         return planRepository.getPlanBySale(sale);
     }
 
