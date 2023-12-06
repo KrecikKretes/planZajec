@@ -17,6 +17,10 @@ public class GrupyGrupService {
         return grupyGrupRepository.countAll();
     }
 
+    public int getDistinctCount(){
+        return grupyGrupRepository.countAllDistinct();
+    }
+
     public List<String> getGrupyGrupy() {
         return grupyGrupRepository.findAllGrupyGrup();
     }

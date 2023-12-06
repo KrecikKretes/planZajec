@@ -30,6 +30,8 @@ public class SaleController {
 
         saleRepository.deleteAll();
 
+        int id = 1;
+
         procces:
         for(int i = 1; i < 400; i++){
             try {
@@ -80,6 +82,7 @@ public class SaleController {
                                 Sale sale = new Sale(sala,i);
                                 saleRepository.save(sale);
                                 saleList.add(sala);
+                                id++;
                             }
 
                             continue procces;

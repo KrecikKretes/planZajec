@@ -105,6 +105,10 @@ public class PlanController extends Constant {
 
                             //Wypisanie dla kazdego dnia
                             for (int j = 0; j < 5; j++) {
+
+                                System.out.println(week[j]);
+                                System.out.println("-----");
+
                                 wykladowcy = null;
 
                                 a = j;
@@ -132,6 +136,8 @@ public class PlanController extends Constant {
                                     System.out.println("Linia PRZED : " + resztaLinii);
                                     System.out.println("GetLine PRZED : " + getLine());
 
+
+                                    System.out.println("..................................");
                                     if(resztaLinii.contains("-n") && resztaLinii.contains("-p")){
                                         if(resztaLinii.indexOf("-n") < resztaLinii.indexOf("-p")){
                                             System.out.println("Zawiera pierwsze -n i -p");
@@ -153,6 +159,8 @@ public class PlanController extends Constant {
                                             getString();
                                         }
                                     }
+                                    System.out.println("..................................");
+                                    System.out.println("");
 
                                     System.out.println("Tydzien : " + getTydzien());
 
@@ -188,9 +196,9 @@ public class PlanController extends Constant {
 
 
                                     //Usunięcie niepotrzebnych znaków
-                                    System.out.println("Test2 : " + getLine());
+                                    System.out.println("GetLine przed replace : " + getLine());
                                     setLine(getLine().replaceAll("<.*?>", ""));
-                                    System.out.println("Test : " + getLine());
+                                    System.out.println("GetLine po replace : " + getLine());
 
                                     getString3();
 
@@ -261,8 +269,10 @@ public class PlanController extends Constant {
 
                                     if(saleService.getSaleBySala(getSalaName()) == null &&
                                             !salaList.contains(getSalaName())){
+                                        System.out.println("Nie znaleziono sale");
                                         salaList.add(getSalaName());
                                         sale = new Sale(getSalaName(), -1);
+                                        System.out.println("Sale stworzono : " + sale);
                                         saleRepository.save(sale);
                                     }else{
                                         sale = saleRepository.findSaleBySala(getSalaName());
@@ -359,6 +369,7 @@ public class PlanController extends Constant {
 
         while(!getLine().isEmpty()){
             System.out.println("Przed : " + getLine());
+            setLine(getLine() + " ");
             substring = getLine().substring(0, getLine().indexOf(" "));
             setLine(getLine().substring(getLine().indexOf(" ")));
             if(substring.contains("-(") || substring.contains("-1ps") || substring.contains("-2ps")){

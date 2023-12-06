@@ -42,7 +42,6 @@ public class Sale {
         return "Sale{" +
                 "id=" + id +
                 ", sala='" + sala + '\'' +
-                ", planList=" + planList +
                 '}';
     }
 }

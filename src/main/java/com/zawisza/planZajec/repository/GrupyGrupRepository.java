@@ -14,6 +14,9 @@ public interface GrupyGrupRepository extends CrudRepository<GrupyGrup, Integer> 
     @Query("select count(*) from GrupyGrup ")
     int countAll();
 
+    @Query("select DISTINCT count(*) from GrupyGrup")
+    int countAllDistinct();
+
     @Query("Select p From GrupyGrup p")
     List<GrupyGrup> findAll();
 

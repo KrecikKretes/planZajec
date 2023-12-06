@@ -51,22 +51,22 @@
                 </td>
                 <td>
                     <select id="grupy" name="grupy" size="${grupySize}" multiple multiselect-search="true" multiselect-select-all="true">
-                        <option th:each="grupaGrup : ${grupyGrup}"
-                                th:value="${grupaGrup}"
-                                th:text="${grupaGrup}">
+                        <option th:each="grupa : ${grupy}"
+                                th:value="${grupa.getGrupa()}"
+                                th:text="${grupa.getGrupa()}">
                         </option>
                     </select>
                 </td>
             </tr>
             <tr>
                 <td>
-                    <label for="grupyGrup">Grupy</label>
+                    <label for="grupyGrup">Grupy Grup</label>
                 </td>
                 <td>
                     <select id="grupyGrup" name="grupyGrup" size="${grupyGrupySize}" multiple multiselect-search="true" multiselect-select-all="true">
-                        <option th:each="grupa : ${grupy}"
-                                th:value="${grupa.getGrupa()}"
-                                th:text="${grupa.getGrupa()}">
+                        <option th:each="grupaGrup : ${grupyGrup}"
+                                th:value="${grupaGrup}"
+                                th:text="${grupaGrup}">
                         </option>
                     </select>
                 </td>

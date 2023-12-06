@@ -165,6 +165,7 @@ public class GrupaController {
     private String getString(String text) {
         String grup = "";
         text = text.trim();
+        text = text + " ";
         String substring;
 
         while(!text.isEmpty()){

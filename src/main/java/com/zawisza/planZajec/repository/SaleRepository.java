@@ -25,4 +25,7 @@ public interface SaleRepository extends CrudRepository<Sale, Integer>{
 
     @Query("Select p From Sale p WHERE p.id = :id")
     Sale getSaleById(@Param("id") int id);
+
+    @Query("select max(p.id) FROM Sale p")
+    int getLastID();
 }

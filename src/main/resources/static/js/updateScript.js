@@ -48,7 +48,6 @@ function change3(){
         // code will run after iframe has finished loading
         document.getElementById("plan_img_loading").style.width = '0';
         document.getElementById("plan_img_ok").style.width = "50px";
-        alert("End");
         button();
     } );
 }

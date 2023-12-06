@@ -15,7 +15,7 @@ import java.util.List;
 public class GrupyGrup {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO, generator="seq")
+    @GeneratedValue(strategy = GenerationType.IDENTITY, generator="seq")
     @GenericGenerator(name = "seq", strategy="increment")
     private int id;
 
