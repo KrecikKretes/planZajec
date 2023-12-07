@@ -366,13 +366,16 @@ public class PlanController extends Constant {
         String grup = "";
         trim();
         String substring;
+        setLine(getLine().trim());
+        setLine(getLine().replaceAll(" {2}"," "));
+        setLine(getLine() + " ");
+
 
         while(!getLine().isEmpty()){
             System.out.println("Przed : " + getLine());
-            setLine(getLine() + " ");
             substring = getLine().substring(0, getLine().indexOf(" "));
             setLine(getLine().substring(getLine().indexOf(" ")));
-            if(substring.contains("-(") || substring.contains("-1ps") || substring.contains("-2ps")){
+            if(substring.contains("-(") || substring.contains("-1ps") || substring.contains("-2ps") || substring.contains("-N.") || substring.contains("-P.")){
                 System.out.println("TAK");
                 if(substring.contains("-(")){
                     grup = substring.substring(0,substring.indexOf("-("));
@@ -383,13 +386,21 @@ public class PlanController extends Constant {
                     if(substring.contains("-1ps")){
                         grup = substring.substring(0,substring.indexOf("-1ps"));
                     }else{
-                        grup = substring.substring(0,substring.indexOf("-2ps"));
+                        if(substring.contains("-2ps")) {
+                            grup = substring.substring(0, substring.indexOf("-2ps"));
+                        }else{
+                            if(substring.contains("-N")) {
+                                grup = substring.substring(0, substring.indexOf("-N."));
+                            }else{
+                                grup = substring.substring(0, substring.indexOf("-P."));
+                            }
+                        }
                     }
                 }
                 break;
             }else{
                 System.out.println("NIE");
-                if(substring.contains(" ")){
+                if(substring.contains(" ") || substring.equals("")){
                     break;
                 }else{
                     if(zajeciaName.isEmpty()){

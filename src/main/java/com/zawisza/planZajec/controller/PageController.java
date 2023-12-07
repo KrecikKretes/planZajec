@@ -217,7 +217,10 @@ public class PageController extends Variables{
 
         List<Plan> planList = planService.getPlan();
 
+
+
         for(Plan plan: planList){
+            System.out.println(plan);
             rs.addRow(plan.getId(), plan.getDzien(),
                     plan.getGodz(), plan.getTydzien(),
                     plan.getGrupyGrup().getId(),
