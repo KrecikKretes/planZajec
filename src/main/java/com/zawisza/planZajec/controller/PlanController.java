@@ -403,7 +403,7 @@ public class PlanController extends Constant {
                 if(substring.contains(" ") || substring.equals("")){
                     break;
                 }else{
-                    if(zajeciaName.isEmpty()){
+                    if(zajeciaName == null){
                         zajeciaName.append(substring);
                     }else{
                         zajeciaName.append(" ").append(substring);
