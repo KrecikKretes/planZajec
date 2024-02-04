@@ -1,0 +1,38 @@
+*{
+    text-align: center;
+    margin: 20px auto 50px;
+}
+select{
+    margin:0 auto;
+    width: 20em;
+}
+option{
+    margin:0 auto;
+}
+
+.loading{
+    width:100px;
+    height:100px;
+}
+img{
+    width:50px;
+}
+#grupy_img_ok{
+    width:0;
+}
+#wykladowcy_img_ok{
+    width:0
+}
+#sale_img_ok{
+    width: 0;
+}
+#plan_img_ok{
+    width: 0;
+}
+iframe{
+    display: none;
+}
+
+.result_td{
+    width: 80px;
+}

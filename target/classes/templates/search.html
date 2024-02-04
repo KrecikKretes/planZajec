@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <title>Search</title>
+    <link th:href="@{/css/style.css}" rel="stylesheet" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script type="text/javascript" rel="script" th:src="@{/js/searchScript.js}" ></script>
+    <script type="text/javascript" rel="script" th:src="@{/js/multiselect-dropdown.js}" ></script>
+</head>
+<body>
+
+    <h1>Zasady :</h1>
+    <p>Jeżeli chcesz wyszukać wszystkich to albo kliknij wszystko albo nic</p>
+
+    <form method="post" action="results" modelAttribute="search">
+
+        <table>
+            <tr>
+                <td>
+                    <label for="wykladowcy">Wykladowcy</label>
+                </td>
+                <td>
+                    <select id="wykladowcy" name="wykladowcyName" size="${wykladowcySize}" multiple multiselect-search="true" multiselect-select-all="true">
+                        <option th:each="wykladowca : ${wykladowcyName}"
+                                th:value="${wykladowca}"
+                                th:text="${wykladowca}">
+                        </option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="wykladowcyskrot">Skrót</label>
+                </td>
+                <td>
+                    <select id="wykladowcyskrot" name="wykladowcySkrot" size="${wykladowcySize}" multiple multiselect-search="true" multiselect-select-all="true">
+                        <option th:each="wykladowca : ${wykladowcySkrot}"
+                                th:value="${wykladowca}"
+                                th:text="${wykladowca}">
+                        </option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="grupy">Grupy</label>
+                </td>
+                <td>
+                    <select id="grupy" name="grupy" size="${grupySize}" multiple multiselect-search="true" multiselect-select-all="true">
+                        <option th:each="grupa : ${grupy}"
+                                th:value="${grupa.getGrupa()}"
+                                th:text="${grupa.getGrupa()}">
+                        </option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="grupyGrup">Grupy Grup</label>
+                </td>
+                <td>
+                    <select id="grupyGrup" name="grupyGrup" size="${grupyGrupySize}" multiple multiselect-search="true" multiselect-select-all="true">
+                        <option th:each="grupaGrup : ${grupyGrup}"
+                                th:value="${grupaGrup}"
+                                th:text="${grupaGrup}">
+                        </option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="zajecia">Zajecia</label>
+                </td>
+                <td>
+                    <select id="zajecia" name="zajecia" size="${zajeciaSize}" multiple multiselect-search="true" multiselect-select-all="true">
+                        <option th:each="zajecie : ${zajecia}"
+                                th:value="${zajecie.getNazwa()}"
+                                th:text="${zajecie.getNazwa()}">
+                        </option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="sale">Sale</label>
+                </td>
+                <td>
+                    <select id="sale" name="sale" size="${saleSize}" multiple multiselect-search="true" multiselect-select-all="true">
+                        <option th:each="sala : ${sale}"
+                                th:value="${sala.getSala()}"
+                                th:text="${sala.getSala()}">
+                        </option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="tydzien">Tydzień</label>
+                </td>
+                <td>
+                    <select id="tydzien" name="tydzien" size="2" multiple multiselect-search="true" multiselect-select-all="true">
+                        <option th:value="n" th:text="n">
+                        </option>
+                        <option th:value="p" th:text="p">
+                        </option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="dzien">Dzień</label>
+                </td>
+                <td>
+                    <select id="dzien" name="dzien" size="5" multiple multiselect-search="true" multiselect-select-all="true">
+                        <option th:each="dzien : ${week}"
+                                th:value="${dzien}"
+                                th:text="${dzien}">
+                        </option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="godzina">Godzina</label>
+                </td>
+                <td>
+                    <select id="godzina" name="godzina" size="14" multiple multiselect-search="true" multiselect-select-all="true">
+                        <option th:each="godzina : ${godziny}"
+                                th:value="${godzina}"
+                                th:text="${godzina}">
+                        </option>
+                    </select>
+                </td>
+            </tr>
+        </table>
+
+        <button type="submit">Wyszukaj</button>
+
+
+    </form>
+
+
+
+    <br>
+
+    <br>
+
+    <br>
+
+</body>
+</html>

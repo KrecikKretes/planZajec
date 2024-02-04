@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link th:href="@{/css/style.css}" rel="stylesheet" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script type="text/javascript" rel="script" th:src="@{/js/indexScript.js}" ></script>
+</head>
+<body>
+    <h1>Witaj samorządowcu!</h1>
+    <p>Jeżeli tu jesteś oznacza to, że trafił Cię zaszczyt bawienia w planie zajęć</p>
+    <p>Spokojnie. Tworzenie tego programu i stworzenie algorytmu, który będzie działał było gorsze</p>
+    <p>A teraz. Co zamierzasz zrobić?</p>
+
+    <table>
+        <tr>
+            <td>
+                <button type="button" th:onclick="changePage('update')">
+                    Zaaktualizuj dane
+                </button>
+            </td>
+            <td>
+                <button type="button" th:onclick="changePage('search')">
+                    Wyszukaj dane
+                </button>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>
