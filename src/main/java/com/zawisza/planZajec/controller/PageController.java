@@ -41,8 +41,8 @@ public class PageController extends Variables{
     public String index() throws SQLException {
 
         if(!isUpdate){
-            ResultSet rs = new Csv().read("data/grupy.csv", null, null);
-            ResultSet rs1 = new Csv().read("data/grupyGrup.csv", null, null);
+            ResultSet rs = new Csv().read("../data/grupy.csv", null, null);
+            ResultSet rs1 = new Csv().read("../data/grupyGrup.csv", null, null);
             while (rs.next()) {
                 Grupy grupy = new Grupy(rs.getString(2));
                 List<GrupyGrup> grupyGrupList = new ArrayList<>();
@@ -66,7 +66,7 @@ public class PageController extends Variables{
 
             System.out.println("Grupy complete");
 
-            rs = new Csv().read("data/sale.csv", null, null);
+            rs = new Csv().read("../data/sale.csv", null, null);
             while (rs.next()) {
                 Sale sale = new Sale(rs.getString(2), rs.getInt(3));
                 saleRepository.save(sale);
@@ -75,7 +75,7 @@ public class PageController extends Variables{
 
             System.out.println("Sale complete");
 
-            rs = new Csv().read("data/wykladowcy.csv", null, null);
+            rs = new Csv().read("../data/wykladowcy.csv", null, null);
             while (rs.next()) {
                 Wykladowcy wykladowcy = new Wykladowcy(rs.getString(2), rs.getString(3), rs.getInt(4));
                 wykladowcyRepository.save(wykladowcy);
@@ -84,7 +84,7 @@ public class PageController extends Variables{
 
             System.out.println("Wykladowcy complete");
 
-            rs = new Csv().read("data/zajecia.csv", null, null);
+            rs = new Csv().read("../data/zajecia.csv", null, null);
             while (rs.next()) {
                 Zajecia zajecia = new Zajecia(rs.getString(2));
                 zajeciaRepository.save(zajecia);
@@ -93,7 +93,7 @@ public class PageController extends Variables{
 
             System.out.println("Zajecia complete");
 
-            rs = new Csv().read("data/plan.csv", null, null);
+            rs = new Csv().read("../data/plan.csv", null, null);
             while (rs.next()) {
                 String tydzien = rs.getString(2);
                 String godzina = rs.getString(3);
@@ -103,16 +103,15 @@ public class PageController extends Variables{
                 int idWykladowcy = rs.getInt(7);
                 int idZajecia = rs.getInt(8);
 
-
-                System.out.println("idSale : " + idSale);
                 GrupyGrup grupyGrup = grupyGrupService.findGrupyGrupById(idGG);
-
                 Sale sale = saleService.getSaleById(idSale);
-                System.out.println(sale);
                 Wykladowcy wykladowcy = wykladowcyService.findWykladowcyById(idWykladowcy);
                 Zajecia zajecia = zajeciaService.findZajeciaById(idZajecia);
 
                 Plan plan = new Plan(tydzien,godzina, week, grupyGrup, sale, wykladowcy, zajecia);
+
+                System.out.println(plan);
+
                 planRepository.save(plan);
             }
             rs.close();
@@ -151,7 +150,7 @@ public class PageController extends Variables{
         for(Grupy grupy: grupyList){
             rs.addRow(grupy.getId(), grupy.getGrupa());
         }
-        new Csv().write("data/grupy.csv", rs, null);
+        new Csv().write("../data/grupy.csv", rs, null);
 
         rs = new SimpleResultSet();
         rs.addColumn("id", Types.INTEGER, 255, 0);
@@ -163,7 +162,7 @@ public class PageController extends Variables{
         for(GrupyGrup grupyGrup: grupyGrups){
             rs.addRow(grupyGrup.getId(), grupyGrup.getGrupaGrupy(), grupyGrup.getGrupy().getId());
         }
-        new Csv().write("data/grupyGrup.csv", rs, null);
+        new Csv().write("../data/grupyGrup.csv", rs, null);
 
 
         rs = new SimpleResultSet();
@@ -176,7 +175,7 @@ public class PageController extends Variables{
         for(Sale sale: saleList){
             rs.addRow(sale.getId(), sale.getSala(), sale.getId_strony());
         }
-        new Csv().write("data/sale.csv", rs, null);
+        new Csv().write("../data/sale.csv", rs, null);
 
         rs = new SimpleResultSet();
         rs.addColumn("id", Types.INTEGER, 255, 0);
@@ -189,7 +188,7 @@ public class PageController extends Variables{
         for(Wykladowcy wykladowcy: wykladowcyList){
             rs.addRow(wykladowcy.getId(), wykladowcy.getNazwisko(), wykladowcy.getSkrot() , wykladowcy.getId_strony());
         }
-        new Csv().write("data/wykladowcy.csv", rs, null);
+        new Csv().write("../data/wykladowcy.csv", rs, null);
 
         rs = new SimpleResultSet();
         rs.addColumn("id", Types.INTEGER, 255, 0);
@@ -200,7 +199,7 @@ public class PageController extends Variables{
         for(Zajecia zajecia: zajeciaList){
             rs.addRow(zajecia.getId(), zajecia.getNazwa());
         }
-        new Csv().write("data/zajecia.csv", rs, null);
+        new Csv().write("../data/zajecia.csv", rs, null);
 
 
 
@@ -228,7 +227,7 @@ public class PageController extends Variables{
                     plan.getZajecia().getId()
                     );
         }
-        new Csv().write("data/plan.csv", rs, null);
+        new Csv().write("../data/plan.csv", rs, null);
 
 
 
