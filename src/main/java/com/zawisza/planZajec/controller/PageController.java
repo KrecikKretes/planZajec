@@ -69,7 +69,6 @@ public class PageController extends Variables{
             rs = new Csv().read("data/sale.csv", null, null);
             while (rs.next()) {
                 Sale sale = new Sale(rs.getString(2), rs.getInt(3));
-
                 saleRepository.save(sale);
             }
             rs.close();

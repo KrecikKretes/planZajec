@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Update</title>
+    <link th:href="@{/css/style.css}" rel="stylesheet" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script type="text/javascript" rel="script" th:src="@{/js/updateScript.js}" ></script>
+</head>
+<body th:onload="start()">
+    <h1>Aktualizowanie danych</h1>
+    <p>Aktualizacja może trochę potrwać</p>
+    <table>
+        <tr>
+            <td>
+                <p>Grupy</p>
+            </td>
+            <td>
+                <div id="grupy_div" class="loading" th:style="'background: url(' + @{/img/loading.gif} + ');'">
+                    <img id="grupy_img_loading" th:src="@{/img/loading.gif}" alt="Loading1">
+                    <img id="grupy_img_ok" th:src="@{/img/ok.png}" alt="Ok1">
+                    <iframe id="grupy" name="grupy" src="../grupy/updateGrupy" th:onload="change()">
+                    </iframe>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <p>Wykladowcy</p>
+            </td>
+            <td>
+                <div id="wykladowcy_div" class="loading">
+                    <img id="wykladowcy_img_loading" th:src="@{/img/loading.gif}" alt="Loading2">
+                    <img id="wykladowcy_img_ok" th:src="@{/img/ok.png}" alt="Ok2">
+                </div>
+            </td>
+
+        </tr>
+        <tr>
+            <td>
+                <p>Sale</p>
+            </td>
+            <td>
+                <div id="sale_div" class="loading">
+                    <img id="sale_img_loading" th:src="@{/img/loading.gif}" alt="Loading3">
+                    <img id="sale_img_ok" th:src="@{/img/ok.png}" alt="Ok3">
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <p>Plan</p>
+            </td>
+            <td>
+                <div id="plan_div" class="loading">
+                    <img id="plan_img_loading" th:src="@{/img/loading.gif}" alt="Loading4">
+                    <img id="plan_img_ok" th:src="@{/img/ok.png}" alt="Ok4">
+                </div>
+            </td>
+        </tr>
+    </table>
+
+    <div id="button_div">
+
+    </div>
+
+
+
+
+
+
+</body>
+</html>
