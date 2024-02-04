@@ -153,6 +153,7 @@ public class GrupaController {
 
                 assert grupy != null;
                 grupy.setGrupyGrupList(grupyGrupList);
+                System.out.println(grupy);
                 grupyRepository.save(grupy);
 
             } catch (IOException e) {

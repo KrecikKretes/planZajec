@@ -7184,7 +7184,9 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             @Param("godz") List<String> godz, @Param("grupy") List<String> grupy,
             @Param("sale") List<String> sale, @Param("wykladowcySkrot") List<String> wykladowcySkrot);
 
-
+    
+    
+    
     //9 warunków
 
 
