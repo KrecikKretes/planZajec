@@ -41,7 +41,7 @@ public class PageController extends Variables{
     public String index() throws SQLException {
 
         if(!isUpdate){
-            ResultSet rs = new Csv().read("$./data/grupy.csv", null, null);
+            ResultSet rs = new Csv().read("data/grupy.csv", null, null);
             ResultSet rs1 = new Csv().read("../data/grupyGrup.csv", null, null);
             while (rs.next()) {
                 Grupy grupy = new Grupy(rs.getString(2));
