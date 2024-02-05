@@ -1,9 +1,12 @@
-FROM maven:3.8.3-openjdk-17 AS build
-WORKDIR /app
-COPY . .
-RUN mvn clean package -Pprod -DskipTests
+FROM maven:3.9.2-eclipse-temurin-17-alpine as builder
 
-FROM eclipse-temurin:17-alpine
-COPY --from=build /target/planZajec-1.1.0.jar planZajec.jar
+COPY ./src src/
+COPY ./pom.xml pom.xml
+COPY ./data data/
+
+RUN mvn clean package -DskipTests
+
+FROM eclipse-temurin:17-jre-alpine
+COPY --from=builder target/*.jar app.jar
 EXPOSE 8080
-ENTRYPOINT ["java","-jar","planZajec.jar"]
+CMD ["java","-jar","app.jar"]
