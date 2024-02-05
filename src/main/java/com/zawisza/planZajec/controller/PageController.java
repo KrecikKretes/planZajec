@@ -41,9 +41,17 @@ public class PageController extends Variables{
     @GetMapping("/")
     public String index() throws SQLException {
 
-        File directoryPath = new File("./");
+        File directoryPath = new File("./tmp");
         //List of all files and directories
         String contents[] = directoryPath.list();
+        System.out.println("List of files and directories in the specified directory:");
+        for(int i=0; i<contents.length; i++) {
+            System.out.println(contents[i]);
+        }
+
+        directoryPath = new File("./bin");
+        //List of all files and directories
+        contents = directoryPath.list();
         System.out.println("List of files and directories in the specified directory:");
         for(int i=0; i<contents.length; i++) {
             System.out.println(contents[i]);
