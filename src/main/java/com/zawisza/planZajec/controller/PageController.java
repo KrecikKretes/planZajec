@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.io.File;
 import java.sql.*;
 import org.h2.tools.Csv;
 import org.h2.tools.SimpleResultSet;
@@ -39,6 +40,15 @@ public class PageController extends Variables{
 
     @GetMapping("/")
     public String index() throws SQLException {
+
+        File directoryPath = new File("./");
+        //List of all files and directories
+        String contents[] = directoryPath.list();
+        System.out.println("List of files and directories in the specified directory:");
+        for(int i=0; i<contents.length; i++) {
+            System.out.println(contents[i]);
+        }
+
 
         if(!isUpdate){
             ResultSet rs = new Csv().read("./data/data/grupy.csv", null, null);
