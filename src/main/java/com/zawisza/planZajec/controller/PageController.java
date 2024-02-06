@@ -95,7 +95,7 @@ public class PageController extends Variables{
 
             System.out.println("Wykladowcy complete");
 
-            rs = new Csv().read("../data/zajecia.csv", null, null);
+            rs = new Csv().read("./data/zajecia.csv", null, null);
             while (rs.next()) {
                 Zajecia zajecia = new Zajecia(rs.getString(2));
                 zajeciaRepository.save(zajecia);
