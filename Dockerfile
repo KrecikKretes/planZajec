@@ -1,14 +1,7 @@
-FROM maven:3.9.2-eclipse-temurin-17-alpine as builder
+FROM openjdk:17
 
-COPY ./src src/
-COPY ./pom.xml pom.xml
-COPY ./data data/
+ADD target/planZajec-1.1.0.jar .
+ADD data ./data
 
-RUN mvn clean package -DskipTests
-
-FROM eclipse-temurin:17-jre-alpine
-COPY --from=builder target/*.jar app.jar
-COPY data/* data/
-COPY src/* src/
-EXPOSE 443
-CMD ["java","-jar","app.jar"]
+EXPOSE 20348
+CMD java -jar planZajec-1.1.0.jar
