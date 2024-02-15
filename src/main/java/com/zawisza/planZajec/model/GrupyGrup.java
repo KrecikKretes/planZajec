@@ -39,6 +39,12 @@ public class GrupyGrup {
         this.grupy = grupy;
     }
 
+    public GrupyGrup(int id, String grupaGrupy, Grupy grupy) {
+        this.id = id;
+        this.grupaGrupy = grupaGrupy;
+        this.grupy = grupy;
+    }
+
     @Override
     public String toString() {
         return "GrupyGrup{" +

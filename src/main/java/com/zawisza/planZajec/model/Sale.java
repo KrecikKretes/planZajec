@@ -37,6 +37,12 @@ public class Sale {
         this.id_strony = id_strony;
     }
 
+    public Sale(int id, String sala, int id_strony) {
+        this.id = id;
+        this.sala = sala;
+        this.id_strony = id_strony;
+    }
+
     @Override
     public String toString() {
         return "Sale{" +

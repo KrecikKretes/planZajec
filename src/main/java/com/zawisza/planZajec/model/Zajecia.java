@@ -33,6 +33,11 @@ public class Zajecia {
         this.nazwa = nazwa;
     }
 
+    public Zajecia(int id, String nazwa) {
+        this.id = id;
+        this.nazwa = nazwa;
+    }
+
     @Override
     public String toString() {
         return "Zajecia{" +

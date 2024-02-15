@@ -1,6 +1,7 @@
 package com.zawisza.planZajec.model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -12,6 +13,7 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 public class Grupy {
 
     @Id
@@ -30,6 +32,11 @@ public class Grupy {
     private List<GrupyGrup> grupyGrupList;
 
     public Grupy(String grupa) {
+        this.grupa = grupa;
+    }
+
+    public Grupy(int id, String grupa) {
+        this.id = id;
         this.grupa = grupa;
     }
 

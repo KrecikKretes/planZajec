@@ -39,105 +39,7 @@ public class PageController extends Variables{
 
 
     @GetMapping("/")
-    public String index() throws SQLException {
-
-        File directoryPath = new File("./");
-        //List of all files and directories
-        String contents[] = directoryPath.list();
-        System.out.println("List of files and directories in the specified directory:");
-        for(int i=0; i<contents.length; i++) {
-            System.out.println(contents[i]);
-        }
-
-
-
-        if(!isUpdate){
-            ResultSet rs = new Csv().read("./data/grupy.csv", null, null);
-            ResultSet rs1 = new Csv().read("./data/grupyGrup.csv", null, null);
-            while (rs.next()) {
-                Grupy grupy = new Grupy(rs.getString(2));
-                List<GrupyGrup> grupyGrupList = new ArrayList<>();
-
-                while (rs1.next()) {
-                    if(rs1.getInt(3) == grupy.getId()){
-                        GrupyGrup grupyGrup = new GrupyGrup(rs1.getString(2), grupy);
-                        grupyGrupList.add(grupyGrup);
-                    }
-                    if(rs1.getInt(3) > grupy.getId()){
-                        break;
-                    }
-
-                }
-
-                grupy.setGrupyGrupList(grupyGrupList);
-                grupyRepository.save(grupy);
-            }
-            rs.close();
-            rs1.close();
-
-            System.out.println("Grupy complete");
-
-            rs = new Csv().read("./data/sale.csv", null, null);
-            while (rs.next()) {
-                Sale sale = new Sale(rs.getString(2), rs.getInt(3));
-                saleRepository.save(sale);
-            }
-            rs.close();
-
-            System.out.println("Sale complete");
-
-            rs = new Csv().read("./data/wykladowcy.csv", null, null);
-            while (rs.next()) {
-                Wykladowcy wykladowcy = new Wykladowcy(rs.getString(2), rs.getString(3), rs.getInt(4));
-                wykladowcyRepository.save(wykladowcy);
-            }
-            rs.close();
-
-            System.out.println("Wykladowcy complete");
-
-            rs = new Csv().read("./data/zajecia.csv", null, null);
-            while (rs.next()) {
-                Zajecia zajecia = new Zajecia(rs.getString(2));
-                zajeciaRepository.save(zajecia);
-            }
-            rs.close();
-
-            System.out.println("Zajecia complete");
-
-            rs = new Csv().read("./data/plan.csv", null, null);
-            while (rs.next()) {
-                String tydzien = rs.getString(2);
-                String godzina = rs.getString(3);
-                String week = rs.getString(4);
-                int idGG = rs.getInt(5);
-                int idSale = rs.getInt(6);
-                int idWykladowcy = rs.getInt(7);
-                int idZajecia = rs.getInt(8);
-
-                GrupyGrup grupyGrup = grupyGrupService.findGrupyGrupById(idGG);
-                Sale sale = saleService.getSaleById(idSale);
-                Wykladowcy wykladowcy = wykladowcyService.findWykladowcyById(idWykladowcy);
-                Zajecia zajecia = zajeciaService.findZajeciaById(idZajecia);
-
-                Plan plan = new Plan(tydzien,godzina, week, grupyGrup, sale, wykladowcy, zajecia);
-
-                System.out.println(plan);
-
-                planRepository.save(plan);
-            }
-            rs.close();
-
-            System.out.println("Plan complete");
-
-
-        }
-
-
-
-        System.out.println("COUNT BEFORE : " + planRepository.countAll());
-
-        //System.out.println(planService.getPlan());
-
+    public String index(){
         return "index";
     }
 
@@ -157,6 +59,8 @@ public class PageController extends Variables{
         rs.addColumn("grupa", Types.VARCHAR, 255, 0);
 
         List<Grupy> grupyList = grupyService.getGrupy();
+
+        System.out.println(grupyList.size());
 
         for(Grupy grupy: grupyList){
             rs.addRow(grupy.getId(), grupy.getGrupa());

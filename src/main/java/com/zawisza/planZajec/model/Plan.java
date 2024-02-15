@@ -55,6 +55,18 @@ public class Plan {
         this.zajecia = zajecia;
     }
 
+    public Plan(int id, String tydzien, String godz, String dzien, GrupyGrup grupyGrup,
+                Sale sale, Wykladowcy wykladowcy, Zajecia zajecia) {
+        this.id = id;
+        this.zajecia = zajecia;
+        this.grupyGrup = grupyGrup;
+        this.wykladowcy = wykladowcy;
+        this.sale = sale;
+        this.tydzien = tydzien;
+        this.dzien = dzien;
+        this.godz = godz;
+    }
+
     @Override
     public String toString() {
         return "Plan{" +

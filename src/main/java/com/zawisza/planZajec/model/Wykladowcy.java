@@ -39,6 +39,13 @@ public class Wykladowcy {
         this.id_strony = id_strony;
     }
 
+    public Wykladowcy(int id, String nazwisko, String skrot, int id_strony) {
+        this.id = id;
+        this.nazwisko = nazwisko;
+        this.skrot = skrot;
+        this.id_strony = id_strony;
+    }
+
     @Override
     public String toString() {
         return "Wykladowcy{" +
