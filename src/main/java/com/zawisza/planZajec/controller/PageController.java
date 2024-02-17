@@ -4,6 +4,10 @@ import com.zawisza.planZajec.model.*;
 import com.zawisza.planZajec.repository.*;
 import com.zawisza.planZajec.service.*;
 import lombok.AllArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -15,6 +19,7 @@ import java.io.File;
 import java.sql.*;
 import org.h2.tools.Csv;
 import org.h2.tools.SimpleResultSet;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,20 +44,24 @@ public class PageController extends Variables{
 
 
     @GetMapping("/")
-    public String index(){
-        return "index";
+    public ModelAndView defaultPage(@AuthenticationPrincipal UserDetails user){
+        ModelAndView nextPage = new ModelAndView("index");
+        nextPage.addObject("user", user);
+        return nextPage;
     }
 
     @GetMapping("/update")
-    public String update() {
-
-        isUpdate = true;
-
-        return "update";
+    public ModelAndView update(@AuthenticationPrincipal UserDetails user) {
+        ModelAndView nextPage = new ModelAndView("update");
+        nextPage.addObject("user", user);
+        return nextPage;
     }
 
     @GetMapping("/complete")
-    public String complete() throws SQLException {
+    public ModelAndView complete(@AuthenticationPrincipal UserDetails user) throws SQLException {
+        ModelAndView nextPage = new ModelAndView("complete");
+        nextPage.addObject("user", user);
+
 
         SimpleResultSet rs = new SimpleResultSet();
         rs.addColumn("id", Types.INTEGER, 255, 0);
@@ -144,11 +153,7 @@ public class PageController extends Variables{
         }
         new Csv().write("./data/plan.csv", rs, null);
 
-
-
-
-
-        return "complete";
+        return nextPage;
     }
 
     @GetMapping("/search")

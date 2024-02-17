@@ -89,6 +89,7 @@ public class PlanZajecApplication {
 		}
 		System.out.println("Zajecia complete");
 
+		/*
 		System.out.println("Plan start");
 		try{
 			readPlan();
@@ -96,6 +97,8 @@ public class PlanZajecApplication {
 			throw new RuntimeException(e);
 		}
 		System.out.println("Plan complete");
+
+		 */
 
 
 	}
