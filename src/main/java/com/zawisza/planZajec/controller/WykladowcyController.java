@@ -45,7 +45,7 @@ public class WykladowcyController {
 
                     // read each line and write to System.out
                     while ((line = br.readLine()) != null) {
-                        //System.out.println(line);
+                        System.out.println(line);
                         if(line.contains("<span class=\"tytulnapis\">")){
                             line = line.replaceAll("<span.*?>", "");
                             line = line.replaceAll("</span.*?table>", "");
@@ -57,11 +57,13 @@ public class WykladowcyController {
                             if(line.contains("-n")){
                                 nazwisko = line.substring(0, line.indexOf("-n"));
                                 skrot = line.substring(line.indexOf("-n") + 4, line.indexOf("-n") + 6);
-                            }else{
+                            }else if(line.contains("-p")){
                                 nazwisko = line.substring(0, line.indexOf("-p"));
                                 skrot = line.substring(line.indexOf("-p") + 4, line.indexOf("-p") + 6);
+                            }else{
+                                nazwisko = line.substring(0, line.indexOf("("));
+                                skrot = line.substring(line.indexOf("(") + 1, line.indexOf(")"));
                             }
-
 
                             Wykladowcy wykladowcy = new Wykladowcy(nazwisko,skrot, i);
                             if(!(wykladowcyNameList.contains(nazwisko) &&

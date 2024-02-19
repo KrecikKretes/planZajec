@@ -10,8 +10,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,6 +37,12 @@ public class PlanZajecApplication {
 	public void start(){
 		System.out.println("------------------- Application is started -------------------");
 		System.out.println();
+
+		System.out.println("------------------- Connect to database -------------------");
+
+		connectToDatabase();
+
+		System.out.println();
 		System.out.println("------------------- Read data -------------------");
 
 		try {
@@ -47,6 +52,18 @@ public class PlanZajecApplication {
 		}
 
 		System.out.println("------------------- Read data complete -------------------");
+	}
+
+	private void connectToDatabase() {
+
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			Connection con = DriverManager.getConnection(
+					"jdbc:mysql://mysql.mikr.us/db_w348", "w348", "6A5B_50691d");
+			Statement stmt = con.createStatement();
+		} catch (Exception e) {
+			System.out.println(e);
+		}
 	}
 
 	private void readData() throws SQLException {
@@ -89,7 +106,8 @@ public class PlanZajecApplication {
 		}
 		System.out.println("Zajecia complete");
 
-		/*
+		System.out.println();
+
 		System.out.println("Plan start");
 		try{
 			readPlan();
@@ -97,10 +115,6 @@ public class PlanZajecApplication {
 			throw new RuntimeException(e);
 		}
 		System.out.println("Plan complete");
-
-		 */
-
-
 	}
 
 	private void readPlan() throws SQLException{

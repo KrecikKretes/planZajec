@@ -165,6 +165,9 @@ public class PageController extends Variables{
         wykladowcyList = wykladowcyService.getUniqueName();
         model.addAttribute("wykladowcyName", wykladowcyList);
 
+        System.out.println(wykladowcySize);
+        System.out.println(wykladowcyList);
+
         List<String> wykladowcySkrotList;
         wykladowcySkrotList = wykladowcyService.getUniqueSkrot();
         model.addAttribute("wykladowcySkrot", wykladowcySkrotList);
