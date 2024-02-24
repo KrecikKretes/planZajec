@@ -33,25 +33,26 @@ public class WykladowcyController {
         List<String> wykladowcySkrotList = new ArrayList<>();
 
         wykladowcyRepository.deleteAll();
+        Wykladowcy.reset();
 
         procces: for(int i = 1; i < 900; i++){
             try {
                 url = new URL("https://podzial.mech.pk.edu.pl/stacjonarne/html/plany/n" + i + ".html");
                 URLConnection con = url.openConnection();
-                InputStream isOdd = con.getInputStream();
+                InputStream inputStream = con.getInputStream();
 
-                try(BufferedReader br = new BufferedReader(new InputStreamReader(isOdd))) {
+                try(BufferedReader br = new BufferedReader(new InputStreamReader(inputStream))) {
                     String line;
 
                     // read each line and write to System.out
                     while ((line = br.readLine()) != null) {
-                        System.out.println(line);
+                        //System.out.println(line);
                         if(line.contains("<span class=\"tytulnapis\">")){
                             line = line.replaceAll("<span.*?>", "");
                             line = line.replaceAll("</span.*?table>", "");
-                            System.out.println("-----");
-                            System.out.println(i);
-                            System.out.println(line);
+                            //System.out.println("-----");
+                            //System.out.println(i);
+                            //System.out.println(line);
                             String nazwisko;
                             String skrot;
                             if(line.contains("-n")){
@@ -72,6 +73,7 @@ public class WykladowcyController {
                                 wykladowcyNameList.add(nazwisko);
                                 wykladowcySkrotList.add(skrot);
                             }
+                            System.out.println(wykladowcy);
 
                             continue procces;
                         }

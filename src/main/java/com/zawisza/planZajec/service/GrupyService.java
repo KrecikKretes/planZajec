@@ -17,7 +17,7 @@ public class GrupyService {
         return grupyRepository.countAll();
     }
 
-    public List<Grupy> getGrupy(){
+    public List<Grupy> getAll(){
         return grupyRepository.getGrupies();
     }
 

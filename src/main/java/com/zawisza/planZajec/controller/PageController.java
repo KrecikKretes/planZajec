@@ -4,10 +4,8 @@ import com.zawisza.planZajec.model.*;
 import com.zawisza.planZajec.repository.*;
 import com.zawisza.planZajec.service.*;
 import lombok.AllArgsConstructor;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -15,13 +13,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import java.io.File;
 import java.sql.*;
 import org.h2.tools.Csv;
 import org.h2.tools.SimpleResultSet;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -67,14 +63,13 @@ public class PageController extends Variables{
         rs.addColumn("id", Types.INTEGER, 255, 0);
         rs.addColumn("grupa", Types.VARCHAR, 255, 0);
 
-        List<Grupy> grupyList = grupyService.getGrupy();
-
+        List<Grupy> grupyList = grupyService.getAll();
         System.out.println(grupyList.size());
 
         for(Grupy grupy: grupyList){
             rs.addRow(grupy.getId(), grupy.getGrupa());
         }
-        new Csv().write("../data/grupy.csv", rs, null);
+        new Csv().write("./data/grupy.csv", rs, null);
 
         rs = new SimpleResultSet();
         rs.addColumn("id", Types.INTEGER, 255, 0);
@@ -142,7 +137,7 @@ public class PageController extends Variables{
 
 
         for(Plan plan: planList){
-            System.out.println(plan);
+            //System.out.println(plan);
             rs.addRow(plan.getId(), plan.getDzien(),
                     plan.getGodz(), plan.getTydzien(),
                     plan.getGrupyGrup().getId(),
@@ -176,7 +171,7 @@ public class PageController extends Variables{
         model.addAttribute("grupySize", grupySize);
 
         List<Grupy> grupyList;
-        grupyList = grupyService.getGrupy();
+        grupyList = grupyService.getAll();
         model.addAttribute("grupy", grupyList);
 
         int grupyGrupySize = grupyGrupService.getDistinctCount();

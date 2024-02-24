@@ -56,14 +56,7 @@ public class PlanZajecApplication {
 
 	private void connectToDatabase() {
 
-		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			Connection con = DriverManager.getConnection(
-					"jdbc:mysql://mysql.mikr.us/db_w348", "w348", "6A5B_50691d");
-			Statement stmt = con.createStatement();
-		} catch (Exception e) {
-			System.out.println(e);
-		}
+
 	}
 
 	private void readData() throws SQLException {
@@ -155,7 +148,7 @@ public class PlanZajecApplication {
 	private void readWykladowcy() throws SQLException{
 		ResultSet rs = new Csv().read("./data/wykladowcy.csv", null, null);
 		while (rs.next()) {
-			Wykladowcy wykladowcy = new Wykladowcy(rs.getInt(1) ,rs.getString(2), rs.getString(3), rs.getInt(4));
+			Wykladowcy wykladowcy = new Wykladowcy(rs.getString(2), rs.getString(3), rs.getInt(4));
 			wykladowcyRepository.save(wykladowcy);
 		}
 		rs.close();

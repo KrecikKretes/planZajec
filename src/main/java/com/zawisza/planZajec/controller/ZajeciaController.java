@@ -43,6 +43,7 @@ public class ZajeciaController {
         List<String> zajeciaList = new ArrayList<>();
 
         zajeciaRepository.deleteAll();
+        Zajecia.reset();
 
         for(int i = 1; i < 87; i++){
             try {

@@ -16,14 +16,14 @@ import java.util.List;
 public class Wykladowcy {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO, generator="seq")
-    @GenericGenerator(name = "seq", strategy="increment")
     private int id;
 
     private String nazwisko;
 
     private String skrot;
     private int id_strony;
+
+    private static int id_count = 1;
 
     @OneToMany(
             mappedBy = "wykladowcy",
@@ -34,16 +34,21 @@ public class Wykladowcy {
     private List<Plan> planList;
 
     public Wykladowcy(String nazwisko, String skrot, int id_strony) {
+        id = id_count++;
         this.nazwisko = nazwisko;
         this.skrot = skrot;
         this.id_strony = id_strony;
     }
 
-    public Wykladowcy(int id, String nazwisko, String skrot, int id_strony) {
+    public Wykladowcy(char id, String nazwisko, String skrot, int id_strony) {
         this.id = id;
         this.nazwisko = nazwisko;
         this.skrot = skrot;
         this.id_strony = id_strony;
+    }
+
+    public static void reset(){
+        id_count = 1;
     }
 
     @Override

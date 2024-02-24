@@ -36,4 +36,8 @@ public class WykladowcyService {
     public Wykladowcy findWykladowcyById(int id){
         return wykladowcyRepository.findWykladowcyById(id);
     }
+
+    public Wykladowcy findWykladowcyBySkrotAndIdStrong(String skrot, int id_strony){
+        return wykladowcyRepository.findWykladowcyBySkrotAndId_strony(skrot, id_strony);
+    }
 }

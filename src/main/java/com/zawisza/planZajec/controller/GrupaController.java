@@ -46,7 +46,6 @@ public class GrupaController {
     @RequestMapping(value="/grupy/updateGrupy")
     public String saveGrupy(){
         URL url;
-        String[] week = {"Pon : ", "Wt : ", "Sr : ", "Czw : ", "Pt : "};
         String grupName;
         Grupy grupy = null;
 
@@ -54,6 +53,9 @@ public class GrupaController {
 
         grupyGrupRepository.deleteAll();
         grupyRepository.deleteAll();
+
+        Grupy.reset();
+        GrupyGrup.reset();
 
         outerloop:
         for(int i = 1; i < 88; i++){
@@ -63,24 +65,27 @@ public class GrupaController {
             try {
                 url = new URL("https://podzial.mech.pk.edu.pl/stacjonarne/html/plany/o" + i + ".html");
                 URLConnection con = url.openConnection();
-                InputStream isOdd = con.getInputStream();
+                InputStream inputStream = con.getInputStream();
 
-
-                try(BufferedReader br = new BufferedReader(new InputStreamReader(isOdd))) {
+                try(BufferedReader br = new BufferedReader(new InputStreamReader(inputStream))) {
                     String line;
 
                     // read each line and write to System.out
                     while ((line = br.readLine()) != null) {
+                        //System.out.println("***FULL LINE***");
                         //System.out.println(line);
+
                         if(line.contains("<span class=\"tytulnapis\">")){
                             line = line.replaceAll("<.*?>", "");
-                            System.out.println(line);
+                            //System.out.println("***FIRST CHANGE OF LINE***");
+                            //System.out.println(line);
                             grupName = line;
 
                             if(grupyRepository.getGrupyByGrupa(grupName) != null){
                                 continue outerloop;
                             }else{
                                 grupy = new Grupy(grupName);
+                                //System.out.println(grupy);
                             }
 
                             System.out.println("----------------");
@@ -91,8 +96,9 @@ public class GrupaController {
 
                             //Wypisanie godziny
                             line = line.replaceAll("<.*?>", "");
-                            System.out.println(line);
-                            System.out.println(i);
+                            //System.out.println("***FIRST CHANGE OF LINE***");
+                            //System.out.println(line);
+                            //System.out.println("i = " + i);
 
 
                             //Wypisanie dla kazdego dnia
@@ -108,27 +114,27 @@ public class GrupaController {
                                 line = line.replaceAll("-p", "-p ");
 
                                 while (line.contains("-n") || line.contains("-p")) {
-                                    System.out.println("LINE : " + line);
+                                    //System.out.println("LINE : " + line);
                                     String text;
                                     String grup;
 
                                     if(line.contains("-n") && line.contains("-p")){
                                         if(line.indexOf("-n") < line.indexOf("-p")){
-                                            System.out.println("Zawiera pierwsze -n i -p");
+                                            //System.out.println("Zawiera pierwsze -n i -p");
                                             text = line.substring(0, line.indexOf("-n") + 2);
                                             line = line.substring(line.indexOf("-n") + 2);
                                         }else{
-                                            System.out.println("Zawiera pierwsze -p i -n");
+                                            //System.out.println("Zawiera pierwsze -p i -n");
                                             text = line.substring(0, line.indexOf("-p") + 2);
                                             line = line.substring(line.indexOf("-p") + 2);
                                         }
                                     }else{
                                         if(line.contains("-n")){
-                                            System.out.println("Zawiera -n");
+                                            //System.out.println("Zawiera tylko -n");
                                             text = line.substring(0, line.indexOf("-n") + 2);
                                             line = line.substring(line.indexOf("-n") + 2);
                                         } else {
-                                            System.out.println("Zawiera -p");
+                                            //System.out.println("Zawiera tylko -p");
                                             text = line.substring(0, line.indexOf("-p") + 2);
                                             line = line.substring(line.indexOf("-p") + 2);
                                         }
@@ -140,18 +146,19 @@ public class GrupaController {
                                         GrupyGrup grupyGrup = new GrupyGrup(grup, grupy);
                                         grupyGrupList.add(grupyGrup);
                                     }
-
-                                    System.out.println(week[j] + "  " + grup);
                                 }
                             }
 
-                            System.out.println();
+                            //System.out.println();
                         }
 
                     }
                 }
 
-                assert grupy != null;
+                System.out.println("------");
+                System.out.println(grupyGrupList);
+                System.out.println("------");
+
                 grupy.setGrupyGrupList(grupyGrupList);
                 System.out.println(grupy);
                 grupyRepository.save(grupy);
@@ -165,12 +172,11 @@ public class GrupaController {
 
     private String getString(String text) {
         String grup = "";
-        text = text.trim();
-        text = text + " ";
+        text = text.trim() + " ";
         String substring;
 
         while(!text.isEmpty()){
-            System.out.println(text);
+            //System.out.println(text);
             substring = text.substring(0, text.indexOf(" "));
             if(substring.contains("-(") || substring.contains("-1ps") || substring.contains("-2ps")){
                 if(substring.contains("-(")){
@@ -192,30 +198,9 @@ public class GrupaController {
                 }
             }
         }
-        /*
-        try{
-            switch (text.substring(0, 6)) {
-                case "J angi" -> grup = "ang";
-                case "Mat DK" -> grup = "Ć";
-                case "Ster p" -> grup = text.substring(text.indexOf("pc ") + 3, text.indexOf("pc ") + 6);
-                case "Ap Med" -> grup = text.substring(text.indexOf("Med ") + 4, text.indexOf("Med ") + 7);
-                case "PM3D C" -> grup = text.substring(text.indexOf("CAD ") + 4, text.indexOf("CAD ") + 7);
-                case "Ind 4." -> grup = text.substring(text.indexOf("4.0 ") + 4, text.indexOf("4.0 ") + 7);
-                case "TerTec" -> grup = text.substring(text.indexOf("II ") + 3, text.indexOf("II ") + 4);
-                case "TKszWy" -> grup = text.substring(text.indexOf(" ") + 1, text.indexOf(" ") + 2);
-                default -> grup = switch (substring.charAt(0)) {
-                    case 'W' -> "W";
-                    case 'S' -> "S";
-                    case 'Ć' -> "Ć";
-                    default -> text.substring(text.indexOf(" ") + 1, text.indexOf(" ") + 4);
-                };
-            }
-        } finally {
-            System.out.println(text);
-            System.out.println(substring);
-        }
 
-         */
+        //System.out.println("getString return = " + grup);
+
         return grup;
     }
 
