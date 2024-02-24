@@ -33,14 +33,15 @@ public class WykladowcyController {
         List<String> wykladowcySkrotList = new ArrayList<>();
 
         wykladowcyRepository.deleteAll();
+        Wykladowcy.reset();
 
         procces: for(int i = 1; i < 900; i++){
             try {
                 url = new URL("https://podzial.mech.pk.edu.pl/stacjonarne/html/plany/n" + i + ".html");
                 URLConnection con = url.openConnection();
-                InputStream isOdd = con.getInputStream();
+                InputStream inputStream = con.getInputStream();
 
-                try(BufferedReader br = new BufferedReader(new InputStreamReader(isOdd))) {
+                try(BufferedReader br = new BufferedReader(new InputStreamReader(inputStream))) {
                     String line;
 
                     // read each line and write to System.out
@@ -49,19 +50,21 @@ public class WykladowcyController {
                         if(line.contains("<span class=\"tytulnapis\">")){
                             line = line.replaceAll("<span.*?>", "");
                             line = line.replaceAll("</span.*?table>", "");
-                            System.out.println("-----");
-                            System.out.println(i);
-                            System.out.println(line);
+                            //System.out.println("-----");
+                            //System.out.println(i);
+                            //System.out.println(line);
                             String nazwisko;
                             String skrot;
                             if(line.contains("-n")){
                                 nazwisko = line.substring(0, line.indexOf("-n"));
                                 skrot = line.substring(line.indexOf("-n") + 4, line.indexOf("-n") + 6);
-                            }else{
+                            }else if(line.contains("-p")){
                                 nazwisko = line.substring(0, line.indexOf("-p"));
                                 skrot = line.substring(line.indexOf("-p") + 4, line.indexOf("-p") + 6);
+                            }else{
+                                nazwisko = line.substring(0, line.indexOf("("));
+                                skrot = line.substring(line.indexOf("(") + 1, line.indexOf(")"));
                             }
-
 
                             Wykladowcy wykladowcy = new Wykladowcy(nazwisko,skrot, i);
                             if(!(wykladowcyNameList.contains(nazwisko) &&
@@ -70,6 +73,7 @@ public class WykladowcyController {
                                 wykladowcyNameList.add(nazwisko);
                                 wykladowcySkrotList.add(skrot);
                             }
+                            System.out.println(wykladowcy);
 
                             continue procces;
                         }

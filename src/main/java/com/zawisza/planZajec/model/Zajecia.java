@@ -15,8 +15,6 @@ import java.util.List;
 public class Zajecia {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY, generator="seq")
-    @GenericGenerator(name = "seq", strategy="increment")
     private int id;
 
     private String nazwa;
@@ -29,8 +27,20 @@ public class Zajecia {
     )
     private List<Plan> planList;
 
+    private static int id_count = 1;
+
     public Zajecia(String nazwa) {
+        this.id = id_count++;
         this.nazwa = nazwa;
+    }
+
+    public Zajecia(int id, String nazwa) {
+        this.id = id;
+        this.nazwa = nazwa;
+    }
+
+    public static void reset(){
+        id_count = 1;
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.zawisza.planZajec.model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -12,14 +13,15 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 public class Grupy {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY, generator="seq")
-    @GenericGenerator(name = "seq", strategy="increment")
     private int id;
 
     private String grupa;
+
+    private static int id_count = 1;
 
     @OneToMany(
             mappedBy = "grupy",
@@ -30,7 +32,17 @@ public class Grupy {
     private List<GrupyGrup> grupyGrupList;
 
     public Grupy(String grupa) {
+        id = id_count++;
         this.grupa = grupa;
+    }
+
+    public Grupy(int id, String grupa) {
+        this.id = id;
+        this.grupa = grupa;
+    }
+
+    public static void reset(){
+        id_count = 1;
     }
 
     @Override

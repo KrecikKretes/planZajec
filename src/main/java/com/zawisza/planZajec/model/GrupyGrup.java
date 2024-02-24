@@ -15,8 +15,6 @@ import java.util.List;
 public class GrupyGrup {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY, generator="seq")
-    @GenericGenerator(name = "seq", strategy="increment")
     private int id;
 
     @Column(name="grupa_grupy")
@@ -34,9 +32,22 @@ public class GrupyGrup {
     )
     private List<Plan> planList;
 
+    private static int id_count = 1;
+
     public GrupyGrup(String grupaGrupy, Grupy grupy) {
+        id = id_count++;
         this.grupaGrupy = grupaGrupy;
         this.grupy = grupy;
+    }
+
+    public GrupyGrup(int id, String grupaGrupy, Grupy grupy) {
+        this.id = id;
+        this.grupaGrupy = grupaGrupy;
+        this.grupy = grupy;
+    }
+
+    public static void reset(){
+        id_count = 1;
     }
 
     @Override

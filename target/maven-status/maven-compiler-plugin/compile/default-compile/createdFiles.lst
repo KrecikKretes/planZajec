@@ -21,6 +21,7 @@ com\zawisza\planZajec\repository\GrupyRepository.class
 com\zawisza\planZajec\repository\GrupyGrupRepository.class
 com\zawisza\planZajec\controller\GrupaController.class
 com\zawisza\planZajec\model\Wykladowcy.class
+com\zawisza\planZajec\config\UserController.class
 com\zawisza\planZajec\model\GrupyGrup.class
 com\zawisza\planZajec\PlanZajecApplication.class
 com\zawisza\planZajec\repository\ZajeciaRepository.class

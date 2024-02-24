@@ -7,8 +7,12 @@ import com.zawisza.planZajec.repository.*;
 import com.zawisza.planZajec.service.*;
 import jakarta.persistence.NonUniqueResultException;
 import lombok.AllArgsConstructor;
+import org.jsoup.nodes.Document;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import org.jsoup.Connection;
+import org.jsoup.Jsoup;
 
 import java.io.*;
 import java.net.ConnectException;
@@ -37,7 +41,7 @@ public class PlanController extends Constant {
     public String savePlan(){
         URL url;
         String[] week = {"Pon", "Wt", "Sr", "Czw", "Pt"};
-        int id = 0;
+
 
         String grupName;
         Grupy grupy = null;
@@ -56,15 +60,28 @@ public class PlanController extends Constant {
         List<String> zajeciaList = new ArrayList<>();
 
         planRepository.deleteAll();
+        Plan.reset();
+
+        String date = "23.02.2024";
 
         for(int i = 1; i < 88; i++){
+            String pageUrl = "https://podzial.mech.pk.edu.pl/stacjonarne/html/plany/o" + i + ".html";
+
             try {
-                url = new URL("https://podzial.mech.pk.edu.pl/stacjonarne/html/plany/o" + i + ".html");
+                //Connecting to the web page
+                Connection conn = Jsoup.connect(pageUrl);
+                //executing the get request
+                Document doc = conn.get();
+                //Retrieving the contents (body) of the web page
+                String result = doc.body().text();
+                if(!result.contains(date) || result.contains("1Er")){
+                    continue;
+                }
+
+
+                url = new URL(pageUrl);
                 URLConnection con = url.openConnection();
                 InputStream inputStream = con.getInputStream();
-
-
-                id = i;
 
                 try(BufferedReader br = new BufferedReader(new InputStreamReader(inputStream))) {
 
@@ -76,18 +93,21 @@ public class PlanController extends Constant {
 
 
                         if(getLine().contains("<span class=\"tytulnapis\">")){
+                            System.out.println("----------------");
                             setLine(getLine().replaceAll("<.*?>", ""));
-                            System.out.println(getLine());
+                            System.out.println("Name of grup : " + getLine());
                             grupName = getLine();
 
                             if(grupyService.getGrupyByNazwa(grupName) == null){
+                                System.out.println("***Grup is not found***");
                                 grupy = new Grupy(grupName);
                             }else{
+                                System.out.println("***Grup is found***");
                                 grupy = grupyService.getGrupyByNazwa(grupName);
-
                             }
 
                             System.out.println("----------------");
+                            //System.out.println();
                             continue;
                         }
 
@@ -97,7 +117,7 @@ public class PlanController extends Constant {
                             //Wypisanie godziny
                             setLine(getLine().replaceAll("<.*?>", ""));
                             System.out.println("-----");
-                            System.out.println(id);
+                            System.out.println(i);
                             System.out.println(getLine());
                             System.out.println("-----");
 
@@ -128,39 +148,35 @@ public class PlanController extends Constant {
 
                                     System.out.println();
                                     System.out.println();
-                                    System.out.println();
-                                    System.out.println();
                                     System.out.println("***************");
-
-                                    //Usuwanie niepotrzebnych znaków
                                     System.out.println("Linia PRZED : " + resztaLinii);
                                     System.out.println("GetLine PRZED : " + getLine());
 
 
                                     System.out.println("..................................");
-                                    if(resztaLinii.contains("-n") && resztaLinii.contains("-p")){
-                                        if(resztaLinii.indexOf("-n") < resztaLinii.indexOf("-p")){
+                                    if(resztaLinii.contains("-(N") && resztaLinii.contains("-(P")){
+                                        if(resztaLinii.indexOf("-(N") < resztaLinii.indexOf("-(P")){
                                             System.out.println("Zawiera pierwsze -n i -p");
                                             setTydzien("n");
-                                            getString();
+                                            findIfLineHaveLinesForEvenWeeks();
                                         }else{
                                             System.out.println("Zawiera pierwsze -p i -n");
                                             setTydzien("p");
-                                            getString2();
+                                            findIfLineHaveLinesForOddWeeks();
                                         }
                                     }else{
                                         if(resztaLinii.contains("-n")){
                                             System.out.println("Zawiera -n");
                                             setTydzien("n");
-                                            getString2();
+                                            findIfLineHaveLinesForOddWeeks();
                                         } else {
                                             System.out.println("Zawiera -p");
                                             setTydzien("p");
-                                            getString();
+                                            findIfLineHaveLinesForEvenWeeks();
                                         }
                                     }
                                     System.out.println("..................................");
-                                    System.out.println("");
+                                    System.out.println();
 
                                     System.out.println("Tydzien : " + getTydzien());
 
@@ -168,7 +184,7 @@ public class PlanController extends Constant {
                                     System.out.println("GetLine PO : " + getLine());
 
 
-                                    //Znalezienie id wykladowcy
+                                    //Znalezienie id wykladowcy bezpośrednio z linku
                                     String id_wykladowcy_href;
                                     int id_wykladowcy_href_int;
                                     if(getLine().contains("a href=\"n") &&
@@ -200,25 +216,28 @@ public class PlanController extends Constant {
                                     setLine(getLine().replaceAll("<.*?>", ""));
                                     System.out.println("GetLine po replace : " + getLine());
 
-                                    getString3();
+                                    findInformation();
 
                                     System.out.println("___________________");
 
                                     trim();
 
+
+                                    System.out.println("Name of Zajecia : " + getZajeciaName());
+
                                     zajecia = zajeciaService.getZajeciaByNazwa(getZajeciaName());
                                     if(zajecia == null){
                                         if(!zajeciaList.contains(getZajeciaName())){
                                             zajeciaList.add(getZajeciaName());
-                                            zajecia = new Zajecia(getZajeciaName());
+                                            zajecia = new Zajecia(zajeciaService.getCount() + 1 ,getZajeciaName());
+                                            System.out.println(zajecia);
                                             zajeciaRepository.save(zajecia);
                                         }
                                     }
 
-                                    assert grupy != null;
                                     grupyGrup = grupyGrupService.getGrupyGrupByIdGrupyAndNazwaGrup(grupy.getId(), getGrupaGrupyName());
 
-                                    System.out.println("Grupy ID : " + grupy.getId());
+                                    System.out.println("Grupy ID : " + grupy.getGrupa());
 
                                     assert zajecia != null;
                                     System.out.println("Zajecia : " + zajecia.getNazwa());
@@ -235,7 +254,11 @@ public class PlanController extends Constant {
                                         setWykladowcyName(wykladowcy.getNazwisko());
                                     }else{
                                         String skrot = getLine().substring(0, getLine().indexOf(" "));
-                                        wykladowcy = wykladowcyRepository.findWykladowcyBySkrotAndId_strony(skrot,-1);
+                                        System.out.println("Skrót : " + skrot);
+                                        //for(Wykladowcy test : wykladowcyService.getWykladowcy()){
+                                            //System.out.println(test);
+                                        //}
+                                        wykladowcy = wykladowcyService.findWykladowcyBySkrotAndIdStrong(skrot,-1);
                                         if(wykladowcy == null){
                                             if(!wykladowcyList.contains(skrot)){
                                                 wykladowcyList.add(skrot);
@@ -308,7 +331,7 @@ public class PlanController extends Constant {
             } catch (NullPointerException | NonUniqueResultException e){
                 System.out.println("NullPointerException : " + e);
                 System.out.println("Line : " + getLine());
-                System.out.println("Grupa : " + id);
+                System.out.println("Grupa : " + i);
                 System.out.println("GrupaGrupy : " + getGrupaGrupyName());
                 System.out.println("Zajecie : " + getZajeciaName());
                 System.out.println("Wykladowca : " + getWykladowcyName());
@@ -332,8 +355,8 @@ public class PlanController extends Constant {
         return "Complete";
     }
 
-    private void getString2() {
-        System.out.println("GetString 2");
+    private void findIfLineHaveLinesForOddWeeks() {
+        System.out.println("findIfLineHaveLines");
         if(resztaLinii.contains("<br>")){
             System.out.println("Zawiera <br>");
             setLine(resztaLinii.substring(0, resztaLinii.indexOf("<br>")));
@@ -342,26 +365,27 @@ public class PlanController extends Constant {
             resztaLinii = resztaLinii.substring(resztaLinii.indexOf("<br>") +4 );
         }else{
             System.out.println("Nie zawiera <br>");
-            setLine(resztaLinii.substring(0, resztaLinii.indexOf("-n") +2 ));
-            resztaLinii = resztaLinii.substring(resztaLinii.indexOf("-n") + 2);
+            setLine(resztaLinii);
+            resztaLinii = " ";
         }
     }
 
-
-    private void getString() {
-        System.out.println("GetString 1");
+    private void findIfLineHaveLinesForEvenWeeks() {
+        System.out.println("findIfLineHaveLinesForEvenWeeks");
         if(resztaLinii.contains("<br>")){
             System.out.println("Zawiera <br>");
             setLine(resztaLinii.substring(0, resztaLinii.indexOf("<br>")));
             resztaLinii = resztaLinii.substring(resztaLinii.indexOf("<br>") + 4);
         }else{
             System.out.println("Nie zawiera <br>");
-            setLine(resztaLinii.substring(0, resztaLinii.indexOf("-p") +2));
-            resztaLinii = resztaLinii.substring(resztaLinii.indexOf("-p") +2);
+            setLine(resztaLinii);
+            //setLine(resztaLinii.substring(0, resztaLinii.indexOf("-p") +2));
+            //resztaLinii = resztaLinii.substring(resztaLinii.indexOf("-p") +2);
+            resztaLinii = " ";
         }
     }
 
-    private void getString3() {
+    private void findInformation() {
         StringBuilder zajeciaName = new StringBuilder();
         String grup = "";
         trim();
@@ -403,7 +427,7 @@ public class PlanController extends Constant {
                 if(substring.contains(" ") || substring.equals("")){
                     break;
                 }else{
-                    if(zajeciaName == null){
+                    if(zajeciaName.isEmpty()){
                         zajeciaName.append(substring);
                     }else{
                         zajeciaName.append(" ").append(substring);
@@ -417,7 +441,7 @@ public class PlanController extends Constant {
         System.out.println("ZajeciaTest : " + zajeciaName);
         System.out.println("GrupTest : " + grup);
 
-        System.out.println("GetLine po getString3 : " + getLine());
+        System.out.println("GetLine po findInformation : " + getLine());
         setGrupaGrupyName(grup);
         setZajeciaName(zajeciaName.toString());
     }

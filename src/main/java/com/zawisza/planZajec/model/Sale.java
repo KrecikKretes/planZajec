@@ -16,13 +16,13 @@ import java.util.List;
 public class Sale {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY, generator="seq")
-    @GenericGenerator(name = "seq", strategy="increment")
     private int id;
 
     private String sala;
 
     private int id_strony;
+
+    private static int id_count = 1;
 
     @OneToMany(
             mappedBy = "sale",
@@ -33,8 +33,19 @@ public class Sale {
     private List<Plan> planList;
 
     public Sale(String sala, int id_strony) {
+        id = id_count++;
         this.sala = sala;
         this.id_strony = id_strony;
+    }
+
+    public Sale(int id, String sala, int id_strony) {
+        this.id = id;
+        this.sala = sala;
+        this.id_strony = id_strony;
+    }
+
+    public static void reset(){
+        id_count = 1;
     }
 
     @Override

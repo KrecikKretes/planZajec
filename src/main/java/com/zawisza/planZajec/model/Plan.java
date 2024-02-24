@@ -5,7 +5,6 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Getter
@@ -14,8 +13,6 @@ import org.hibernate.annotations.GenericGenerator;
 public class Plan {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY, generator="seq")
-    @GenericGenerator(name = "seq", strategy="increment")
     private int id;
 
     @ManyToOne
@@ -30,9 +27,7 @@ public class Plan {
     @JoinColumn(name="id_wykladowcy")
     private Wykladowcy wykladowcy;
 
-    @ManyToOne(
-            cascade = CascadeType.ALL
-    )
+    @ManyToOne
     @JoinColumn(name="id_sale")
     private Sale sale;
 
@@ -43,9 +38,15 @@ public class Plan {
     @Setter
     private String godz;
 
+    private static int id_count = 1;
+
+    public static void reset(){
+        id_count = 1;
+    }
 
     public Plan(String tydzien, String godz, String dzien, GrupyGrup grupyGrup,
                 Sale sale, Wykladowcy wykladowcy, Zajecia zajecia) {
+        this.id = id_count++;
         this.tydzien = tydzien;
         this.godz = godz;
         this.dzien = dzien;
@@ -53,6 +54,18 @@ public class Plan {
         this.sale = sale;
         this.wykladowcy = wykladowcy;
         this.zajecia = zajecia;
+    }
+
+    public Plan(int id, String tydzien, String godz, String dzien, GrupyGrup grupyGrup,
+                Sale sale, Wykladowcy wykladowcy, Zajecia zajecia) {
+        this.id = id;
+        this.zajecia = zajecia;
+        this.grupyGrup = grupyGrup;
+        this.wykladowcy = wykladowcy;
+        this.sale = sale;
+        this.tydzien = tydzien;
+        this.dzien = dzien;
+        this.godz = godz;
     }
 
     @Override

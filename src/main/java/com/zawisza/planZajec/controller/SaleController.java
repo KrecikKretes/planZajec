@@ -29,8 +29,8 @@ public class SaleController {
         List<String> saleList = new ArrayList<>();
 
         saleRepository.deleteAll();
+        Sale.reset();
 
-        int id = 1;
 
         procces:
         for(int i = 1; i < 400; i++){
@@ -82,7 +82,6 @@ public class SaleController {
                                 Sale sale = new Sale(sala,i);
                                 saleRepository.save(sale);
                                 saleList.add(sala);
-                                id++;
                             }
 
                             continue procces;
