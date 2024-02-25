@@ -4327,4 +4327,7 @@ public class PlanService {
     }
 
 
+    public Plan getPlanById(int id) {
+        return planRepository.getPlanById(id);
+    }
 }

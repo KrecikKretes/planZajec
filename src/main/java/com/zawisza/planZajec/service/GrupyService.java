@@ -25,4 +25,7 @@ public class GrupyService {
         return grupyRepository.getGrupyByGrupa(nazwa);
     }
 
+    public Grupy getGrupyById(int id) {
+        return grupyRepository.getGrupyById(id);
+    }
 }

@@ -160,9 +160,6 @@ public class PageController extends Variables{
         wykladowcyList = wykladowcyService.getUniqueName();
         model.addAttribute("wykladowcyName", wykladowcyList);
 
-        System.out.println(wykladowcySize);
-        System.out.println(wykladowcyList);
-
         List<String> wykladowcySkrotList;
         wykladowcySkrotList = wykladowcyService.getUniqueSkrot();
         model.addAttribute("wykladowcySkrot", wykladowcySkrotList);
@@ -229,12 +226,12 @@ public class PageController extends Variables{
         List<Plan> planList;
 
         System.out.println();
-        System.out.println("COUNT BEFORE : " + planRepository.countAll());
-
 
         planList = checkWhatIsNull(search);
 
-        System.out.println("COUNT AFTER : " + planRepository.countAll());
+        System.out.println(planService.getPlanById(4160));
+        System.out.println(planService.getPlanById(4161));
+        System.out.println(planService.getPlanById(4162));
 
         System.out.println(planList);
 

@@ -15,6 +15,9 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
     @Query("SELECT  count(*) FROM Plan")
     int countAll();
 
+    @Query("Select p from Plan p WHERE p.id = :id")
+    Plan getPlanById(@Param("id") int id);
+
     @Query("Select p from Plan p WHERE p.wykladowcy.nazwisko IN :wykladowcyName" +
             " ORDER BY p.tydzien ASC, CASE WHEN p.dzien LIKE 'Pon' THEN 1" +
             " WHEN p.dzien LIKE 'Wt' THEN 2" +
@@ -7210,6 +7213,7 @@ public interface PlanRepository  extends CrudRepository<Plan, Integer> {
             @Param("zajeciaNazwa") List<String> zajeciaNazwa, @Param("tydzien") List<String> tydzien,
             @Param("dzien") List<String> dzien, @Param("godz") List<String> godz,
             @Param("grupy") List<String> grupy, @Param("sale") List<String> sale, @Param("wykladowcySkrot") List<String> wykladowcySkrot);
+
 
 
 }
