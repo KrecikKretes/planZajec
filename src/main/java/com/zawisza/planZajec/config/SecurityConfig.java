@@ -1,5 +1,6 @@
 package com.zawisza.planZajec.config;
 
+import com.zawisza.planZajec.Connections;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -54,8 +55,8 @@ public class SecurityConfig {
                 .roles("USER")
                 .build();
         UserDetails admin = User.builder()
-                .username("admin")
-                .password(pwEnc.encode("secret"))
+                .username(Connections.username)
+                .password(pwEnc.encode(Connections.password))
                 .roles("USER", "ADMIN")
                 .build();
         return new InMemoryUserDetailsManager(user, admin);

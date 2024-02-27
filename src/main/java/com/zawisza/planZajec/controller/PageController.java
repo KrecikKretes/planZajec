@@ -220,18 +220,11 @@ public class PageController extends Variables{
         System.out.println(search.getWykladowcySkrot());
         System.out.println(search.getTydzien());
 
-
-
-
         List<Plan> planList;
 
         System.out.println();
 
         planList = checkWhatIsNull(search);
-
-        System.out.println(planService.getPlanById(4160));
-        System.out.println(planService.getPlanById(4161));
-        System.out.println(planService.getPlanById(4162));
 
         System.out.println(planList);
 

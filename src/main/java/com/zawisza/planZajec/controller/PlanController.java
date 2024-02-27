@@ -63,7 +63,7 @@ public class PlanController extends Constant {
         planRepository.deleteAll();
         Plan.reset();
 
-        String date = "23.02.2024";
+        String date = null;
 
         for(int i = 1; i < 88; i++){
             String pageUrl = "https://podzial.mech.pk.edu.pl/stacjonarne/html/plany/o" + i + ".html";
@@ -75,6 +75,12 @@ public class PlanController extends Constant {
                 Document doc = conn.get();
                 //Retrieving the contents (body) of the web page
                 String result = doc.body().text();
+
+                if(i == 1) {
+                    int index = result.indexOf("wygenerowano ");
+                    date = result.substring(index + 13, index + 23);
+                }
+
                 if(!result.contains(date) || result.contains("1Er")){
                     continue;
                 }
@@ -353,6 +359,9 @@ public class PlanController extends Constant {
                 throw new RuntimeException(e);
             }
         }
+
+        System.out.println(date);
+
         return "Complete";
     }
 
