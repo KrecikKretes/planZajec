@@ -20,5 +20,8 @@ public interface GrupyRepository extends CrudRepository<Grupy, Integer> {
 
     @Query("Select p from Grupy p")
     List<Grupy> getGrupies();
+
+    @Query("select p from Grupy p WHERE p.id = :id")
+    Grupy getGrupyById(@Param("id") int id);
 }
 

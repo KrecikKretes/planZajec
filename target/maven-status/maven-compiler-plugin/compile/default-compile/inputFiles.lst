@@ -8,6 +8,7 @@ D:\planZajec\planZajec\src\main\java\com\zawisza\planZajec\controller\GrupaContr
 D:\planZajec\planZajec\src\main\java\com\zawisza\planZajec\controller\Variables.java
 D:\planZajec\planZajec\src\main\java\com\zawisza\planZajec\config\WebConfig.java
 D:\planZajec\planZajec\src\main\java\com\zawisza\planZajec\service\ZajeciaService.java
+D:\planZajec\planZajec\src\main\java\com\zawisza\planZajec\calendar\CalendarClass.java
 D:\planZajec\planZajec\src\main\java\com\zawisza\planZajec\controller\WykladowcyController.java
 D:\planZajec\planZajec\src\main\java\com\zawisza\planZajec\repository\WykladowcyRepository.java
 D:\planZajec\planZajec\src\main\java\com\zawisza\planZajec\controller\PageController.java
@@ -28,5 +29,7 @@ D:\planZajec\planZajec\src\main\java\com\zawisza\planZajec\Constant.java
 D:\planZajec\planZajec\src\main\java\com\zawisza\planZajec\model\Search.java
 D:\planZajec\planZajec\src\main\java\com\zawisza\planZajec\service\GrupyService.java
 D:\planZajec\planZajec\src\main\java\com\zawisza\planZajec\service\WykladowcyService.java
+D:\planZajec\planZajec\src\main\java\com\zawisza\planZajec\controller\CalendarController.java
 D:\planZajec\planZajec\src\main\java\com\zawisza\planZajec\model\Zajecia.java
+D:\planZajec\planZajec\src\main\java\com\zawisza\planZajec\Connections.java
 D:\planZajec\planZajec\src\main\java\com\zawisza\planZajec\model\Sale.java

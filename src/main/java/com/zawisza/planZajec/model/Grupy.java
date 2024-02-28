@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -27,7 +28,7 @@ public class Grupy {
             mappedBy = "grupy",
             cascade = CascadeType.ALL,
             orphanRemoval = true,
-            fetch = FetchType.LAZY
+            fetch = FetchType.EAGER
     )
     private List<GrupyGrup> grupyGrupList;
 
@@ -39,6 +40,11 @@ public class Grupy {
     public Grupy(int id, String grupa) {
         this.id = id;
         this.grupa = grupa;
+        this.grupyGrupList = new ArrayList<>();
+    }
+
+    public void addGrupyGrup(GrupyGrup grupyGrup){
+        this.grupyGrupList.add(grupyGrup);
     }
 
     public static void reset(){

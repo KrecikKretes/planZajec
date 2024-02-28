@@ -16,6 +16,7 @@ com\zawisza\planZajec\config\WebConfig.class
 com\zawisza\planZajec\controller\BasicController.class
 com\zawisza\planZajec\Constant.class
 com\zawisza\planZajec\model\Grupy.class
+com\zawisza\planZajec\controller\CalendarController.class
 com\zawisza\planZajec\controller\PlanController.class
 com\zawisza\planZajec\repository\GrupyRepository.class
 com\zawisza\planZajec\repository\GrupyGrupRepository.class
@@ -27,6 +28,8 @@ com\zawisza\planZajec\PlanZajecApplication.class
 com\zawisza\planZajec\repository\ZajeciaRepository.class
 com\zawisza\planZajec\service\PlanService.class
 com\zawisza\planZajec\model\Zajecia.class
+com\zawisza\planZajec\Connections.class
 com\zawisza\planZajec\controller\WykladowcyController.class
 com\zawisza\planZajec\service\GrupyService.class
+com\zawisza\planZajec\calendar\CalendarClass.class
 com\zawisza\planZajec\service\ZajeciaService.class

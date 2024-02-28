@@ -34,13 +34,13 @@ public class Wykladowcy {
     private List<Plan> planList;
 
     public Wykladowcy(String nazwisko, String skrot, int id_strony) {
-        id = id_count++;
+        this.id = id_count++;
         this.nazwisko = nazwisko;
         this.skrot = skrot;
         this.id_strony = id_strony;
     }
 
-    public Wykladowcy(char id, String nazwisko, String skrot, int id_strony) {
+    public Wykladowcy(int id, String nazwisko, String skrot, int id_strony) {
         this.id = id;
         this.nazwisko = nazwisko;
         this.skrot = skrot;

@@ -4,13 +4,13 @@ import com.zawisza.planZajec.model.*;
 import com.zawisza.planZajec.repository.*;
 import com.zawisza.planZajec.service.*;
 import lombok.AllArgsConstructor;
-import org.h2.tools.Csv;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
 
-import java.sql.*;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,11 +23,13 @@ public class PlanZajecApplication {
 	private final WykladowcyRepository wykladowcyRepository;
 	private final ZajeciaRepository zajeciaRepository;
 	private final PlanRepository planRepository;
+	private final GrupyGrupRepository grupyGrupRepository;
 
 	private final WykladowcyService wykladowcyService;
 	private final GrupyGrupService grupyGrupService;
 	private final SaleService saleService;
 	private final ZajeciaService zajeciaService;
+	private final GrupyService grupyService;
 
 	public static void main(String[] args) {
 		SpringApplication.run(PlanZajecApplication.class, args);
@@ -55,8 +57,7 @@ public class PlanZajecApplication {
 	}
 
 	private void connectToDatabase() {
-
-
+        Connections.connectToDatabase();
 	}
 
 	private void readData() throws SQLException {
@@ -111,12 +112,12 @@ public class PlanZajecApplication {
 	}
 
 	private void readPlan() throws SQLException{
-		ResultSet rs = new Csv().read("./data/plan.csv", null, null);
+				ResultSet rs = Connections.executeQuery("SELECT * FROM plan");
 		while (rs.next()) {
 			int id = rs.getInt(1);
-			String tydzien = rs.getString(2);
+			String dzien = rs.getString(2);
 			String godzina = rs.getString(3);
-			String week = rs.getString(4);
+			String tydzien = rs.getString(4);
 			int idGG = rs.getInt(5);
 			int idSale = rs.getInt(6);
 			int idWykladowcy = rs.getInt(7);
@@ -127,9 +128,7 @@ public class PlanZajecApplication {
 			Wykladowcy wykladowcy = wykladowcyService.findWykladowcyById(idWykladowcy);
 			Zajecia zajecia = zajeciaService.findZajeciaById(idZajecia);
 
-			Plan plan = new Plan(id, tydzien,godzina, week, grupyGrup, sale, wykladowcy, zajecia);
-
-			System.out.println(plan);
+			Plan plan = new Plan(id, tydzien,godzina, dzien, grupyGrup, sale, wykladowcy, zajecia);
 
 			planRepository.save(plan);
 		}
@@ -137,7 +136,7 @@ public class PlanZajecApplication {
 	}
 
 	private void readZajecia() throws SQLException{
-		ResultSet rs = new Csv().read("./data/zajecia.csv", null, null);
+		ResultSet rs = Connections.executeQuery("SELECT * FROM zajecia");
 		while (rs.next()) {
 			Zajecia zajecia = new Zajecia(rs.getInt(1), rs.getString(2));
 			zajeciaRepository.save(zajecia);
@@ -146,46 +145,42 @@ public class PlanZajecApplication {
 	}
 
 	private void readWykladowcy() throws SQLException{
-		ResultSet rs = new Csv().read("./data/wykladowcy.csv", null, null);
-		while (rs.next()) {
-			Wykladowcy wykladowcy = new Wykladowcy(rs.getString(2), rs.getString(3), rs.getInt(4));
-			wykladowcyRepository.save(wykladowcy);
-		}
-		rs.close();
+
+        ResultSet rs = Connections.executeQuery("SELECT * FROM wykladowcy");
+        while (rs.next()) {
+            Wykladowcy wykladowcy = new Wykladowcy(rs.getInt(1) ,rs.getString(2), rs.getString(3), rs.getInt(4));
+            wykladowcyRepository.save(wykladowcy);
+        }
+        rs.close();
 	}
 
 	private void readSale() throws SQLException{
-		ResultSet rs = new Csv().read("./data/sale.csv", null, null);
+
+		ResultSet rs = Connections.executeQuery("SELECT * FROM sale");
 		while (rs.next()) {
-			Sale sale = new Sale(rs.getInt(1), rs.getString(2), rs.getInt(3));
+			Sale sale = new Sale(rs.getInt(1) ,rs.getString(2), rs.getInt(3));
 			saleRepository.save(sale);
 		}
 		rs.close();
 	}
 
 	private void readGrupy() throws SQLException{
-		ResultSet rs = new Csv().read("./data/grupy.csv", null, null);
-		ResultSet rs1 = new Csv().read("./data/grupyGrup.csv", null, null);
+		ResultSet rs = Connections.executeQuery("SELECT * FROM grupy");
 		while (rs.next()) {
 			Grupy grupy = new Grupy(rs.getInt(1), rs.getString(2));
-			List<GrupyGrup> grupyGrupList = new ArrayList<>();
-
-			while (rs1.next()) {
-				if(rs1.getInt(3) == grupy.getId()){
-					GrupyGrup grupyGrup = new GrupyGrup(rs1.getInt(1) ,rs1.getString(2), grupy);
-					grupyGrupList.add(grupyGrup);
-				}
-				if(rs1.getInt(3) > grupy.getId()){
-					break;
-				}
-
-			}
-
-			grupy.setGrupyGrupList(grupyGrupList);
 			grupyRepository.save(grupy);
-
 		}
+
 		rs.close();
+
+		ResultSet rs1 = Connections.executeQuery("SELECT * FROM grupyGrup");
+
+		while (rs1.next()) {
+			GrupyGrup grupyGrup = new GrupyGrup(rs1.getInt(1) ,rs1.getString(2), grupyService.getGrupyById(rs1.getInt(3)));
+			Grupy grupy = grupyService.getGrupyById(rs1.getInt(3));
+			grupy.addGrupyGrup(grupyGrup);
+			grupyGrupRepository.save(grupyGrup);
+		}
 		rs1.close();
 	}
 }
